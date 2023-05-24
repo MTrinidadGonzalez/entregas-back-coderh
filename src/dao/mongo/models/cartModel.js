@@ -19,21 +19,20 @@ const schema= new mongoose.Schema({
         type:Number,
         default: 0
     },
-    status: {
-        type: Boolean,
-        default: false
-    },
+    default: [],
     user:{
-        type:String,
-        default: "user"
-    }
+        type: String,
+        default: "UserCart"
+    } 
+
 
 },{timestamps:{createdAt: 'created_at', updatedAt: 'updated_at'}}
 )
 
+/*
 schema.pre('find', function(){
     this.populate('products.product')
-})
+})*/
 
 const cartModel= mongoose.model(collection,schema)
 export default cartModel;

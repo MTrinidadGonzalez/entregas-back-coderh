@@ -31,6 +31,32 @@ router.post('/', async (req,res)=>{
     }
 })
 
+
+router.post('/realTimeProducts', async (req,res)=>{
+    try{
+        const {title, description, price}= req.body
+        if(!title || !description || !price) return res.status(400).send({status: "error", error: "Incompleted values"})
+        const product= {
+            title,
+            description,
+            price
+        }
+        const result= await productsService.createProduct(product)
+        res.sendStatus(201)
+
+        const allProducts= await productsService.getProducts()
+        req.io.emit('productRealTime', allProducts)
+    }
+    catch(err){
+        console.log(err)
+    }
+})
+
+
+
+
+
+
 router.get('/:pid', async (req,res)=>{
     try{
         const {pid}= req.params
