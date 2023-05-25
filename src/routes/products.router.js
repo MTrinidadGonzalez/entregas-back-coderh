@@ -34,12 +34,13 @@ router.post('/', async (req,res)=>{
 
 router.post('/realTimeProducts', async (req,res)=>{
     try{
-        const {title, description, price}= req.body
-        if(!title || !description || !price) return res.status(400).send({status: "error", error: "Incompleted values"})
+        const {title, description, price, category}= req.body
+        if(!title || !description || !price || !category) return res.status(400).send({status: "error", error: "Incompleted values"})
         const product= {
             title,
             description,
-            price
+            price,
+            category
         }
         const result= await productsService.createProduct(product)
         res.sendStatus(201)

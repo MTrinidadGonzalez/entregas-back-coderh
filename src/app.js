@@ -35,7 +35,7 @@ app.set('view engine', 'handlebars')
 
 app.use('/', viewsRouter)
 app.use('/api/products', productsRouter)
-app.use('/cart', cartRouter)
+app.use('/api/cart', cartRouter)
 
 io.on('connection',socket=>{
     registerChatHandler(io,socket);

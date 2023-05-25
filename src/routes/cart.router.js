@@ -48,12 +48,15 @@ router.get('/',async (req, res) => {
   });
   
   // Agrego un producto al carrito
+// id de un carrito: 646e45e77d31625d814ec4a9 y de un producto: 646e8d4231192c6f826b473f
 
-  router.put('/:cid/:pid',async (req, res) => {
+
+  router.put('/:cid/product/:pid',async (req, res) => {
     try{
       const cid = req.params.cid;
       const pid= req.params.pid;
       const cart = await  cartServices.addProductToCart(cid, pid);
+      console.log(JSON.stringify(cart,null, '\t'))
       res.send({status: 'success', payload:cart })
       
     }
