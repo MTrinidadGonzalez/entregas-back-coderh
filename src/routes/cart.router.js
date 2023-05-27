@@ -38,6 +38,7 @@ router.get('/',async (req, res) => {
   router.post('/', async (req, res) => {
     try{
       const {cart}= req.body
+     
       const newCart= await cartServices.createCart(cart)
       
       res.send({status: 'success', payload: newCart})
@@ -55,6 +56,17 @@ router.get('/',async (req, res) => {
     try{
       const cid = req.params.cid;
       const pid= req.params.pid;
+      
+      /*const cartGet = await cartServices.getCartById(cid)
+      
+      const existingProduct = cartGet.products.find(
+        (product) => product._id === pid
+      )
+      if (existingProduct) {
+        
+        existingProduct.quantity += 1;
+        const cart = await  cartServices.addProductToCart(cid, existingProduct._id)
+      }*/
       const cart = await  cartServices.addProductToCart(cid, pid);
       console.log(JSON.stringify(cart,null, '\t'))
       res.send({status: 'success', payload:cart })

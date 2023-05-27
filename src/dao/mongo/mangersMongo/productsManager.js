@@ -7,7 +7,7 @@ export default class ProductsManager{
     }
 
     getProductBy=(params)=>{
-        return productsModel.findOne(params).lean()
+        return productsModel.findOne(params).lean().populate('products.product')
     }
 
     createProduct=(product)=>{

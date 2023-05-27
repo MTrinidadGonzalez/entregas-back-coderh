@@ -1,5 +1,6 @@
 import { Router } from "express";
 import ProductsManager from "../dao/mongo/mangersMongo/productsManager.js";
+import productsModel from "../dao/mongo/models/productsModel.js";
 
 const router= Router()
 const productsService= new ProductsManager()
@@ -14,14 +15,25 @@ router.get('/', async (req, res)=>{
     }
 })
 
+//pueba de fultreo por category:
+router.get('/prueba', async (req,res)=>{
+    const {category}= req.query
+
+    const filter= await productsModel.find({},{category: category}).lean()
+    
+    console.log(filter)
+    res.send({status: "succes", payload: filter})
+})
+
 router.post('/', async (req,res)=>{
     try{
-        const {title, description, price}= req.body
-        if(!title || !description || !price) return res.status(400).send({status: "error", error: "Incompleted values"})
+        const {title, description, price,category, status}= req.body
+        if(!title || !description || !price || !category) return res.status(400).send({status: "error", error: "Incompleted values"})
         const product= {
             title,
             description,
-            price
+            price,
+            category
         }
         const result= await productsService.createProduct(product)
         res.sendStatus(201)
@@ -96,6 +108,9 @@ router.delete('/:pid', async(req,res)=>{
     }
     
 })
+
+
+
 
 export default router
 

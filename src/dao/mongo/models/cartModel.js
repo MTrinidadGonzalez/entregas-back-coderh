@@ -29,6 +29,8 @@ const schema= new mongoose.Schema({
 },{timestamps:{createdAt: 'created_at', updatedAt: 'updated_at'}}
 )
 
+
+//OPCION 1 PARA USAR EL POPULATE: 
 /*
 schema.pre('find', function(){
     this.populate('products.product')
