@@ -54,10 +54,14 @@ router.get('/products', async(req,res)=>{
     
 } )
 
+//registe view
+router.get('/register', (req, res)=>{
+    res.render('register')
+})
 
-//chat
-router.get('/chat', async(req,res)=>{
-    res.render('chat')
+//login view
+router.get('/login', (req,res)=>{
+    res.render('login')
 })
 
 //realTimeProducts
@@ -77,5 +81,12 @@ router.get('/carts/:cid', async (req,res)=>{
 })
 //pid de un carrito 647027372ffaefb0e5b10016
 
+
+
+/*
+//chat lo tengo que sacar
+router.get('/chat', async(req,res)=>{
+    res.render('chat')
+})*/
 
 export default router
