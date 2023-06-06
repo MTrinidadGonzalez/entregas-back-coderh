@@ -3,6 +3,8 @@ import ProductsManager from "../dao/mongo/mangersMongo/productsManager.js";
 import CartsManager from '../dao/mongo/mangersMongo/cartsManager.js'
 import productsModel from "../dao/mongo/models/productsModel.js";
 import cartModel from "../dao/mongo/models/cartModel.js";
+import { privacy } from "../meddlewares/auth.js";
+
 
 const router= Router()
 const productsService= new ProductsManager()
@@ -55,13 +57,21 @@ router.get('/products', async(req,res)=>{
 } )
 
 //registe view
-router.get('/register', (req, res)=>{
+router.get('/register',privacy('NO_AUTH'),(req, res)=>{
     res.render('register')
 })
 
 //login view
-router.get('/login', (req,res)=>{
+router.get('/login',privacy('NO_AUTH'), (req,res)=>{
     res.render('login')
+})
+
+//profile   ,privacy('PRIVATE')
+router.get('/profile',(req,res)=>{
+    res.render('profile',{
+        user:req.session.user
+    })
+
 })
 
 //realTimeProducts
@@ -83,10 +93,12 @@ router.get('/carts/:cid', async (req,res)=>{
 
 
 
+
+export default router
+
+
 /*
 //chat lo tengo que sacar
 router.get('/chat', async(req,res)=>{
     res.render('chat')
 })*/
-
-export default router
