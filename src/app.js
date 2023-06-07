@@ -5,6 +5,8 @@ import mongoose, { mongo } from 'mongoose'
 import { Server } from 'socket.io'
 import MongoStore from 'connect-mongo'
 import session from 'express-session'
+import passport from 'passport'
+import initializePassportStrategies from './config/passport.config.js'
 
 import __dirname from './utils.js'
 
@@ -47,6 +49,10 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }))
+
+//passport:
+app.use(passport.initialize())
+initializePassportStrategies()
 
 app.use('/', viewsRouter)
 app.use('/api/products', productsRouter)
