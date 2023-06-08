@@ -1,20 +1,24 @@
 import { Router } from "express";
 import UsersManager from '../dao/mongo/mangersMongo/usersManager.js'
 import passport from "passport";
-import {validatePassword } from '../utils.js'
 
-const usersService= new UsersManager()
 
 const router= Router()
 
-router.post('/register',passport.authenticate('register',{failureRedirect:'/api/session/registerFail'}), async (req,res)=>{
 
-res.send({status: 'success', payload: result})
+router.post('/register',passport.authenticate('register',{failureRedirect:'/api/sessions/registerfail'}),async(req,res)=>{
+    try{
+        
+    res.send({status:"success",message:"Registered"});
+    }
+  catch(error){
+    console.log(error)
+  }
 })
 
-router.get('registerFail',(req,res)=>{
-    console.log(req.session.message)
-    res.status(400).send({status:'error',error: req.session.message})
+router.get('/registerfail',async (req,res)=>{
+    console.log(req.session.messages);
+    res.status(400).send({status:"error",error:req.session.messages})
 })
 
 router.post('/login',passport.authenticate('login',{failureRedirect:'/api/sessions/loginFail'}),async(req,res)=>{

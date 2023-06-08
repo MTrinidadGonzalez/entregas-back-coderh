@@ -40,6 +40,12 @@ app.engine('handlebars', handlebars.engine())
 app.set('views',`${__dirname}/views`)
 app.set('view engine', 'handlebars')
 
+//passport:
+app.use(passport.initialize())
+initializePassportStrategies()
+
+
+
 app.use(session({
     store: new MongoStore({
         mongoUrl: 'mongodb+srv://mtgprimaria:155383070@clustertrinidad.ohzqqhf.mongodb.net/ecommerce?retryWrites=true&w=majority',
@@ -50,9 +56,7 @@ app.use(session({
     saveUninitialized: false
 }))
 
-//passport:
-app.use(passport.initialize())
-initializePassportStrategies()
+
 
 app.use('/', viewsRouter)
 app.use('/api/products', productsRouter)
@@ -61,7 +65,8 @@ app.use('/api/session', sessionRoutes)
 
 
 
-
+/*
 io.on('connection',socket=>{
     registerChatHandler(io,socket);
 })
+*/

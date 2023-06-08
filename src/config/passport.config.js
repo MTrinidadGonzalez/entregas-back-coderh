@@ -12,15 +12,14 @@ const initializePassportStrategies = () => {
     passport.use(
       'register',
       new LocalStrategy(
-        { passReqToCallback: true, usernameField: 'email' },
+        { passReqToCallback:true, usernameField:'email' },
         async (req, email, password, done) => {
           try {
             const { first_name, last_name } = req.body;
             //busco si el usuario ya existe:
             const exists = await userService.getUser({ email });
             //false porque no guarde usuario en req.user:
-            if (exists)
-              return done(null, false, { message: 'El usuario ya está registrado' });
+            if (exists) return done(null, false, { message: 'El usuario ya está registrado' });
             //Encripto la password
             const hashedPassword = await createHash(password);
             //Registro al usuario
@@ -32,8 +31,9 @@ const initializePassportStrategies = () => {
             };
             const result = await userService.createUser(user);
             //Ahi finalizo el done y en lugar de false le mando el result
-            done(null, result);
-          } catch (error) {
+            done(null, result,{message:'se creo la sesion'});
+          } 
+          catch (error) {
             done(error);
           }
         }
@@ -65,8 +65,13 @@ user={
 }
 }))
 
-
-
+passport.serializeUser(function(user,done){
+  return done(null, user.id)
+})
+passport.deserializeUser(async function(id,done){
+  const user= await userService.getUser({_id:id})
+  return done(null,user)
+})
 };
 
     export default initializePassportStrategies
