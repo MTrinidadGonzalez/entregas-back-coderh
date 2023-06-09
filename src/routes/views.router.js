@@ -74,6 +74,11 @@ router.get('/profile',(req,res)=>{
 
 })
 
+//restore password
+router.get('/restorepassword',(req,res)=>{
+    res.render('restorePassword')
+})
+
 //realTimeProducts
 
 router.get('/realTimeProducts', async (req,res)=>{

@@ -1,7 +1,9 @@
-import passport from 'passport'
-import local from 'passport-local'
+
 import UsersManager from '../dao/mongo/mangersMongo/usersManager.js'
 import {createHash , validatePassword} from '../utils.js'
+import passport from 'passport'
+import local from 'passport-local'
+import GithubStrategy from 'passport-github2'
 
 const userService= new UsersManager()
 const LocalStrategy= local.Strategy
@@ -40,38 +42,93 @@ const initializePassportStrategies = () => {
       )
     )
 /////////funcion para login
-passport.use('login', new LocalStrategy({usernameField:'email'}, async(email,password,done)=>{
+passport.use(
+  'login',
+  new LocalStrategy(
+    { usernameField: 'email' },
+    async (email, password, done) => {
+      //PASSPORT SÓLO DEBE DEVOLVER AL USUARIO FINAL, ÉL NO ES RESPONSABLE DE LA SESIÓN
+      if (email === 'admin@admin.com' && password === '123') {
+        //Desde aquí ya puedo inicializar al admin.
+        const user = {
+          id: 0,
+          name: `Admin`,
+          role: 'admin',
+          email: '...',
+        };
+        return done(null, user);
+      }
+      let user;
+      //busco si el user existe
+      user = await userService.getUser({ email }); //Sólo busco por mail
+      if (!user)
+        return done(null, false, { message: 'Credenciales incorrectas' });
 
-if(email=== 'admin@correo' && password=== '12345'){
-   let user={
-        name: 'administrador',
-        role:'admin',
-        email: '.'
+      //verifico la contraseña
+
+      const isValidPassword = await validatePassword(password, user.password);
+      if (!isValidPassword)
+        return done(null, false, { message: 'Contraseña inválida' });
+
+      //devuelvo al user y la sesion se hace en el endpoint
+
+      user = {
+        id: user._id,
+        name: `${user.first_name} ${user.last_name}`,
+        email: user.email,
+        role: user.role,
+      };
+      return done(null, user);
     }
-    return done(null, user)
-}
+  )
+);
+
+
+////Github strategy:
+passport.use('github', new GithubStrategy({
+  clientID:'Iv1.e63146038bc90095',
+  clientSecret: '72bfccf11d3469bccf973d4362b04fa6380b294f',
+  callbackURL:'http://localhost:8080/api/session/githubcallback',
+},async (accessToken, refreshToken, profile, done)=>{
+try{
+ 
+const {name, email}= profile._json
 const user= await userService.getUser({email})
-if(!user) return done(null, false, {message: 'Usuario no encontrado'})
-
-const isValidePass= await validatePassword(password,user.password)
-if(!isValidePass) return done(null, false, {message:'Contraseña incorrecta'})
-
-//la sesion la pngo en el router de loguin, con este codigo nada mas le paso al usuario q se creo con los filtros
-
-user={
-    name: `${user.first_name} ${user.last_name}`,
-    email: user.email,
-    role: user.role
+if(!user){
+  const newUser={
+    first_name: name,
+    last_name:"",
+    email,
+    password: ''
+  }
+  const result= await userService.createUser(newUser)
+  done(null, result)
 }
-}))
+else{
+  done(null,user)
+}
+}
+catch(error){ 
+  done(error)
+}
+}
+))
 
-passport.serializeUser(function(user,done){
-  return done(null, user.id)
-})
-passport.deserializeUser(async function(id,done){
-  const user= await userService.getUser({_id:id})
-  return done(null,user)
-})
+//serializessssss
+passport.serializeUser(function (user, done) {
+  return done(null, user.id);
+});
+passport.deserializeUser(async function (id, done) {
+  if (id === 0) {
+    return done(null, {
+      role: 'admin',
+      name: 'ADMIN',
+    });
+  }
+  const user = await userService.getUser({ _id: id });
+  return done(null, user);
+});
+
 };
 
     export default initializePassportStrategies
