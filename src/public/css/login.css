@@ -1,0 +1,20 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.form-clsss{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: antiquewhite;
+    padding: 20px;
+}
+.form-clsss input{
+    padding: 5px;
+    margin: 5px;
+}

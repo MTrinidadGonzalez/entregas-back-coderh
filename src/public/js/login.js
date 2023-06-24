@@ -1,5 +1,4 @@
 
-console.log('pag de login')
 const form= document.getElementById('loginForm')
 
 form.addEventListener('submit',async (e)=>{
@@ -17,13 +16,12 @@ form.addEventListener('submit',async (e)=>{
             } 
         })
         const responseData= await response.json()
-        if(responseData.status === 'success'){
+       /* if(responseData.status === 'success'){
             window.location.replace('/products')
-        }
+        } */ console.log(responseData)
     }
     catch(err){
         console.log(err)
     }
    
 })
-

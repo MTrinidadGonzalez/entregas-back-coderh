@@ -1,4 +1,3 @@
-
 import productsModel from '../models/productsModel.js';
 
 export default class ProductsManager{
@@ -12,6 +11,10 @@ export default class ProductsManager{
 
     createProduct=(product)=>{
         return productsModel.create(product)
+    }
+
+    createProducts=(products)=>{
+        return productsModel.insertMany(products)
     }
 
     updateProduct=(id, product)=>{

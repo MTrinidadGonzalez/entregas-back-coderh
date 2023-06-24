@@ -1,9 +1,9 @@
-import userModel from '../models/user.js'
+import userModel from '../models/usersModels.js'
 
 
 export default class UsersManager{
     getUsers= ()=>{
-        return productsModel.find().lean()
+        return userModel.find().lean()
     }
 
     getUser=(params)=>{
@@ -15,7 +15,7 @@ export default class UsersManager{
     }
 
     updateUser=(id, user)=>{
-        return userModel.findByIdAndUpdate(id, {$set: product})
+        return userModel.findByIdAndUpdate(id, {$set: user})
     }
 
     deleteUser=(id)=>{

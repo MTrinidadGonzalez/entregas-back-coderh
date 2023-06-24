@@ -1,41 +1,37 @@
+import RouterBase from "../router.js";
+import CartsManager from '../dao/managers/cartsManager.js'
 
-
-import { Router } from "express";
-import CartsManager from "../dao/mongo/mangersMongo/cartsManager.js";
-const router= Router()
 const cartServices= new CartsManager()
 
-  //id de mi carrito cid: 646e45e77d31625d814ec4a9
-  //pid: "6467d746f81253d41ad5133f"
-
-
-// Obtengo todos los carritos
-router.get('/',async (req, res) => {
-  try{
-    const carts = await cartServices.getCarts();
-    res.send({status: 'success', payload: carts})
-  }
-   catch(err){
-    console.log(err)
-   }
-  });
-  
-  // Obtengo un carrito por ID
-  router.get('/:cid', async (req, res) => {
+export default class CartRouter extends RouterBase{
+ init(){
+    // Obtengo todos los carritos
+this.get('/',async (req, res) => {
     try{
-      const  cid = req.params.cid;
-      const cart = await cartServices.getCartById(cid);
-
-     // console.log(JSON.stringify(cart, null, '\t'))
-      res.send({status: 'success', payload: cart})
+      const carts = await cartServices.getCarts();
+      res.send({status: 'success', payload: carts})
     }
-   catch(err){
-    console.log(err)
-   }
-  });
+     catch(err){
+      console.log(err)
+     }
+    });
+    
+    // Obtengo un carrito por ID
+    this.get('/:cid', async (req, res) => {
+      try{
+        const  cid = req.params.cid;
+        const cart = await cartServices.getCartById(cid);
   
-  // Creo un nuevo carrito
-  router.post('/', async (req, res) => {
+       // console.log(JSON.stringify(cart, null, '\t'))
+        res.send({status: 'success', payload: cart})
+      }
+     catch(err){
+      console.log(err)
+     }
+    });
+
+    // Creo un nuevo carrito
+    this.post('/', async (req, res) => {
     try{
       const {cart}= req.body
      
@@ -49,10 +45,8 @@ router.get('/',async (req, res) => {
   });
   
   // Agrego un producto al carrito
-// id de un carrito: 646e45e77d31625d814ec4a9 y de un producto: 646e8d4231192c6f826b473f
 
-
-  router.put('/:cid/product/:pid',async (req, res) => {
+  this.put('/:cid/product/:pid',async (req, res) => {
     try{
       const cid = req.params.cid;
       const pid= req.params.pid;
@@ -78,7 +72,7 @@ router.get('/',async (req, res) => {
   });
   
   // Elimino  producto del carrito
-  router.delete('/:cid/:pid',async (req, res) => {
+  this.delete('/:cid/:pid',async (req, res) => {
     try{
       const { cid, pid } = req.params;
       const cart = cartServices.deleteProductToCart(cid, pid);
@@ -90,7 +84,7 @@ router.get('/',async (req, res) => {
   });
   
   // Eliminar un carrito por ID
-  router.delete('/carts/:id',async (req, res) => {
+  this.delete('/carts/:id',async (req, res) => {
     try{
       const { id } = req.params;
       const cart = cartServices.deleteCart(id);
@@ -100,4 +94,8 @@ router.get('/',async (req, res) => {
     console.log(err)
   }
   });
-  export default router
+
+
+
+ }//cierre del init
+}//cierre de la clase

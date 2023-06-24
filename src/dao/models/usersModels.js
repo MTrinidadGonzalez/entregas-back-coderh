@@ -5,8 +5,16 @@ const collection= 'Users'
 const schema= new mongoose.Schema({
     first_name: String, 
     last_name: String,
-    email: String,
-    password: String,
+    email:{
+        type:String,
+        require: true,
+        unique:true
+    },
+    password:{
+        type:String,
+        require: true,
+        unique:true
+    },
     role:{
         type:String,
         default: 'user'

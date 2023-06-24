@@ -1,4 +1,3 @@
-
 const form= document.getElementById('registerForm')
 
 form.addEventListener('submit', async(event)=> {
@@ -34,31 +33,3 @@ form.addEventListener('submit', async(event)=> {
 });
   
   
-/*
-form.addEventListener('submit',async (e)=>{
-    try{
-        e.preventDefault()
-        const data= new FormData(form)
-        
-        const obj= {}
-        const usuario= data.forEach((value, key)=>(obj[key]=value))
-        const response = await fetch('/api/session', {
-            method:'POST',
-            body:JSON.stringify(obj),
-            headers:{
-                "Content-Type":"application/json"
-            } 
-        })
-        console.log(response)
-        const responseData= await response.json()
-        if(responseData.status === 'success'){
-            window.location.replace('/login')
-        }
-        
-    }
-    catch(err){
-        console.log(err)
-    }
-   
-})*/
-
