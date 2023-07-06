@@ -11,7 +11,7 @@ body{
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-color: antiquewhite;
+    background-color:  rgba(252, 241, 241, 0.403);
     padding: 20px;
 }
 .form-clsss input{

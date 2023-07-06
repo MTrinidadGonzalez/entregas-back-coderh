@@ -1,33 +1,50 @@
-<div>
-    <h1>Productos:</h1>
 
+<div class="bodyContainer">
+
+
+<h1>Productos:</h1>
+<div class="productsContainer">
     {{#each products}}
-    <div>
+    <div class="productCard">
         <p>Title: {{this.title}} </p>
+       
         <p>Description: {{this.description}} </p>
         <p>Price: $ {{this.price}} </p>
-    <button>add to cart</button>
+    <button class="btnCard"  data-product-id="{{this._id}}" >Add to cart</button>
     </div>
     {{/each}}
+</div>
+
 
     {{#if hasPrevPage}}
-    <a href="/products/?page={{prevPage}}"><button>Anterior</button> </a>
+    <div class="btnsContainer"></div>
+    <a href="/products/?page={{prevPage}}"><button> < Anterior</button> </a>
     {{/if}}
 
-    {{page}}
+    <div class="numberPage">
+   {{page}}
+    </div>
+  
 
     {{#if hasNextPage}}
-    <a href="/products/?page={{nextPage}}"><button>Próxima</button> </a>
-    
+    <a href="/products/?page={{nextPage}}"><button>Próxima > </button> </a>
+    </div>
     {{/if}}
 
 
 {{#if productsfilter}}
+<div class="productsContainer"> 
 {{#each productsfilter}}
-<div>
-<p>Descripción: {{this.description}} </p>
+   <div class="productCard">
+        <p>Title: {{this.title}} </p>
+        <p>Description: {{this.description}} </p>
+        <p>Price: $ {{this.price}} </p>
+    <button class="btnCard"  data-product-id="{{this._id}}" >Add to cart</button>
+    </div>
+{{/each}}
+</div>
+{{/if}}
+
 </div>
 
-{{/each}}
-{{/if}}
-</div>
+ <script src="/js/products.js"></script> 

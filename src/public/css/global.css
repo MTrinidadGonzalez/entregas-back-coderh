@@ -1,0 +1,35 @@
+body{
+    border: 0%;
+    box-sizing: border-box;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: larger;
+}
+
+.navContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.nav-ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+}
+.nav-item{
+    text-decoration: none;
+    padding: 5px;
+    margin: 5px;
+
+}
+.nav-item:hover{
+    background-color:  rgba(252, 241, 241, 0.403);
+    ;
+}

@@ -7,8 +7,8 @@ const productsService= new ProductsManager()
 
 export default class CartsManager{
 
-createCart=(cart)=>{
-    return cartModel.create(cart)
+createCart=()=>{
+    return cartModel.create({products:[]})
 }
  //OCION 2 PARA USAR EL POPULATE AL HACER FIND   
 getCarts=()=>{
@@ -27,9 +27,6 @@ deleteCart=(cid)=>{
 addProductToCart=(cid,pid)=>{
 return cartModel.updateOne({_id:cid}, {$push: {products:{product: new mongoose.Types.ObjectId(pid)}}})
 
-
 }
-
-
 
 }

@@ -1,18 +1,17 @@
 import { Router } from "express";
+import { passportCall } from "../utils.js";
 
-
-export default class RouterBase{
+export default class RouterPadre{
     constructor(){
         this.router= Router()
-        this.init()//esto lo van a usar los childrens de esta clase
+        this.init()
     }
 
     getRouter(){
-        return this.router
+      return  this.router
     }
-
     init(){}
-      //hago los métos (get,port,put,delete) llamando a esa función que desmenuza y ejecuta los callbacks y sus parámetros
+
 
     get(path,policies, ...callbacks){
         this.router.get(path,passportCall('jwt',{strategyType:'jwt'}),this.handlePolicies(policies),this.applyCallbacks(callbacks))
@@ -26,19 +25,16 @@ export default class RouterBase{
     }
 
     delete(path, policies,...callbacks){
-        this.router.delete(path, passportCall('jwt',{strategyType:'jwt'}),handlePolicies(policies),thisthis.applyCallbacks(callbacks))
+        this.router.delete(path, passportCall('jwt',{strategyType:'jwt'}),this.handlePolicies(policies),this.applyCallbacks(callbacks))
     }
 
-    //para enviar respuesta de forma sistematizada:
     generateCustomResponse =(req,res,next)=>{
         res.sendSuccess= (message)=>{
             res.send({status:'success', message})
         }
-
         res.sendSuccessAndPayload=(payload)=>{
             res.send({status:'success', payload})
         }
-
         res.sendError= (error)=>{
             res.status(500).send({status:'error', error})
         }
@@ -49,34 +45,26 @@ export default class RouterBase{
         next()
     }
 
-    //metodo para el manejo de politicas:
-    handlePolicies= (policies)=>{
+    handlePolicies(policies){
         return(req,res,next)=>{
             if(policies[0]=== 'PUBLIC') return next()
             const user= req.user
-            //si no está autenticado pero si existe el user por si ya está registrado o logueado:
-            if(policies[0]=== 'NO_AUTH'&&user) return res.status(401).send({status:error, error: 'no autenticado'})
-            //ahora si en las políticas dice no auth pero no encontró al user(por ejemplo para la ruta de login):
+            if(user){console.log(`me llega este user en req.user del handlepolicies ${user.name}`)
+            }else{ console.log('todavia no llego el user en el req ')} 
+            if(policies[0]=== 'NO_AUTH'&&user) return res.status(401).send({status:'error', error: 'no autenticado'})
+            
             if(policies[0]=== 'NO_AUTH'&&!user) return next()
 
-            //ahora para las rutas en que el usuario ya tenga q existir:
-            if(!user)res.status(401).send({status:error, error: 'no autenticado'})
+            //para las rutas en que el usuario ya tenga q existir:
+            if(!user)res.status(401).send({status:error, error: 'no vino el user'})
 
-            //si ya existe el user, y no es una politica puplica
-            if(!policies.include(user.role.toUpperCase())) return res.status(403).send({status:'error', error:'forbiden'})
+            //si ya existe el user, y no es una politica publica
+            if(!policies.includes(user.role.toUpperCase())) return res.status(403).send({status:'error', error:'forbiden'})
 
             //si ya cumplio con todo y está dentro de las políticas:
             next()
-
         }
     }
-
-
-    //applyCallbacks recibe todos los callbacks(medlewares tmb) que tenga ese endpoint, los mapea y a cada
-    //uno lo ejecuta con la función aplly
-    //(...params) serían los parametros de ese enpoint, y el apply le pngo el this primero indicando q tome ese contexto
-    //por ejemplo el req y res, son parámetros de ese callback que recibe router.get 
-    //this hace referencia que que pertence a esa claseo sea ese ruteo es una intancia de este clase, y hace referencia a si mismo
 
     applyCallbacks(callbacks){
         return callbacks.map(callback=> async(...params)=>{
@@ -90,4 +78,5 @@ export default class RouterBase{
             }
         })
     }
+
 }
