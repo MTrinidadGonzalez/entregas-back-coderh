@@ -1,5 +1,5 @@
 import RouterPadre from '../routers/router.js'
-import {productsService} from '../services/services.js'
+import {cartsService, productsService} from '../services/services.js'
 
 export default class ProductRouter extends RouterPadre{
     init(){
@@ -15,15 +15,27 @@ export default class ProductRouter extends RouterPadre{
         }
     })//
 
-    this.post('/addproduct', ["PUBLIC"],async (req,res)=>{
+
+    //addproduct al carrito
+    this.post('/addproduct', ["USER"],async (req,res)=>{
         try{
+          
+            const cid= req.user.cart[0]._id
+            const username= req.user.name
             const pid= req.body.productId
-        res.send({status:"success", message:`llego el id del product ${pid}`})
+
+            const result= await cartsService.addProductToCart(cid,pid)
+            console.log(result)
+
+        res.send({status:"success", 
+                  message:`se agrego el product ${pid} en el el carrito ${cid} de ${username}`,
+                  payload:result})
         }
         catch(error){
             console.log(error)
         }
     })
+
 
     this.get('/:pid', ["PUBLIC"], async (req,res)=>{
         const {pid}=req.params

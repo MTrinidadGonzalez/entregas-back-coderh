@@ -12,21 +12,37 @@ createCart=()=>{
 }
  //OCION 2 PARA USAR EL POPULATE AL HACER FIND   
 getCarts=()=>{
-    return cartModel.find().lean().populate('products.product')
+    return cartModel.find().lean().populate('products')
 }
 
 getCartById=(cid)=>{
-    return cartModel.findById(cid).lean().populate('products.product')
+    return cartModel.findById(cid).lean().populate('products')
 }
 
 deleteCart=(cid)=>{
     return cartModel.findByIdAndDelete(cid)
 }
 
-//AGREGO PRODUCT AL CARRITO MEDIANTE REF AL OBJECT ID 
-addProductToCart=(cid,pid)=>{
-return cartModel.updateOne({_id:cid}, {$push: {products:{product: new mongoose.Types.ObjectId(pid)}}})
+//fucion de addproduct tu cart
+addProductToCart = async (cid, pid) => {
+    const product = await productsModel.findById(pid)
+  
+    if (!product) {
+      console.log('No encontró el product'); 
+    } 
+    const cart = await cartModel.findById(cid)
+    if (!cart) {
+      console.log('no encontró al carrito')
+    }
+  
+    cart.products.push(pid)
+  
+    await cart.save()
+    return cart
+  };
 
-}
+
+
+
 
 }

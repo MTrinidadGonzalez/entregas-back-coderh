@@ -84,7 +84,7 @@ const passportStrategies=()=>{
               name: `${user.first_name} ${user.last_name}`,
               email: user.email,
               role: user.role,
-              cart:user.cart
+              cart: user.cart 
             };
             console.log(`estoy en passport con estrategia login con el user creado ${user}`)
             
