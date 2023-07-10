@@ -16,9 +16,10 @@ form.addEventListener('submit',async (e)=>{
             } 
         })
         const responseData= await response.json()
-       /* if(responseData.status === 'success'){
-            window.location.replace('/products')
-        } */ console.log(responseData)
+        console.log(responseData)
+        if(responseData.status === 'success'){
+            window.location.replace('/home')
+        }
     }
     catch(err){
         console.log(err)

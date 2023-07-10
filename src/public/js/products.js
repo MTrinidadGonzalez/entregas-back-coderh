@@ -20,7 +20,7 @@ btnCards.forEach((button)=>{
            
           };
         
-          fetch("/api/products/addproduct", {
+          fetch("/api/products", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"

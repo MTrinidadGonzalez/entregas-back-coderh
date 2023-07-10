@@ -8,13 +8,13 @@ export default class ProductsView extends RouterPadre{
         this.get('/', ["PUBLIC"], async (req,res)=>{
             const { page=1, category, limit: queryLimit}= req.query
     
-            const defaultLimit = 3
+            const defaultLimit = 6
             const limit = queryLimit ? parseInt(queryLimit) ?? defaultLimit : defaultLimit
     
         
             if(category){
                 const productsfilter= await productsService.getProductsTo("category",category)
-               console.log(productsfilter)
+              // console.log(productsfilter)
                 res.render('products',{
                     productsfilter,
                     hasPrevPage: false,

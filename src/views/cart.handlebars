@@ -4,15 +4,26 @@
   
   {{#each cart.products}}
   <div class="productCart"> 
-    <p>Title: {{this.title}}</p>
-    <p>Id: {{this._id}}</p>
+    <div>
+       <img src={{this.img}} alt={{this.description}}>
+    </div>
+  
+   
+   <div>
+     <p>Id: {{this._id}}</p>
    <p>Description: {{this.description}}</p>
    <p>Price:$ {{this.price}}</p>
    <p>Category: {{this.category}}</p>
     <p>Quantity: {{this.quantity}}</p>
- <hr>
-  </div>
+   </div>
    
+   <div>
+ <button>Eliminar del carrito</button>
+   </div>
+  
+  
+  </div>
+    <hr>
     {{/each}}
 </div>
 

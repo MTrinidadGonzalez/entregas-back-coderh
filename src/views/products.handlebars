@@ -1,13 +1,27 @@
+<nav class="navContainer">
+    <ul class="nav-ul">
+        <li><a href="/home" class="nav-item">HOME</a></li>
+         <li><a href="/products/?category=remeras" class="nav-item">Remeras</a></li>
+         <li><a href="/products/?category=pantalones" class="nav-item">Pantalones</a></li>
+          <li><a href="/products/?category=abrigos" class="nav-item" >Abrigos</a></li>
+          <li><a href="/products/?category=accesorios" class="nav-item" >Accesorios</a></li>
+           <li><a href="/cart" class="nav-item" >
+            <span class="material-symbols-outlined">
+            shopping_cart
+            </span>       
+           </a></li>
+      
+    </ul>
+</nav>
+
 
 <div class="bodyContainer">
 
-
-<h1>Productos:</h1>
 <div class="productsContainer">
     {{#each products}}
     <div class="productCard">
         <p>Title: {{this.title}} </p>
-       
+        <img src={{this.img}} alt={{this.description}}>
         <p>Description: {{this.description}} </p>
         <p>Price: $ {{this.price}} </p>
     <button class="btnCard"  data-product-id="{{this._id}}" >Add to cart</button>
@@ -37,6 +51,7 @@
 {{#each productsfilter}}
    <div class="productCard">
         <p>Title: {{this.title}} </p>
+         <img src={{this.img}} alt={{this.description}}>
         <p>Description: {{this.description}} </p>
         <p>Price: $ {{this.price}} </p>
     <button class="btnCard"  data-product-id="{{this._id}}" >Add to cart</button>

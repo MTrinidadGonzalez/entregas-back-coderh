@@ -14,7 +14,7 @@ export default class ProductRouter extends RouterPadre{
 
     this.get('/:pid', ["PUBLIC"],productsControllers.getProduct )
 
-    this.post('/',["ADMIN"],productsControllers.postProduct)
+    this.post('/cargoproduct',["ADMIN"],productsControllers.postProduct)
 
 
     this.put('/:pid',["ADMIN"],productsControllers.putProduct )
@@ -29,7 +29,7 @@ export default class ProductRouter extends RouterPadre{
     this.post('/cargomuchos', ["PUBLIC"], async (req,res)=>{
        try{
         const products= req.body
-       const result= await createProducts.createProducts(products)
+       const result= await productsService.createProducts(products)
        res.send({status:"success", message:"productos agregados", payload: result})
        }
        catch(error){
