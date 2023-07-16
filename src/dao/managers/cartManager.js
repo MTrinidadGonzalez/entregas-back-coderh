@@ -16,7 +16,7 @@ getCarts=()=>{
 }
 
 getCartById=(cid)=>{
-    return cartModel.findById(cid).lean().populate('products')
+    return cartModel.findById(cid).lean().populate('products.product')
 }
 
 deleteCart=(cid)=>{
@@ -58,6 +58,17 @@ addProductToCart = async (cid, product) => {
   };
 
 
+  deleteProductTocart=async(cid, pid)=>{
+
+    const cart= await cartModel.findById(cid)
+    const productsList= cart.products
+    const index= productsList.findIndex(p=> p._id.equals(new mongoose.Types.ObjectId(product.pid)))
+    productsList.slice(index,1)
+    await cart.save()
+    console.log('como queda el cart luego de borrar producto', cart)
+    return cart
+
+  }
 
 
 }

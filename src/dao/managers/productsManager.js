@@ -4,7 +4,9 @@ export default class ProductsManager{
     getProducts= ()=>{
         return productsModel.find().lean()
     }
-
+    getProductById=(pid)=>{
+        return productsModel.findById(pid)
+    }
     getProductsTo= (param1,param2)=>{
         return productsModel.find({[param1]:param2}).lean()
     }

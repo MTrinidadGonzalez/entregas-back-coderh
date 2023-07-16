@@ -47,6 +47,13 @@ const addProductCart=async (req,res)=>{
     }
 }
 
+const deleteProductCart=(req,res)=>{
+
+}
+
+
+
+
 const postProduct= async(req,res)=>{
     try{
         const {title, description,price,category,code,thumbnail}=req.body
@@ -91,5 +98,6 @@ export default{
     getProduct,
     addProductCart,
     postProduct,
-    putProduct
+    putProduct,
+    deleteProductCart
 }
