@@ -29,10 +29,14 @@ const addProductCart=async (req,res)=>{
         const cid= req.user.cart[0]._id
         const username= req.user.name
         const pid= req.body.productId
-
+        const productQuantity= req.body.spamQuantity
+        console.log(req.body)
+        const product= {
+            pid:pid,
+            productQuantity:productQuantity
+        }
          
-        const result= await cartsService.addProductToCart(cid,pid)
-        console.log(result)
+        const result= await cartsService.addProductToCart(cid,product)
 
     res.send({status:"success", 
               message:`se agrego el product ${pid} en el el carrito ${cid} de ${username}`,

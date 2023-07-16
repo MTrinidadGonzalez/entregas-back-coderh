@@ -1,29 +1,37 @@
 import mongoose from "mongoose";
 
-const collection= "Carts"
+const collection= 'Carts'
 
 const schema= new mongoose.Schema({
-   products:[
-    {
-        type: mongoose.SchemaTypes.ObjectId,
-        ref: 'Products'
-    }
-   ],
-    totalAmount:{
-        type:Number,
-        default: 0
-    },
-    default: [],
 
-},{timestamps:{createdAt: 'created_at', updatedAt: 'updated_at'}}
-)
+    products:[
+        {
+            product: {
+              type: mongoose.SchemaTypes.ObjectId,
+              ref: 'Products'
+            },
+            quantity: {
+              type: Number,
+              default: 1
+            },
+            amount: {
+              type: Number,
+              default: 0
+            }
+          }
+       ],
+        totalAmount:{
+            type:Number,
+            default: 0
+        },
+        totalQuantity:{
+          type:Number,
+          default: 0
+        }
+      
 
 
-//OPCION 1 PARA USAR EL POPULATE: 
-/*
-schema.pre('find', function(){
-    this.populate('products.product')
-})*/
+},{timestamps:{createdAt: 'created_at', updatedAt: 'updated_at'}})
 
 const cartModel= mongoose.model(collection,schema)
 export default cartModel;

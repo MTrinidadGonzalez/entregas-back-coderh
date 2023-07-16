@@ -1,7 +1,7 @@
 import cartModel from "../models/cartModel.js";
 import productsModel from "../models/productsModel.js";
 import ProductsManager from "../managers/productsManager.js";
-import mongoose from "mongoose";
+import mongoose, { mongo } from "mongoose";
 
 const productsService= new ProductsManager()
 
@@ -24,23 +24,38 @@ deleteCart=(cid)=>{
 }
 
 //fucion de addproduct tu cart
-addProductToCart = async (cid, pid) => {
-    const product = await productsModel.findById(pid)
+addProductToCart = async (cid, product) => {
+    const newproduct = await productsModel.findById(product.pid)
+    const cart= await cartModel.findById(cid)
+    const productsList= cart.products
   
-    if (!product) {
-      console.log('No encontró el product'); 
-    } 
-    const cart = await cartModel.findById(cid)
-    if (!cart) {
-      console.log('no encontró al carrito')
+    const index= productsList.findIndex(p=> p._id.equals(new mongoose.Types.ObjectId(product.pid)))
+    if(index > -1){
+   
+    const prodcuctoEncontrado=  productsList[index]
+    prodcuctoEncontrado.quantity++
+    prodcuctoEncontrado.amount= prodcuctoEncontrado.amount + newproduct.price
+    cart.totalAmount = cart.totalAmount + prodcuctoEncontrado.amount
+    cart.totalQuantity++
+
+  }
+  else{
+    console.log('el producto no estaba en el carrito')
+    const productadd={
+      _id: new mongoose.Types.ObjectId(product.pid),
+      amount: newproduct.price,
+      quantity: product.productQuantity
     }
-  
-    cart.products.push(pid)
-  
+    productsList.push(productadd)
+    cart.totalAmount = cart.totalAmount + productadd.amount
+    cart.totalQuantity++
+
+  }
+    
     await cart.save()
+    console.log('como queda el cart luego de el prodcuto agregado', cart)
     return cart
   };
-
 
 
 
