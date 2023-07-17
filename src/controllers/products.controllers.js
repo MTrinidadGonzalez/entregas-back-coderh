@@ -48,7 +48,13 @@ const addProductCart=async (req,res)=>{
 }
 
 const deleteProductCart=(req,res)=>{
+    const user = req.user;
+    const cid = user.cart[0]._id
+    console.log('cart id', cid)
+    const pid= req.body.pid
+    console.log('pid', pid)
 
+    res.send({status:'success', message: `me llego el id del producto a eliminar ${pid}` })
 }
 
 

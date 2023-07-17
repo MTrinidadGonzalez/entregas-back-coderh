@@ -7,30 +7,27 @@
   {{#each listFinalDeProducts}}
         <div class="productCart"> 
   
-  <div class="sub-div-cart-card">
-    <div>
-        
+<div class="sub-div-cart-card">
+    <div> 
         <img src={{this.img}} alt={{this.description}} class="img-product-cart">
         <p>Id: {{this._id}}</p>
     </div> 
     <div>
-           <p>Description: {{this.description}}</p>
-   <p>Price:$ {{this.price}}</p>
-   <p>Amount:$ {{this.amount}} </p>
-   <p>Category: {{this.category}}</p>
-    <p>Quantity: {{this.quantity}}</p>
+        <p>Description: {{this.description}}</p>
+       <p>Price:$ {{this.price}}</p>
+       <p>Amount:$ {{this.amount}} </p>
+       <p>Category: {{this.category}}</p>
+        <p>Quantity: {{this.quantity}}</p>
     </div>
 </div>
-   
    <div>
- <button>Eliminar del carrito</button>
+<button class="delete-product-btn" data-product-id="{{this._id}}">Eliminar del carrito</button>
    </div>
-  
-  </div>
+</div>
     <hr>
     {{/each}}
           
           </div>
 
-
+<script src="/js/cart.js"></script>
       
