@@ -21,7 +21,9 @@ export default class HomeViewRouter extends RouterPadre{
             const prevPage = hasPrevPage ? currentPage - 1 : null;
             const nextPage = hasNextPage ? currentPage + 1 : null;
             
-            
+            const cart= req.user.cart
+            const totalQuantity = cart[0].totalQuantity
+            console.log(totalQuantity)
             res.render('home',{
                 css:'home',
                 products,
@@ -30,6 +32,7 @@ export default class HomeViewRouter extends RouterPadre{
              hasPrevPage,
              prevPage,
               nextPage,
+              totalQuantity:totalQuantity
             })
         })
 

@@ -10,7 +10,7 @@ export default class CartsManager{
 createCart=()=>{
     return cartModel.create({products:[]})
 }
- //OCION 2 PARA USAR EL POPULATE AL HACER FIND   
+
 getCarts=()=>{
     return cartModel.find().lean().populate('products')
 }
@@ -23,7 +23,32 @@ deleteCart=(cid)=>{
     return cartModel.findByIdAndDelete(cid)
 }
 
-//fucion de addproduct tu cart
+subtractProduct= async (cid,pid)=>{
+  const newproduct = await productsModel.findById(pid)
+  const cart= await cartModel.findById(cid)
+  console.log('carrito sin modificar', cart)
+  const productsList= cart.products
+
+  const index= productsList.findIndex(p=> p._id.equals(new mongoose.Types.ObjectId(pid)))
+  if(index > -1){
+    if ((productsList[index].quantity > 1)){
+      
+      productsList[index].quantity--
+      productsList[index].amount = productsList[index].amount - newproduct.price
+      cart.totalAmount = cart.totalAmount - newproduct.price
+      cart.totalQuantity--
+    }
+    else{
+      productsList.splice(index,1)
+    }
+    await cart.save()
+    console.log('como queda el cart con el producto eliminado', cart)
+    return cart
+
+  }
+}
+
+// addproduct tu cart
 addProductToCart = async (cid, product) => {
     const newproduct = await productsModel.findById(product.pid)
     const cart= await cartModel.findById(cid)
@@ -33,22 +58,22 @@ addProductToCart = async (cid, product) => {
     if(index > -1){
    
     const prodcuctoEncontrado=  productsList[index]
-    prodcuctoEncontrado.quantity++
-    prodcuctoEncontrado.amount= prodcuctoEncontrado.amount + newproduct.price
+    prodcuctoEncontrado.quantity = product.productQuantity
+    prodcuctoEncontrado.amount=  newproduct.price * prodcuctoEncontrado.quantity
     cart.totalAmount = cart.totalAmount + prodcuctoEncontrado.amount
-    cart.totalQuantity++
+    cart.totalQuantity= cart.totalQuantity + prodcuctoEncontrado.quantity
 
   }
   else{
     console.log('el producto no estaba en el carrito')
     const productadd={
       _id: new mongoose.Types.ObjectId(product.pid),
-      amount: newproduct.price,
+      amount: newproduct.price * product.productQuantity,
       quantity: product.productQuantity
     }
     productsList.push(productadd)
     cart.totalAmount = cart.totalAmount + productadd.amount
-    cart.totalQuantity++
+    cart.totalQuantity = cart.totalQuantity + productadd.quantity
 
   }
     
@@ -57,18 +82,7 @@ addProductToCart = async (cid, product) => {
     return cart
   };
 
-
-  deleteProductTocart=async(cid, pid)=>{
-
-    const cart= await cartModel.findById(cid)
-    const productsList= cart.products
-    const index= productsList.findIndex(p=> p._id.equals(new mongoose.Types.ObjectId(product.pid)))
-    productsList.slice(index,1)
-    await cart.save()
-    console.log('como queda el cart luego de borrar producto', cart)
-    return cart
-
-  }
+ 
 
 
 }
