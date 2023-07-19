@@ -4,6 +4,7 @@ export const generateTiketsData= async(req,res,next)=>{
     const user= req.user
               const cid= req.user.cart[0]._id
               const cart= await cartsService.getCartById(cid)
+              const useremail= req.user.email
               const products=cart.products
   
               const productIds = products.map(p => p._id).join(',')
@@ -26,7 +27,8 @@ export const generateTiketsData= async(req,res,next)=>{
               
               req.userTiketInfo = {
                 productsComprados:listFinalDeProducts,
-                usercart: cart
+                usercart: cart,
+                useremail: useremail
               }
               next()
   }

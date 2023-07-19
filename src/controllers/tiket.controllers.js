@@ -1,52 +1,51 @@
 import productsModel from "../dao/models/productsModel.js"
+import { tiketService } from "../services/services.js";
 
-
-/*
- el método bulkWrite() 
-te permite realizar múltiples operaciones de escritura en un solo llamado a la base de datos, 
-lo que puede ser más eficiente en comparación con hacer una consulta y 
-una actualización para cada documento por separado.
-*/
-
-const stockConfimCompra=async (req,res)=>{
-try{
-    const user= req.user
-    const cart= user.cart[0]
-    const products=cart.products
-           /*
-          const cambios = products.map(product => ({
-            updateOne: {
-              filter: { _id: product._id },
-              update: { $inc: { stock: -product.quantity } }
-            }
-          }));
-
-          await productsModel.bulkWrite(cambios)
-
-*/
-
-
-
-const operacionTiket= async (req,res)=>{
-  try{
-
-  }
-  catch(error){
-    console.log('fallo la operacion tiket, lo siento tri sos muy tonta',error)
-  }
-}
-
-
-
-
-    res.send({status:'success'})
-}
-catch(error){
-    console.log(error)
-}
+const operacionTiket=async(req,res)=>{
+  const userTiketInfo = req.userTiketInfo;
+  const productsTiket= req.userTiketInfo.productsComprados
+  
+//console.log('products tikets',productsTiket)
+  const cambios = productsTiket.map(product => ({
+    updateOne: {
+      filter: { _id: product._id },
+      update: { $inc: { stock: -product.quantity } }
+    }
+  }))
+  await productsModel.bulkWrite(cambios)
+  
+  const producstWithStock= []
+  const productsWithoutStock= []
+  const productIds = productsTiket.map(product => product._id) 
+  const productsDb = await productsModel.find({ _id: { $in: productIds } })
+  
+  productsDb.forEach(p=>{
+    const stock= p.stock
+    if(stock > 0){
+      //console.log('tiene stock')
+      producstWithStock.push({...p})
+     // console.log('productos con stock',producstWithStock)
+    }
+    else{
+      console.log('Lo siento , no hay stock del producto')
+      productsWithoutStock.push({...p})
+    //  console.log('productos sin stock', productsWithoutStock)
+    }
+  })
+  const sumoQuantity = productosConStock.reduce((total, producto) => total + producto._doc.quantity, 0)
+    const sumoAmount = productosConStock.reduce((total, producto) => total + producto._doc.price, 0);
+    const tiket= {
+      buyerEmailTiket:userTiketInfo.useremail ,
+      productsWithStock:producstWithStock ,
+      productsWithoutStock:productsWithoutStock,
+      totalQuantity:sumoQuantity,
+      totalAmount:sumoAmount,
+    }
+  const result = await  tiketService.createTiket(tiket)
+  console.log('result de operacion product', result)
+  res.send({status:'success', payload: result})
 }
 
 export default{
-    stockConfimCompra,
-   
+  operacionTiket
 }

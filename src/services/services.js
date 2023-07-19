@@ -13,3 +13,9 @@ import CartsManager from '../dao/managers/cartManager.js'
 import CartsService from './cartService.js'
 
 export const cartsService= new CartsService(new CartsManager)
+
+
+import TiketServices from '../services/tikets.service.js'
+import TiketManager from '../dao/managers/tiketManager.js'
+
+export const tiketService= new TiketServices(new TiketManager)

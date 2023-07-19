@@ -41,19 +41,8 @@ export default class CartView extends RouterPadre{
         })
 
         this.get('/:cid/purchase', ['USER'], generateTiketsData, async (req, res) => {
-          const userTiketInfo = req.userTiketInfo;
-      
-          const productsTiket= req.userTiketInfo.productsComprados
-        //console.log('products tikets',productsTiket)
          
-          const cambios = productsTiket.map(product => ({
-            updateOne: {
-              filter: { _id: product._id },
-              update: { $inc: { stock: -product.quantity } }
-            }
-          }))
 
-          await productsModel.bulkWrite(cambios)
 
           res.render('tiketcompra');
         });
