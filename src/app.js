@@ -13,6 +13,7 @@ import {loginAndRegisterview} from './services/viewsServices/viewsServices.js'
 import {productsView} from './services/viewsServices/viewsServices.js'
 import {cartView} from './services/viewsServices/viewsServices.js'
 import {homeViewRouter} from './services/viewsServices/viewsServices.js'
+import { Server } from 'socket.io'
 
 const app= express()
 
@@ -49,4 +50,9 @@ app.use('/products',productsView.getRouter())
 app.use('/',cartView.getRouter())
 app.use('/', homeViewRouter.getRouter())
 
-app.listen(port, ()=> console.log(`listening on ${port} - ${config.mode.mode}`))
+const server= app.listen(port, ()=> console.log(`listening on ${port} - ${config.mode.mode}`))
+const io  = new Server(server)
+io.on('connection', socket =>{
+    console.log("Nuevo cliente conectado");
+   
+})

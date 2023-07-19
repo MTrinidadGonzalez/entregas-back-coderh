@@ -65,7 +65,7 @@ addProductToCart = async (cid, product) => {
 
   }
   else{
-    console.log('el producto no estaba en el carrito')
+    //console.log('el producto no estaba en el carrito')
     const productadd={
       _id: new mongoose.Types.ObjectId(product.pid),
       amount: newproduct.price * product.productQuantity,
@@ -74,11 +74,11 @@ addProductToCart = async (cid, product) => {
     productsList.push(productadd)
     cart.totalAmount = cart.totalAmount + productadd.amount
     cart.totalQuantity = cart.totalQuantity + productadd.quantity
-
+    console.log('el producto se agrego por primera vez me queda totalquantity', cart.totalQuantity, 'totalamount:', cart.totalAmount )
   }
     
     await cart.save()
-    console.log('como queda el cart luego de el prodcuto agregado', cart)
+    //console.log('como queda el cart luego de el prodcuto agregado', cart)
     return cart
   };
 

@@ -22,7 +22,7 @@ form.addEventListener('submit',async (e)=>{
         }
     }
     catch(err){
-        console.log(err)
+        console.log(err, 'se esta trabando en el js de de login')
     }
    
 })

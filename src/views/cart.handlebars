@@ -1,9 +1,8 @@
 
-
-
 <div class="cartCard">
-    <h1>Productos agregados al cart de {{user.name}}:</h1>
-  
+    <h1 value="{{user.name}}" id="username" >Productos agregados al cart de {{user.name}}:</h1>
+  <h3 value={{cart.totalQuantity}}>Cantidad total de productos:  {{cart.totalQuantity}}  </h3>
+  <h3>Monto total:$  {{cart.totalAmount}} </h3>
   {{#each listFinalDeProducts}}
         <div class="productCart"> 
   
@@ -28,6 +27,13 @@
     {{/each}}
           
           </div>
-<button><a href="/{{cid}}/purchase">Finalizar compra</a></button>
+  <button ><a href="{{cart._id}}/purchase" >Finalizar compra</a></button>
+
+
+
+
+
+
+
 <script src="/js/cart.js"></script>
-      
+<script src="/js/tiket.js"></script>      

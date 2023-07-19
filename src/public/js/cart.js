@@ -1,3 +1,6 @@
+
+console.log('conectado al primer js')
+
 const btnDeleteProductCart= document.querySelectorAll('.delete-product-btn')
 
 
@@ -18,11 +21,11 @@ btnDeleteProductCart.forEach(btn => {
         })
         .then((response)=>{
             response.json()
-            console.log('La respuesta del envio del btn fue', response)
+            console.log('La respuesta del envio del btn borrar product fue', response)
         }
         )
         .catch(error => {
-            console.error('Ocurrió un error al enviar la solicitud:', error);
+            console.error('Ocurrió un error al enviar la solicitud borrar product:', error);
         })
        
 

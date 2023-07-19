@@ -12,7 +12,15 @@ export default class CartRoute extends RouterPadre{
         
         this.post('/deleteproductcart', ['USER'],productsCntrolles.deleteProductCart)
 
+
+            //aqui voy a mandar el la confirmacion de compra, se supone que recibo los ids de los 
+            //products del cart product, luego los comparo a su quantity con el stock y me devuelve el array de 
+            //products q si estaban y products q no hay stock la función se llamará stockConfimCompra en el tiketcontroller
+        this.post('/:cid/purchase', ['USER'], )
+
+
     }//cierre del init
+
+    
+
 }
-
-
