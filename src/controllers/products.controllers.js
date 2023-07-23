@@ -1,4 +1,7 @@
 import {cartsService, productsService} from '../services/services.js'
+import ErrorsService from '../services/ErrorServices/error.services.js'
+import {productsErrorIncompleteValues, productsExistYet} from '../constants/productsErrors.js'
+import {DicionarioEErrorProducts} from '../constants/EErors.js'
 
 const getProducts=async(req,res)=>{
     try{
@@ -36,6 +39,18 @@ const addProductCart=async (req,res)=>{
             productQuantity:productQuantity
         }
          
+        const productStock= await productsService.getProduct(pid)
+        if (productStock.stock < 0){
+            ErrorsService.createError({
+                name:"Error al agregar producto producto",
+                cause: productsWithoutStock(productStock),
+                code: DicionarioEErrorProducts.SIN_STOCK_INIXISTENTE,
+                status:400
+
+            })
+        }
+
+
         const result= await cartsService.addProductToCart(cid,product)
 
     res.send({status:"success", 
@@ -68,15 +83,27 @@ const deleteProductCart= async(req,res)=>{
 
 const postProduct= async(req,res)=>{
     try{
-        const {title, description,price,category,code,thumbnail}=req.body
+        const {title, description,price,category,code,img}=req.body
         const product={
             title,
             description,
             price,
             category,
             code,
-            thumbnail
+            img
         }
+        
+        if(!title || !description || !price || !category || !code || !img){
+            ErrorsService.createError({
+                name:"Error al crear producto",
+                cause: productsErrorIncompleteValues({title,description,price,code,img}),
+                code: DicionarioEErrorProducts.INCOMPLETE_VALUES,
+                status:400
+
+            })
+        }
+        
+        
         const addProduct= await productsService.createProduct(product)
         res.send({status:'success', message:`Se creó el producto ${product.description}`,payload:addProduct})
     }

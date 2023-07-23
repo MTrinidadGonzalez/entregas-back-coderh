@@ -10,6 +10,7 @@ import ProductRouter from './routers/products.router.js'
 import CartRoute from './routers/cart.router.js'
 import moksRouter from '../src/moks/routermoks/moks.products.router.js'
 
+import errorHandler from '../src/meddlewares/errorMedlewares.js'
 import __dirname from './utils.js'
 import {loginAndRegisterview} from './services/viewsServices/viewsServices.js'
 import {productsView} from './services/viewsServices/viewsServices.js'
@@ -53,6 +54,8 @@ app.use('/',cartView.getRouter())
 app.use('/', homeViewRouter.getRouter())
 
 app.use('/smokingsproducts', moksRouter)
+
+app.use(errorHandler)
 
 const server= app.listen(port, ()=> console.log(`listening on ${port} - ${config.mode.mode}`))
 const io  = new Server(server)
