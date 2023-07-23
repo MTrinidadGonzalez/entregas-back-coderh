@@ -6,14 +6,14 @@ const operacionTiket=async(req,res)=>{
   const productsTiket= req.userTiketInfo.productsComprados
   
 //console.log('products tikets',productsTiket)
-  const cambios = productsTiket.map(product => ({
+ /* const cambios = productsTiket.map(product => ({
     updateOne: {
       filter: { _id: product._id },
       update: { $inc: { stock: -product.quantity } }
     }
   }))
-  await productsModel.bulkWrite(cambios)
-  
+
+  await productsModel.bulkWrite(cambios)*/
   const producstWithStock= []
   const productsWithoutStock= []
   const productIds = productsTiket.map(product => product._id) 
