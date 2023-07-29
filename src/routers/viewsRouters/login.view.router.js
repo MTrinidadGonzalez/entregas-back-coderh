@@ -2,7 +2,7 @@ import RouterPadre from '../router.js'
 
 export default class LoginAndRegisterView extends RouterPadre{
     init(){
-        this.get('/', ["PUBLIC"], async (req,res)=>{
+        this.get('/register', ["PUBLIC"], async (req,res)=>{
             res.render('register',{
                 css: 'register'
             })

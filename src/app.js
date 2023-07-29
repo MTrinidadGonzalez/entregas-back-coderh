@@ -9,6 +9,7 @@ import SessionRouter from './routers/session.router.js'
 import ProductRouter from './routers/products.router.js'
 import CartRoute from './routers/cart.router.js'
 import moksRouter from '../src/moks/routermoks/moks.products.router.js'
+import loggerRouter from './routers/loggerRouter/logger.router.js'
 
 import errorHandler from '../src/meddlewares/errorMedlewares.js'
 import __dirname from './utils.js'
@@ -17,10 +18,10 @@ import {productsView} from './services/viewsServices/viewsServices.js'
 import {cartView} from './services/viewsServices/viewsServices.js'
 import {homeViewRouter} from './services/viewsServices/viewsServices.js'
 import { Server } from 'socket.io'
+import attachLogger from './meddlewares/logger.medleware.js'
+
 
 const app= express()
-
-
 
 
 
@@ -30,6 +31,10 @@ app.use(cookieParser())
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static(`${__dirname}/public`))
+
+
+app.use(attachLogger)
+
 passportStrategies()
 
 //handlebars
@@ -39,6 +44,7 @@ app.set('view engine','handlebars')
 
 
 //rutas
+app.use('/', loggerRouter)
 const userRouter= new UserRouter()
 app.use('/api/users', userRouter.getRouter())
 const sessionRouter= new SessionRouter()
