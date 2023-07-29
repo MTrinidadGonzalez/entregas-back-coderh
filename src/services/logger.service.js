@@ -1,5 +1,6 @@
 import winston from 'winston'
 
+
 export default class LoggerServices{
             constructor(env){
                 this.options= {
@@ -25,8 +26,9 @@ export default class LoggerServices{
                             transports:[
                                 new winston.transports.Console({level:"debug", format:winston.format.simple()}),
                                 new winston.transports.File({level:"error",filename: '../errors.log', format:winston.format.simple()}),
+                                new winston.transports.Console({level:"info", format:winston.format.simple()}),
                                 //este hattp lo hago xq quiero ver las peticiones q me llegan:
-                                new winston.transports.Console({level:"http"})
+                                new winston.transports.Console({level:"http", format:winston.format.simple()})
                             ]
                           })
                       

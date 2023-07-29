@@ -49,8 +49,15 @@ export default class RouterPadre{
         return(req,res,next)=>{
             if(policies[0]=== 'PUBLIC') return next()
             const user= req.user
-            if(user){console.log(`me llega este user en req.user del handlepolicies ${user.name}`)
-            }else{ console.log('todavia no llego el user en el req ')} 
+
+            if(user){
+                req.logger.info('Esta vigente el token y req.user')
+            }
+            else{ 
+                req.logger.error('El req.usr, y el token no están activos')
+            } 
+
+
             if(policies[0]=== 'NO_AUTH'&&user) return res.status(401).send({status:'error', error: 'no autenticado'})
             
             if(policies[0]=== 'NO_AUTH'&&!user) return next()

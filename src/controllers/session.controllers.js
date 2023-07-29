@@ -2,6 +2,7 @@ import {generateToken} from '../utils.js'
 
 const registerUser=async (req,res)=>{
     try{
+      
         console.log(`llego a la ruta de registro el user con el siguiente carrito ${req.user.cart}`)
         res.send({status:'success', message:`Usuario ${req.user.name} registrado`})
        }

@@ -18,7 +18,6 @@ const getProduct= async(req,res)=>{
     try{
         const {pid}=req.params
         const product= await productsService.getProductBy("_id",pid)
-        console.log(`se en encontro el producto ${product.description}`)
         res.send({status:'success', payload: product})
     }
     catch(error){
@@ -47,7 +46,8 @@ const addProductCart=async (req,res)=>{
                 code: DicionarioEErrorProducts.SIN_STOCK_INIXISTENTE,
                 status:400
 
-            })
+            }),
+            req.logger.error(`producto agregado, sin stock ${productStock}`)
         }
 
 

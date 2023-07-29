@@ -23,7 +23,9 @@ const passportStrategies=()=>{
               const exists = await userServices.getUser("email", email);
               
               if (exists){
+                req.logger.error('Sulicitud de registro, usuario ya registrado')
                 return done(null, false, { message: 'El usuario ya existe' });
+               
               }
               
             else{
@@ -72,12 +74,18 @@ const passportStrategies=()=>{
               user = await userServices.getUser("email", email);
               
              
-            if (!user)
+            if (!user){
+              req.logger.error('Solicitud de login, correo no encontrado')
               return done(null, false, { message: 'Correo no encontrado' });
+            }
+      
     
             const isValidPassword = await validatePassword(password, user.password);
-            if (!isValidPassword)
+            if (!isValidPassword){
+              req.logger.error('Solicitud de login, correo no encontrado')
               return done(null, false, { message: 'Contraseña inválida' });
+            }
+            
     
             user = {
               id: user._id,
