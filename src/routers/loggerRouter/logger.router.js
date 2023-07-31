@@ -1,10 +1,11 @@
 import { Router } from "express";
 
+
 const router= Router()
 
-router.get('/logger', (req,res)=>{
-    const logger= req.logger
-    logger.info('informacion que consologueo')
+router.get('/loggerTest', (req,res)=>{
+    const info= req.logger.info
+    console.log('req.loggerinfo', info)
     res.send({message:'Loggers'})
 })
 

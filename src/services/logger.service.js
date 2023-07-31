@@ -1,6 +1,5 @@
 import winston from 'winston'
 
-
 export default class LoggerServices{
             constructor(env){
                 this.options= {
@@ -15,7 +14,7 @@ export default class LoggerServices{
                      
                 }
                 this.logger= this.createLogger(env)
-               
+                this.loggers=[]
             }
 
             createLogger=(env)=>{
@@ -42,7 +41,8 @@ export default class LoggerServices{
                        })
 
                     }
-            }
+                }
 
+            
 }
 

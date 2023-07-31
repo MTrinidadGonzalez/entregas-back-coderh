@@ -23,7 +23,8 @@ const passportStrategies=()=>{
               const exists = await userServices.getUser("email", email);
               
               if (exists){
-                req.logger.error('Sulicitud de registro, usuario ya registrado')
+                 req.logger.error('Passport register, usuario ya registrado')
+               
                 return done(null, false, { message: 'El usuario ya existe' });
                
               }
@@ -75,7 +76,8 @@ const passportStrategies=()=>{
               
              
             if (!user){
-              req.logger.error('Solicitud de login, correo no encontrado')
+              req.logger.error('Passport login, correo no encontrado')
+           
               return done(null, false, { message: 'Correo no encontrado' });
             }
       

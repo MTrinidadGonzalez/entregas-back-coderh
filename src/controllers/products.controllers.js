@@ -49,9 +49,7 @@ const addProductCart=async (req,res)=>{
             }),
             req.logger.error(`producto agregado, sin stock ${productStock}`)
         }
-
-
-        const result= await cartsService.addProductToCart(cid,product)
+           const result= await cartsService.addProductToCart(cid,product)
 
     res.send({status:"success", 
               message:`se agrego el product ${pid} en el el carrito ${cid} de ${username}`,

@@ -1,5 +1,7 @@
 import { Router } from "express";
 import { passportCall } from "../utils.js";
+import config from '../config.js'
+
 
 export default class RouterPadre{
     constructor(){
@@ -51,10 +53,12 @@ export default class RouterPadre{
             const user= req.user
 
             if(user){
-                req.logger.info('Esta vigente el token y req.user')
+              req.logger.info('Llega el token y req.user a handlePolicies')
+                
             }
             else{ 
-                req.logger.error('El req.usr, y el token no están activos')
+              req.logger.error('El req.user, y el token no no llegan a handlePolicies') 
+             
             } 
 
 
