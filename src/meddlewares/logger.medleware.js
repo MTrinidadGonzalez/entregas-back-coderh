@@ -4,11 +4,10 @@ import config from '../config.js'
  const loggerServices=new LoggerServices(config.mode.mode)
 
 const attachLogger=(req,res,next)=>{
-   req.logger=loggerServices.logger
-
-   
+ req.logger=loggerServices.logger
+    
     //quiero ver las paticiones x eso agrege http
-    req.logger.http(`Peticion http: ${req.method} , ${req.url} , ${new Date().toLocaleTimeString()}`)
+  //  req.logger.http(`Peticion http: ${req.method} , ${req.url} , ${new Date().toLocaleTimeString()}`)
   
     next()
 }

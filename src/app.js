@@ -24,7 +24,7 @@ import attachLogger from './meddlewares/logger.medleware.js'
 const app= express()
 
 
-
+app.use(attachLogger)
 const port =config.app.PORT
 const connection= mongoose.connect(config.mongo.URL)
 app.use(cookieParser())
@@ -33,15 +33,16 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.static(`${__dirname}/public`))
 
 
-app.use(attachLogger)
 
-passportStrategies()
+
+
 
 //handlebars
 app.engine('handlebars',handlebars.engine());
 app.set('views',`${__dirname}/views`);
 app.set('view engine','handlebars')
 
+passportStrategies()
 
 //rutas
 app.use('/', loggerRouter)

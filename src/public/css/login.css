@@ -37,3 +37,7 @@
     background-color:  rgba(252, 241, 241, 0.403);
    border-radius: 6px;
 }
+
+.spamUserNotFound{
+    color: red;
+}

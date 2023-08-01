@@ -8,7 +8,5 @@ Carpera routers- archivo routers.js- metodo handlePolicies : utilizo req.loggers
     -si no llega token y user : logger.error
 Carpeta controllers- archivo productControllers.js - método addProductToCart:
     -Producto sin stock: req.logger.error
-Carpeta config- archivo passport.config.js- estrategia:
-    -'register' : usuario ya reqistrado : req.logger.error
-    -'login' : correo o contraseña no encontrados: req.logger.error
+
 Carpeta routers- carpeta loggerRouter- archivo logger.router.js : router.get('/loggerTest') 

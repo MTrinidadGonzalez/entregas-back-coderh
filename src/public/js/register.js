@@ -1,5 +1,7 @@
 const form= document.getElementById('registerForm')
 
+
+
 form.addEventListener('submit', async(event)=> {
   try{
     event.preventDefault()
@@ -13,17 +15,25 @@ form.addEventListener('submit', async(event)=> {
     
 
     const response = await fetch('/api/session/register', {
-        method:'POST',
-        body:user,
-        headers:{
-            "Content-Type":"application/json"
-        } 
+      method: 'POST',
+      body: user,
+      headers: {
+          "Content-Type": "application/json"
+      }
     })
-    console.log(response)
-    const responseData= await response.json()
-    if(responseData.status === 'success'){
+   console.log('response',response)
+ 
+    const data= await response.json()
+    console.log('data', data)
+    console.log('responseData:',data)  
+        if(data.status === 'success'){
         window.location.replace('/login')
-    }
+      }
+      if(data.status === 'error'){
+        const aletErrorRegister= document.getElementById('aletErrorRegister')
+        const msj= data.error
+        aletErrorRegister.innerText= msj 
+      }
   
 }
 

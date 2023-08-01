@@ -16,13 +16,18 @@ form.addEventListener('submit',async (e)=>{
             } 
         })
         const responseData= await response.json()
-        console.log(responseData)
+      
         if(responseData.status === 'success'){
             window.location.replace('/home')
         }
+        if(responseData.status === 'error'){
+            const spamUserNotFound= document.getElementById('spamUserNotFound')
+            const msj= responseData.error
+            spamUserNotFound.innerText= msj
+        }
     }
     catch(err){
-        console.log(err, 'se esta trabando en el js de de login')
+        console.log(err, 'error del server en login.js')
     }
    
 })

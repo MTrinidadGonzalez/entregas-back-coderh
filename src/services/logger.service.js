@@ -43,6 +43,8 @@ export default class LoggerServices{
                     }
                 }
 
-            
+                getLoggersArray() {
+                    return this.loggers;
+                  }
 }
 

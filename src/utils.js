@@ -27,12 +27,15 @@ export const generateToken= (user)=>{
 }
 
 
+// parte que cambio: if(error)return next(error);
+
 //funcion de passportCall
 import passport from 'passport'
 export const passportCall = (strategy,options={}) =>{
     return async(req,res,next) =>{
         passport.authenticate(strategy,(error,user,info)=>{
-            if(error) return next(error);
+            if(error)if(error)return next(error);
+           
             if(!options.strategyType){
                 console.log(`Route ${req.url} no se definió la strategyType`);
                 return res.sendServerError();
@@ -42,9 +45,12 @@ export const passportCall = (strategy,options={}) =>{
                 switch(options.strategyType) {
                     case 'jwt':
                         req.error = info.message?info.message:info.toString;
+                        
                         return next();
                     case 'locals':
-                        return res.send(info.message?info.message:info.toString())
+                       req.error= info.message?info.message:info.toString;
+                       return next();
+                      //  return res.send(info.message?info.message:info.toString())
                 }
             }
             req.user = user;
