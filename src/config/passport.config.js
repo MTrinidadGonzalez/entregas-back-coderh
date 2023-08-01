@@ -20,10 +20,14 @@ const passportStrategies=()=>{
           async (req, email, password, done) => {
             try {
               const { first_name, last_name } = req.body;
+              if(!first_name && !last_name && !email && !password){
+                return done(null, false, { message:'Datos incompletos' });
+              }
+
               const exists = await userServices.getUser("email", email);
               
               if (exists){  
-                return done(null, false, { message: 'El usuario ya existe' });           
+                return done(null, false, { message:'El usuario ya existe' });           
               }
               
             else{
@@ -87,7 +91,7 @@ const passportStrategies=()=>{
               role: user.role,
               cart: user.cart 
             };
-            console.log(`estoy en passport con estrategia login con el user creado ${user}`)
+       
             
             return done(null, user);
             }

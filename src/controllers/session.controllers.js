@@ -2,10 +2,12 @@ import {generateToken} from '../utils.js'
 
 const registerUser=async (req,res)=>{
     try{   if(req.error){
-            res.send({status:'error', error: req.error})
             req.logger.error(`logger register.Usuario no encontrado: ${req.error}`)
-    }
-            res.send({status:'success', payload:req.user})       
+            res.send({status:'error', error: req.error})
+             }
+             else{
+                res.send({status:'success', payload:req.user})    
+             }   
        }
        catch(error){
         console.log(error)

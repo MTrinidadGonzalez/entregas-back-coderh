@@ -53,13 +53,11 @@ export default class RouterPadre{
             const user= req.user
 
             if(user){
-            
               req.logger.info('Llega el token y req.user a handlePolicies')
             }
             else{ 
             
               req.logger.error('El req.user, y el token no no llegan a handlePolicies') 
-              
              
             } 
 

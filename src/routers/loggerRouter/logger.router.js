@@ -4,8 +4,7 @@ import { Router } from "express";
 const router= Router()
 
 router.get('/loggerTest', (req,res)=>{
-    const loggers= req.logger.loggers
-    console.log('req.logger.loggers', loggers)
+   console.log(req.logger)
     res.send({message:'Loggers'})
 })
 

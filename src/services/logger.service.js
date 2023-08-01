@@ -14,9 +14,8 @@ export default class LoggerServices{
                      
                 }
                 this.logger= this.createLogger(env)
-                this.loggers=[]
+              
             }
-
             createLogger=(env)=>{
                 switch(env){
                     case 'dev':
@@ -43,8 +42,5 @@ export default class LoggerServices{
                     }
                 }
 
-                getLoggersArray() {
-                    return this.loggers;
-                  }
 }
 
