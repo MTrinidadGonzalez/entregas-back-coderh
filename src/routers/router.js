@@ -53,15 +53,11 @@ export default class RouterPadre{
             const user= req.user
 
             if(user){
-              req.logger.info('Llega el token y req.user a handlePolicies')
+              req.logger.debug('Llega el token y req.user a handlePolicies')
             }
-            else{ 
-            
-              req.logger.error('El req.user, y el token no no llegan a handlePolicies') 
-             
+            else{             
+              req.logger.error('El req.user, y el token no no llegan a handlePolicies')             
             } 
-
-
             if(policies[0]=== 'NO_AUTH'&&user) return res.status(401).send({status:'error', error: 'no autenticado'})
             
             if(policies[0]=== 'NO_AUTH'&&!user) return next()
