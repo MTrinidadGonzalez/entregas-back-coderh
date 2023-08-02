@@ -63,7 +63,8 @@ export default class RouterPadre{
             if(policies[0]=== 'NO_AUTH'&&!user) return next()
 
             //para las rutas en que el usuario ya tenga q existir:
-            if(!user)res.status(401).send({status:error, error: 'no vino el user'})
+             // if(!user)res.status(401).send({status:error, error: 'no token'})
+              if(!user)res.redirect('/login')
 
             //si ya existe el user, y no es una politica publica
             if(!policies.includes(user.role.toUpperCase())) return res.status(403).send({status:'error', error:'forbiden'})

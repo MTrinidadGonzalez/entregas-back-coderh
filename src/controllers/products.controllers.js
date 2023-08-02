@@ -1,7 +1,7 @@
 import {cartsService, productsService} from '../services/services.js'
 import ErrorsService from '../services/ErrorServices/error.services.js'
 import {productsErrorIncompleteValues, productsExistYet} from '../constants/productsErrors.js'
-import {DicionarioEErrorProducts} from '../constants/EErors.js'
+import {DictionaryEErrorProducts} from '../constants/EErors.js'
 
 const getProducts=async(req,res)=>{
     try{
@@ -43,7 +43,7 @@ const addProductCart=async (req,res)=>{
             ErrorsService.createError({
                 name:"Error al agregar producto producto",
                 cause: productsWithoutStock(productStock),
-                code: DicionarioEErrorProducts.SIN_STOCK_INIXISTENTE,
+                code: DictionaryEErrorProducts.SIN_STOCK_INIXISTENTE,
                 status:400
 
             }),
@@ -95,7 +95,7 @@ const postProduct= async(req,res)=>{
             ErrorsService.createError({
                 name:"Error al crear producto",
                 cause: productsErrorIncompleteValues({title,description,price,code,img}),
-                code: DicionarioEErrorProducts.INCOMPLETE_VALUES,
+                code: DictionaryEErrorProducts.INCOMPLETE_VALUES,
                 status:400
 
             })

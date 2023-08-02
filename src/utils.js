@@ -34,7 +34,7 @@ import passport from 'passport'
 export const passportCall = (strategy,options={}) =>{
     return async(req,res,next) =>{
         passport.authenticate(strategy,(error,user,info)=>{
-            if(error)if(error)return next(error);
+            if(error)return next(error);
            
             if(!options.strategyType){
                 console.log(`Route ${req.url} no se definió la strategyType`);
@@ -64,6 +64,7 @@ export const cookieExtractor = (req) =>{
     let token = null; //aca viene el token... Si lo encuentra
     if(req&&req.cookies) {
         token = req.cookies['authToken']
+     
     }
     return token;
 }

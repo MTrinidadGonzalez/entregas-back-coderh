@@ -111,7 +111,7 @@ const passportStrategies=()=>{
           },
           async (accessToken, refreshToken, profile, done) => {
             try {
-              console.log(profile);
+              //console.log(profile);
             
               const { name, email } = profile._json;
               const user = await userServices.getUser("email", email);
@@ -124,7 +124,7 @@ const passportStrategies=()=>{
                   password:''
                 }
                 const result = await userServices.createUser(newUser);
-                done(null,result);
+                done(null,newUser);
               }
               
               done(null,user);
@@ -142,9 +142,11 @@ const passportStrategies=()=>{
         jwtFromRequest:ExtractJwt.fromExtractors([cookieExtractor]),
         secretOrKey:'jwtSecret'
       }, async(payload,done)=>{
+     
+
         return done(null,payload);
       }))
     
-    };
+    };//cierre de toda las estrategias
 export default passportStrategies
 
