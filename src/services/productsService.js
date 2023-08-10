@@ -9,7 +9,9 @@ export default class ProductsServices{
     getProducts= ()=>{
         return this.dao.getProducts()
     }
-
+    getProductById=(pid)=>{
+        return this.dao.getProductById(pid)
+    }
     getProductsTo= (param1,param2)=>{
         return this.dao.getProductsTo(param1,param2)
     }

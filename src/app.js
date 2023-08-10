@@ -2,6 +2,8 @@ import express  from "express";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import handlebars from 'express-handlebars'
+
+
 import config from  './config.js'
 import passportStrategies from './config/passport.config.js'
 import UserRouter from "./routers/user.router.js";
@@ -10,6 +12,7 @@ import ProductRouter from './routers/products.router.js'
 import CartRoute from './routers/cart.router.js'
 import moksRouter from '../src/moks/routermoks/moks.products.router.js'
 import loggerRouter from './routers/loggerRouter/logger.router.js'
+import EmailRouter from './routers/email.router.js'
 
 import errorHandler from '../src/meddlewares/errorMedlewares.js'
 import __dirname from './utils.js'
@@ -54,6 +57,9 @@ const productsRouter= new ProductRouter()
 app.use('/api/products', productsRouter.getRouter())
 const cartRouter= new CartRoute()
 app.use('/api/cart', cartRouter.getRouter())
+const emailRouter= new EmailRouter()
+app.use('/api/email', emailRouter.getRouter())
+
 //rutas de vistas
 app.use('/',loginAndRegisterview.getRouter())
 app.use('/products',productsView.getRouter())
@@ -64,11 +70,10 @@ app.use('/smokingsproducts', moksRouter)
 
 app.use(errorHandler)
 
+
 const server= app.listen(port, ()=> console.log(`listening on ${port} - ${config.mode.mode}`))
+
 const io  = new Server(server)
-
-
-
 
 io.on('connection', socket =>{
     console.log("Nuevo cliente conectado");

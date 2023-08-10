@@ -46,5 +46,12 @@ export default class ProductsView extends RouterPadre{
          })
     }
         })
-    }
+
+
+        this.get('/newProduct',["PUBLIC"], async (req,res)=>{
+            res.render('newProduct',{css:'newProduct'})
+        })
+   
+    }//cierre init
+
 }

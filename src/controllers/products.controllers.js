@@ -8,8 +8,8 @@ const getProducts=async(req,res)=>{
         const products= await productsService.getProducts()
         res.send({status: "success", payload:products})
     }
-    catch(err){
-        console.log(err)
+    catch(error){
+        console.log('Error catch get products:', error)
     }
 }
 
@@ -17,11 +17,11 @@ const getProducts=async(req,res)=>{
 const getProduct= async(req,res)=>{
     try{
         const {pid}=req.params
-        const product= await productsService.getProductBy("_id",pid)
+        const product= await productsService.getProductById(pid)
         res.send({status:'success', payload: product})
     }
     catch(error){
-        console.log(error)
+        console.log('Error catch get product:', error)
     }
 }
 
@@ -38,7 +38,7 @@ const addProductCart=async (req,res)=>{
             productQuantity:productQuantity
         }
          
-        const productStock= await productsService.getProduct(pid)
+        const productStock= await productsService.getProductById(pid)
         if (productStock.stock < 0){
             ErrorsService.createError({
                 name:"Error al agregar producto producto",
@@ -72,7 +72,7 @@ const deleteProductCart= async(req,res)=>{
     res.send({status:'success',payload:result })
     }
     catch(error){
-        console.log(error)
+        console.log('Error catch delete product:', error)
     }
 }
 
@@ -80,6 +80,8 @@ const deleteProductCart= async(req,res)=>{
 
 
 const postProduct= async(req,res)=>{
+    const email= req.user.email
+    
     try{
         const {title, description,price,category,code,img}=req.body
         const product={
@@ -88,7 +90,8 @@ const postProduct= async(req,res)=>{
             price,
             category,
             code,
-            img
+            img,
+            owner: email
         }
         
         if(!title || !description || !price || !category || !code || !img){
@@ -106,7 +109,7 @@ const postProduct= async(req,res)=>{
         res.send({status:'success', message:`Se creó el producto ${product.description}`,payload:addProduct})
     }
     catch(error){
-        console.log(error)
+        req.logger.error('Error catch createProduct:', error)
     }
 }
 
@@ -126,7 +129,7 @@ const putProduct=async(req,res)=>{
         res.send({status:'success', message:`Se modificó ${product.description}`, payload:updateProduct})
     }
     catch(error) {
-        console.log(error)
+        req.logger.error('Error catch updateProduct:', error)
     }
 }
 

@@ -1,4 +1,14 @@
-                            SERVICES:
+                           MAIL SERVICES
+Carpeta mailServices - archivo mail.service.js:  class MailingService
+Carpeta constants:
+         -Archivo Dtemplates.js: diccionario de templates.
+         -Archivo DMailInfo.js: diccionario de info de correos. 
+Archivo utils.js: función generateMailTemplate.
+Carpeta templates- archivo restorePassw.handlebars             
+Carpeta routers- archivo email.router.js                   
+                           
+                           
+                           SERVICES:
 Carpeta services- archivo services.js : instancias de clases (services)                             
                              
                              
@@ -26,3 +36,4 @@ Carpeta controllers- archivo sessionControllers.js - métodos registerUser,login
     -Error de registro o login (usuarios no encontrados): req.logger.error
 
  Carpeta routers- carpeta loggerRouter- archivo logger.router.js : router.get('/loggerTest') 
+

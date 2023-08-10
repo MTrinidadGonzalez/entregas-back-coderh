@@ -82,7 +82,7 @@ export default class RouterPadre{
             catch(error){
                 //ya que todos los meddlewares recibidos tienen un (req,res,next), tomo el parametro de la posicion 1 o sea res y mando el status
                /* params[1].status(500).send(error)*///este el el custom error que es el arametro que ocupa el lugar [1]
-               console.log(error)
+               console.log( error)
             }
         })
     }

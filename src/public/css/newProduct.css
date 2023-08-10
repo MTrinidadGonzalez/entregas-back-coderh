@@ -1,0 +1,32 @@
+.containerNewProduct{
+    padding: 10px;
+}
+.formNewProduct{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px;   
+    background-image: url('https://i.pinimg.com/564x/28/a6/d9/28a6d987e23d9228f984a48746dd4a70.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.formNewProduct input{
+    padding: 5px;
+    margin: 5px;
+    border-radius: 6px;
+}
+.btnNewProduct{
+    text-decoration: none;
+    font-size: larger;
+
+    padding: 7px;
+    margin: 5px;
+    border-radius: 7px;
+    border: 1px solid black;
+}
+.btnNewProduct:hover{
+    background-color:  rgba(252, 241, 241, 0.403);
+}

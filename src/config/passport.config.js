@@ -59,7 +59,6 @@ const passportStrategies=()=>{
         new LocalStrategy(
           { usernameField: 'email' },
           async (email, password, done) => {
-            
             if ((email === admin2) && password === adminPassword) {
               const user = {
                 id: 0,

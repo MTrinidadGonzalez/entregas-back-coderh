@@ -14,7 +14,7 @@ export default class ProductRouter extends RouterPadre{
         this.post('/deleteProduct', productsControllers.deleteProductCart)
         this.get('/:pid', ["PUBLIC"],productsControllers.getProduct )
 
-        this.post('/cargoproduct',["ADMIN"],productsControllers.postProduct)
+        this.post('/newproduct',["ADMIN","PREMIUM"],productsControllers.postProduct)
 
 
         this.put('/:pid',["ADMIN"],productsControllers.putProduct )

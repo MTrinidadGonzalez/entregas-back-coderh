@@ -27,7 +27,8 @@ const operacionTiket=async(req,res)=>{
      // console.log('productos con stock',producstWithStock)
     }
     else{
-      console.log('Lo siento , no hay stock del producto')
+      
+      req.logger.debug('Producto sin stock:', error)
       productsWithoutStock.push({...p})
     //  console.log('productos sin stock', productsWithoutStock)
     }
@@ -42,7 +43,8 @@ const operacionTiket=async(req,res)=>{
       totalAmount:sumoAmount,
     }
   const result = await  tiketService.createTiket(tiket)
-  console.log('result de operacion product', result)
+  req.logger.debug('result de operacion product', result)
+ 
   res.send({status:'success', payload: result})
 }
 
