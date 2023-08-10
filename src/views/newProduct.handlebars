@@ -2,12 +2,18 @@
     <h1>Nuevo producto</h1>
 
 <form id="formNewProduct" class="formNewProduct">
-    <input type="text" placeholder="Title" value="title">
-    <input type="text" placeholder="description" value="description">
-    <input type="number" placeholder="Price: $" value="price">
-    <input type="text" placeholder="Code" value="code">
-    <input type="text" placeholder="Imagn link" value="img">
-    <input type="number" placeholder="Stock" value="stock">
+    <input type="text" placeholder="Title" name="title">
+    <input type="text" placeholder="Description" name="description">
+    <input type="number" placeholder="Price: $" name="price" min="1">
+    <select id="category" name="category">
+        <option value="remeras">Remeras</option>
+        <option value="pantalones">Pantalones</option>
+        <option value="abrigos">Abrigos</option>
+        <option value="accesorios">Accesorios</option>
+    </select>
+    <input type="text" placeholder="Code" name="code">
+    <input type="text" placeholder="Imagn link" name="img">
+    <input type="number" placeholder="Stock" name="stock" min="1">
     <input type="submit" value="Cargar nuevo producto" class="btnNewProduct">
 </form>
 

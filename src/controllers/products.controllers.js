@@ -80,10 +80,10 @@ const deleteProductCart= async(req,res)=>{
 
 
 const postProduct= async(req,res)=>{
-    const email= req.user.email
+    const useremail= req.user.email
     
     try{
-        const {title, description,price,category,code,img}=req.body
+       const {title, description,price,category,code,img}=req.body
         const product={
             title,
             description,
@@ -91,7 +91,7 @@ const postProduct= async(req,res)=>{
             category,
             code,
             img,
-            owner: email
+            owner:useremail
         }
         
         if(!title || !description || !price || !category || !code || !img){
@@ -104,12 +104,12 @@ const postProduct= async(req,res)=>{
             })
         }
         
-        
         const addProduct= await productsService.createProduct(product)
-        res.send({status:'success', message:`Se creó el producto ${product.description}`,payload:addProduct})
+        res.send({status:'success'}) 
+        
     }
     catch(error){
-        req.logger.error('Error catch createProduct:', error)
+       console.log('Error catch createProduct:', error)
     }
 }
 
