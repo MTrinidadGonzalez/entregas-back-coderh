@@ -18,6 +18,6 @@ export default class SessionRouter extends RouterPadre{
         this.get('/github',["NO_AUTH"],passportCall('github',{strategyType:'locals'}),(req,res)=>{});
         this.get('/githubcallback',["NO_AUTH"],passportCall('github',{strategyType:'locals'}),sessionControllers.loginWidthGitHub)
 
-
+       
     }//cierre del init
 }//cierre de clase

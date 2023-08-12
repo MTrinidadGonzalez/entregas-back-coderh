@@ -5,7 +5,7 @@ import {productsService} from '../../services/services.js'
 
 export default class HomeViewRouter extends RouterPadre{
     init(){
-        this.get('/home', ["PUBLIC"], async (req,res)=>{
+        this.get('/home', ["USER","ADMIN","PREMIUM"], async (req,res)=>{
 
             const { page=1, limit: queryLimit}= req.query 
             const defaultLimit = 3

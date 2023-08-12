@@ -26,6 +26,10 @@ export default class ProductsManager{
         return productsModel.findByIdAndUpdate(pid, {$set: product})
     }
 
+    getProductsByOwnerEmail(email) {          
+        return productsModel.find({ owner: email });   
+    }
+    
     deleteProduct=(pid)=>{
         return productsModel.findByIdAndDelete(pid)
     }

@@ -1,3 +1,16 @@
+Tercera entrega:
+Nuevos permisos de usuario premium/admin:
+Perfil del usuario- 
+      1.Archivos handlebars: 
+         -profile.handlebars -endpoint de la vista '/profile' (archivo login.view.router.js)
+         - newProduct.handlebars (form para agregar producto) endpoint de la vista '/products/newproduct' (archivo products.view.router.js)
+         - userProducts.handlebars (liste de productos del usuario con boton de eliminar producto)
+     
+      2.Logicas        
+       -"Crear nuevo producto": '/products/newProduct' ( products.controllers, método postProduct)
+    
+
+
                            MAIL SERVICES
 Carpeta mailServices - archivo mail.service.js:  class MailingService
 Carpeta constants:

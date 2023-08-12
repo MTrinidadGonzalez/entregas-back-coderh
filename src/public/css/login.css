@@ -13,6 +13,8 @@
     align-items: center;
     padding: 60px;   
     background-image: url('https://i.pinimg.com/564x/28/a6/d9/28a6d987e23d9228f984a48746dd4a70.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .form-clsss{

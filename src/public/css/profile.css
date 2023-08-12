@@ -1,0 +1,16 @@
+.profileNav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+}
+.profileNav li, a{
+    text-decoration: none;
+    padding: 5px;
+    margin: 5px;
+    color: white;
+}
+
+.profileNav li:hover{
+    background-color:  rgba(252, 241, 241, 0.403);
+}

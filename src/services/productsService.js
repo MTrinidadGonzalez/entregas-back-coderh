@@ -12,6 +12,12 @@ export default class ProductsServices{
     getProductById=(pid)=>{
         return this.dao.getProductById(pid)
     }
+
+    getProductsByOwnerEmail=(email)=>{
+        return this.dao.getProductsByOwnerEmail(email)
+    }
+
+
     getProductsTo= (param1,param2)=>{
         return this.dao.getProductsTo(param1,param2)
     }
