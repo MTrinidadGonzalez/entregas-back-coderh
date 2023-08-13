@@ -29,20 +29,13 @@ const loginUser=async (req,res)=>{
 
   const loginWidthGitHub=(req,res)=>{
     try{
-        if(req.error){
-            res.send({status:'error', error: req.error})
-            req.logger.error(`logger login github.Usuario no encontrado: ${req.error}`)
-        }
-        else{
-            const accessToken = generateToken(req.user);
-            res.cookie('authToken',accessToken, {
-            maxAge:1000*60*60*24,
-          //  httpOnly:true,
-           // sameSite:"none"
-            })
-            res.redirect('/home')
-     //.send({status:'success', message: `llego a login router ${req.user.name}`})      
-    }
+        const accessToken = generateToken(req.user);
+        res.cookie('authToken',accessToken, {
+        maxAge:1000*60*60*24,
+      //  httpOnly:true,
+       // sameSite:"none"
+        })
+        res.redirect('/home')
     }
     catch(error){
        console.log('Error catch loginWithGitHub:', error)
