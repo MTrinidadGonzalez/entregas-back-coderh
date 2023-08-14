@@ -43,3 +43,53 @@ btnCards.forEach((button) => {
     quantityElement.textContent = quantity;
   });
 });
+
+
+const btnConvertToPremium= document.getElementById('btnConvertToPremium')
+btnConvertToPremium.addEventListener('click', ()=>{
+const userId = btnConvertToPremium.getAttribute('data-user-id');
+
+fetch('/api/session/convertToPremium',
+{
+  method: 'POST',
+  headers: {
+      'Content-Type':'application/json'
+  },
+  body: JSON.stringify({ userId })
+})
+.then(response=> response.json())
+.then(data=> {
+  if(data.status === "success"){
+  window.location.href = '/login'
+  }
+})
+
+})
+
+
+const btnRevertPremium= document.getElementById('btnRevertPremium')
+
+btnRevertPremium.addEventListener('click',()=>{
+
+  const userId = btnRevertPremium.getAttribute('data-user-id');
+
+ fetch('/api/session/revertPremium',
+ {
+   method: 'POST',
+   headers: {
+       'Content-Type':'application/json'
+   },
+   body: JSON.stringify({ userId })
+ })
+ .then(response=> response.json())
+ .then(data=> {
+   if(data.status === "success"){
+   window.location.href = '/login'
+   }
+ })
+
+
+
+
+
+})

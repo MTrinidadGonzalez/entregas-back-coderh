@@ -24,6 +24,9 @@ export default class HomeViewRouter extends RouterPadre{
             const cart= req.user.cart
             const totalQuantity = cart[0].totalQuantity
             //console.log(totalQuantity)
+
+            const userId= req.user.id
+          
             res.render('home',{
                 css:'home',
                 products,
@@ -32,7 +35,8 @@ export default class HomeViewRouter extends RouterPadre{
              hasPrevPage,
              prevPage,
               nextPage,
-              totalQuantity:totalQuantity
+              totalQuantity:totalQuantity,
+              userId:userId
             })
         })
 

@@ -12,6 +12,10 @@ export default class UserServices{
             return this.dao.getUser(params,user)
         }
 
+        uptateUserRole=(userId, newRole)=>{
+            return this.dao.uptateUserRole(userId,newRole)
+        }
+
         createUser(user){
             return this.dao.createUser(user)
         }

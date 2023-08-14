@@ -1,5 +1,5 @@
 import {generateToken} from '../utils.js'
-
+import {userServices} from '../services/services.js'
 const registerUser=async (req,res)=>{
     try{   
         res.send({status:'success', payload:req.user})  
@@ -42,9 +42,24 @@ const loginUser=async (req,res)=>{
     }
   }          
 
+const convertToPremium=async(req,res)=>{
+  const userId= req.body.userId
+  const result= await userServices.uptateUserRole(userId, "PREMIUM")
+  res.clearCookie('authToken').send({status:"success", message:'Rol de usuario cambiado'})
+}
+
+
+
+const revertPremium= async(req,res)=>{
+  const result= await userServices.uptateUserRole(userId, "USER")
+  res.clearCookie('authToken').send({status:"success", message:'Rol de usuario cambiado'})
+}
+
 
 export default{
     registerUser,
     loginUser,
-    loginWidthGitHub
+    loginWidthGitHub,
+    convertToPremium,
+    revertPremium
 }

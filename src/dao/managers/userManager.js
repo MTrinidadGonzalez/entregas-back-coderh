@@ -10,6 +10,10 @@ export default class UserManager{
         return userModel.findOne({[params]: user}).lean().populate('cart')
     }
 
+    uptateUserRole=(userId, newRole)=>{
+        return userModel.findByIdAndUpdate(userId, { role: newRole }, { new: true })
+    }
+
     createUser=(user)=>{
         return userModel.create(user)
     }
@@ -21,4 +25,5 @@ export default class UserManager{
     deleteUser=(uid)=>{
         return userModel.findByIdAndDelete(uid)
     }
+
 }
