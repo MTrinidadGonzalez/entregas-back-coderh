@@ -14,11 +14,13 @@ export default class ProfilesViewRouter extends RouterPadre{
             res.render('profileuser')
         })
 
-        this.get('userData', ["USER", "PREMIUM"], async (req,res)=>{
+        this.get('/userData', ["USER", "PREMIUM"], async (req,res)=>{
             res.render('userData')
         })
 
-
+        this.get('/restoreRequest', ["PUBLIC"], async (req,res)=>{
+            res.render('restoreRequest')
+        })
 
     }//cierre del init
 }

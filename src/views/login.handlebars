@@ -3,19 +3,16 @@
     <form id="loginForm" class="form-clsss">
      
         <label for="">Email:</label>
-        <input type="text" name="email">
+        <input type="text" name="email" required>
        
         <label for="">Password:</label> 
-        <input type="text" name="password">
-       
+        <input type="password" name="password" required>    
         <input type="submit" value="Entrar">
     </form>
     <span id="spamUserNotFound" class="spamUserNotFound"></span>
-<h3><a href="/restorepassword" class="link-style"> ¿Olvidaste tu contraseña? </a></h3>
-
-
-<h3><a href="/api/session/github" class="link-style"> Ingresar con cuenta de GitHub</a></h3>
-
+  
+    <h3><a href="/api/session/github" class="link-style"> Ingresar con cuenta de GitHub</a></h3>
+    <h3><a href="/restoreRequest" class="link-style"> ¿Olvidaste tu contraseña? </a></h3>
 </div>
 
 <script src="/js/loginGH.js"></script>

@@ -24,7 +24,7 @@ form.addEventListener('submit', async(event)=> {
    console.log('response',response)
  
     const data= await response.json()
-    console.log('data', data)
+
     console.log('responseData:',data)  
         if(data.status === 'success'){
         window.location.replace('/login')
