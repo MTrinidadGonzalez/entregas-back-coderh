@@ -12,6 +12,9 @@ export default class UserRouter extends RouterPadre{
         this.put('/', ["USER"], usersControllers.putUser)
 
         this.delete('/',["USER"],usersControllers.deleteUser )
+
+
+        
         
     }//cierre del init
 }//cierre de la clase

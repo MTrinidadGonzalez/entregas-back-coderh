@@ -52,12 +52,12 @@ export default class ProductsView extends RouterPadre{
             res.render('newProduct',{css:'newProduct'})
         })
         
-        this.get('/userProducts', ["PREMIUM"], async (req,res)=>{
+        this.get('/premiumProducts', ["PREMIUM"], async (req,res)=>{
             const email= req.user.email
             const products= await productsService.getProductsByOwnerEmail(email)
             const productsJSON = JSON.parse(JSON.stringify(products));
-            console.log('productos pasados a json', productsJSON)
-            res.render('userProducts',{
+           
+            res.render('premiumProducts',{
                 css:'userProducts',
                 products:productsJSON
 

@@ -2,8 +2,10 @@ import LoginAndRegisterView from '../../routers/viewsRouters/login.view.router.j
 import ProductsView from '../../routers/viewsRouters/products.view.router.js'
 import CartView from '../../routers/viewsRouters/cart.view.router.js'
 import HomeViewRouter from '../../routers/viewsRouters/home.view.route.js'
+import ProfilesViewRouter from '../../routers/viewsRouters/profiles.view.routers.js'
 
 export const loginAndRegisterview = new LoginAndRegisterView()
 export const productsView= new ProductsView()
 export const cartView= new CartView()
 export const homeViewRouter= new HomeViewRouter()
+export const profilesViewRouter= new ProfilesViewRouter()

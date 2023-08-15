@@ -13,6 +13,7 @@ import CartRoute from './routers/cart.router.js'
 import moksRouter from '../src/moks/routermoks/moks.products.router.js'
 import loggerRouter from './routers/loggerRouter/logger.router.js'
 import EmailRouter from './routers/email.router.js'
+import {profilesViewRouter} from './services/viewsServices/viewsServices.js'
 
 import errorHandler from '../src/meddlewares/errorMedlewares.js'
 import __dirname from './utils.js'
@@ -65,6 +66,7 @@ app.use('/',loginAndRegisterview.getRouter())
 app.use('/products',productsView.getRouter())
 app.use('/',cartView.getRouter())
 app.use('/', homeViewRouter.getRouter())
+app.use('/', profilesViewRouter.getRouter())
 
 app.use('/smokingsproducts', moksRouter)
 

@@ -14,11 +14,6 @@ export default class LoginAndRegisterView extends RouterPadre{
             })
         })
 
-        this.get('/profile',["PUBLIC"], async (req,res)=>{
-            res.render('profile',{
-                css:'profile'
-            })
-        })
 
     }
 }
