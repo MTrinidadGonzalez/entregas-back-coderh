@@ -22,5 +22,9 @@ export default class ProfilesViewRouter extends RouterPadre{
             res.render('restoreRequest')
         })
 
+       this.get('/newPswRestore', ["PUBLIC"], async(req,res)=>{
+        res.render('newPswRestore')
+       })
+
     }//cierre del init
 }

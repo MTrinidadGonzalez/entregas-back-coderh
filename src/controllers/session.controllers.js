@@ -1,5 +1,8 @@
 import {generateToken} from '../utils.js'
 import {userServices} from '../services/services.js'
+import RestoreTokenDTO from '../dto/user/restoreRequesTokenDTO.js'
+import MailingService from '../mailService/mail.service.js'
+import Dtemplates from '../constants/Dtemplates.js'
 const registerUser=async (req,res)=>{
     try{   
         res.send({status:'success', payload:req.user})  
@@ -55,11 +58,33 @@ const revertPremium= async(req,res)=>{
   res.clearCookie('authToken').send({status:"success", message:'Rol de usuario cambiado'})
 }
 
+const restoreRequest=async(req,res)=>{
+  const {email}= req.body
+  const user= await userServices.getUser("email", email)
+  if(user){
+   const restoreToken= generateToken(RestoreTokenDTO.getFrom(user),'1h')
+   const mailingService= new MailingService()
+    const result= await mailingService.sendMail(user.email, Dtemplates.RESTORE_PASSW,{restoreToken})
+   res.send({status:"success"})
+  }
+  if(!user){
+   res.send({status:"error", error: "Correo no encontrado"})
+  }
+}
+
+
+const newPswRestore=async(req,res)=>{
+ 
+}
+
+
 
 export default{
     registerUser,
     loginUser,
     loginWidthGitHub,
     convertToPremium,
-    revertPremium
+    revertPremium,
+    restoreRequest,
+    newPswRestore
 }

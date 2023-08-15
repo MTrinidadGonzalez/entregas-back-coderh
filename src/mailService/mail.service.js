@@ -1,5 +1,8 @@
 import nodemailer from 'nodemailer'
 import config from "../config.js";
+import DMailInfo from '../constants/DMailInfo.js'
+import {generateMailTemplate} from '../utils.js'
+
 
 export default class MailingService{
     constructor(){

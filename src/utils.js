@@ -75,7 +75,7 @@ import Handlebars from 'handlebars'
 
 export const generateMailTemplate= async (template, payload)=>{
     //lee el archivo y lo devuelve como string
-    const content= await fs.promises.readFile(`${__dirname}/template/${template}.handlebars`, 'utf-8')
+    const content= await fs.promises.readFile(`${__dirname}/templates/${template}.handlebars`, 'utf-8')
     const preCompiled= Handlebars.compile(content)
     const compiledContent= preCompiled({...payload})
     return compiledContent

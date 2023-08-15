@@ -1,7 +1,7 @@
-import {__dirname} from '../utils.js'
+import __dirname from  '../utils.js'
 
 export default {
     restorePassw:{
-        subject: "Restore password"
+        subject: "Restaurar contraseña"
     }
 }

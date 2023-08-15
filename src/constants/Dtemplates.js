@@ -1,3 +1,3 @@
 export default {
-    RESTORE_PASSW: 'restorePassw'
+    RESTORE_PASSW: 'restorePsw'
 }
