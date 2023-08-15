@@ -2,10 +2,13 @@ Tercera entrega:
 Nuevos permisos de usuario premium/admin:
 Perfil del usuario- 
       1.Archivos handlebars: 
-         -home.handlebars - btn UIQERO SER USUARIO PREMIUM- Lleva a /api/session/convertToPremium (archivo session.router.js y session.controllers.js)
+      -home.handlebars - btn UIQERO SER USUARIO PREMIUM- Lleva a /api/session/convertToPremium (archivo session.router.js y session.controllers.js)
+         Si sos premium: 
          -profile.handlebars -endpoint de la vista '/profile' (archivo login.view.router.js)
          - newProduct.handlebars (form para agregar producto) endpoint de la vista '/products/newproduct' (archivo products.view.router.js)
          - userProducts.handlebars (liste de productos del usuario con boton de eliminar producto)
+
+      -home.handlebars - btn DEJAR DE SER USUARIO PREMIUM- Leeva a api/session/revertPremium (archivo session.router.js y session.controllers.js)
      
       2.Logicas        
        -"Crear nuevo producto": '/products/newProduct' ( products.controllers, método postProduct)

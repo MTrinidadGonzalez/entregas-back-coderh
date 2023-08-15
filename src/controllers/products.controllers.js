@@ -27,28 +27,35 @@ const getProduct= async(req,res)=>{
 
 const addProductCart=async (req,res)=>{
     try{
-          
+ 
         const cid= req.user.cart[0]._id
         const username= req.user.name
         const pid= req.body.productId
         const productQuantity= req.body.spamQuantity
-        console.log(req.body)
         const product= {
             pid:pid,
             productQuantity:productQuantity
         }
          
-        const productStock= await productsService.getProductById(pid)
-        if (productStock.stock < 0){
+        const productdB= await productsService.getProductById(pid)
+        const productOwner= productdB.owner
+        const email= req.user.email
+        if(productOwner === email){
+         res.send({status:'error', message: "Producto perteneciente al usuario"})
+        }
+
+
+        if (productdB.stock < 0){
             ErrorsService.createError({
                 name:"Error al agregar producto producto",
-                cause: productsWithoutStock(productStock),
+                cause: productsWithoutStock(productdB),
                 code: DictionaryEErrorProducts.SIN_STOCK_INIXISTENTE,
                 status:400
 
             }),
-            req.logger.error(`producto agregado, sin stock ${productStock}`)
+            req.logger.error(`producto agregado, sin stock ${productdB}`)
         }
+       
            const result= await cartsService.addProductToCart(cid,product)
 
     res.send({status:"success", 

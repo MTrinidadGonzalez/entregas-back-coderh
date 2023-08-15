@@ -9,7 +9,7 @@ export default class ProductRouter extends RouterPadre{
         this.get('/',["USER"],productsControllers.getProducts)
 
         //addproduct al carrito
-        this.post('/', ["USER"], productsControllers.addProductCart)
+        this.post('/addProductTocart', ["USER","PREMIUM"], productsControllers.addProductCart)
 
         this.post('/deleteProduct', productsControllers.deleteProductCart)
        

@@ -26,6 +26,10 @@ export default class HomeViewRouter extends RouterPadre{
             //console.log(totalQuantity)
 
             const userId= req.user.id
+            let role= req.user.role
+            const isUser = role === 'USER';
+            const isPremium = role === 'PREMIUM';
+            const isAdmin= role === 'ADMIN'
           
             res.render('home',{
                 css:'home',
@@ -36,7 +40,11 @@ export default class HomeViewRouter extends RouterPadre{
              prevPage,
               nextPage,
               totalQuantity:totalQuantity,
-              userId:userId
+              userId:userId,
+              role:role,
+              isPremium: isPremium,
+              isAdmin: isAdmin,
+              isUser:isUser
             })
         })
 

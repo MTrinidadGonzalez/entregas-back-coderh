@@ -12,7 +12,7 @@ btnCards.forEach((button) => {
       spamQuantity: quantity
     };
 
-    fetch("/api/products", {
+    fetch("/api/products/addProductTocart", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -24,7 +24,9 @@ btnCards.forEach((button) => {
         return response.json();
       })
       .then(result => {
-        console.log(result.message);
+       if(result.message === "Producto perteneciente al usuario"){
+        alert('No puedes agregar tus propios productos')
+       }
       })
       .catch(error => {
         console.error("Error:", error);
