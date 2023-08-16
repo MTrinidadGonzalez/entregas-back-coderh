@@ -66,13 +66,13 @@ import { tiketService ,cartsService} from "../services/services.js";
      const purchaser= req.user.email
     
     const tiket= {
-      totalQuantity:sumoQuantity,
+      totalQuantity:cart.totalQuantity,
       amount:cart.totalAmount,
       code: Math.random().toString(),
       purchaser: purchaser
     }
     const result = await  tiketService.createTiket(tiket)
-    await cartsService.clearCart(cid)   
+ //   await cartsService.clearCart(cid)   
     res.send({status:"success"})
 
   }

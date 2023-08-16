@@ -1,8 +1,9 @@
 import tiketModel from '../models/tiketModel.js'
 export default class TiketManager{
 
-    getTiket=(tid)=>{
-        return tiketModel.findById(tid)
+
+    getTiket=(params,data)=>{
+        return tiketModel.findOne({[params]: data})
     }
 
     createTiket=(tiket)=>{

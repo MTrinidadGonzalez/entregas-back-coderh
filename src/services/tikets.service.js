@@ -1,14 +1,13 @@
-import TiketManager from '../dao/managers/tiketManager.js'
-
 
 export default class TiketServices{
     constructor(dao){
         this.dao= dao
     }
 
-    getTiket=(tid)=>{
-        return this.dao.getTiket(tid)
+    getTiket=(params,data)=>{
+        return this.dao.getTiket(params,data)
     }
+
 
     createTiket=(tiket)=>{
         return this.dao.createTiket(tiket)

@@ -5,8 +5,6 @@ const collection= 'Tikets'
 const schema= new mongoose.Schema({
 
     purchase: { type: Date, default: Date.now },
-    productsWithStock: [],
-    productsWithoutStock:[],
     totalQuantity: Number,
     amount:Number,
     code:String,

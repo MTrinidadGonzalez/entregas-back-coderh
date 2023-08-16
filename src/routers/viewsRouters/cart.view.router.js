@@ -1,5 +1,5 @@
 import RouterPadre from '../router.js'
-import {cartsService, productsService} from '../../services/services.js'
+import {cartsService, productsService,tiketService} from '../../services/services.js'
 import productsModel from '../../dao/models/productsModel.js'
 import {generateTiketsData} from '../../meddlewares/tiket.meddleware.js'
 
@@ -42,8 +42,20 @@ export default class CartView extends RouterPadre{
         })
 
         this.get('/:cid/purchase', ['USER',"PREMIUM"], generateTiketsData, async (req, res) => {
-             
-                res.render('tiketcompra')
+            const email= req.user.email
+            const tiketDb= await tiketService.getTiket("purchaser", email)
+              
+            const tiket={
+              code: tiketDb.code,
+              totalQuantity: tiketDb.totalQuantity,
+              amount: tiketDb.amount,
+              purchaser:tiketDb.purchaser,
+              dataTime: tiketDb.created_at
+            }
+            console.log(tiket)
+               res.render('tiketcompra',{
+              tiket:tiket
+            })
               });
 
     }//cierre del init
