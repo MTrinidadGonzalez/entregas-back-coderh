@@ -12,7 +12,7 @@
         <p>Id: {{this._id}}</p>
     </div> 
     <div>
-        <p>Description: {{this.description}}</p>
+       <p>Description: {{this.description}}</p>
        <p>Price:$ {{this.price}}</p>
        <p>Amount:$ {{this.amount}} </p>
        <p>Category: {{this.category}}</p>
@@ -25,15 +25,12 @@
 </div>
     <hr>
     {{/each}}
-          
-          </div>
-  <button ><a href="{{cart._id}}/purchase" >Finalizar compra</a></button>
+ </div>
 
-
-
-
-
-
+ 
+  <button data-cart-id="{{cid}}" id="btnGenerarTiket">Finalizar compra</button>
+  
+  <button data-cart-id="{{cid}}" id="btnCancelarCompra">Cancelar compra</button>
 
 <script src="/js/cart.js"></script>
 <script src="/js/tiket.js"></script>      

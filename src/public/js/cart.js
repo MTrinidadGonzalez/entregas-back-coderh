@@ -21,7 +21,7 @@ btnDeleteProductCart.forEach(btn => {
         })
         .then((response)=>{
             response.json()
-            console.log('La respuesta del envio del btn borrar product fue', response)
+            window.location.replace('/cart')
         }
         )
         .catch(error => {
@@ -33,5 +33,29 @@ btnDeleteProductCart.forEach(btn => {
     })
 });
 
+
+const btnCancelarCompra=document.getElementById('btnCancelarCompra')
+btnCancelarCompra.addEventListener('click', ()=>{
+   try{
+    const cartId =  btnCancelarCompra.getAttribute('data-cart-id')
+    fetch('/api/cart/clearCart',{
+        method: 'POST',
+        body: JSON.stringify({cid:cartId}),
+        headers:{
+            'Content-Type':'application/json '
+        } 
+    })
+    .then(response=> response.json())
+    .then(data=>{
+        if(data.status=== "success"){
+            window.location.replace('/home')
+        }
+       })  
+    }
+
+   catch(error){
+    console.log(error)
+   }
+})
 
 // /api/cart/deleteproductcart

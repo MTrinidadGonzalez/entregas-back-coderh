@@ -38,10 +38,10 @@
         <img src={{this.img}} alt={{this.description}}>
         <p>Description: {{this.description}} </p>
         <p>Price: $ {{this.price}} </p>
-          <button id="btn-subtract-product" class="btn-subtract-product">-</button>
-            <span id="spam-quantity" class="spam-quantity">1</span>
-        <button id="btn-add-more-product" class="btn-add-more-product">+</button>
-    <button class="btnCard"  data-product-id="{{this._id}}" >Add to cart</button>
+        <button id="btn-subtract-product" class="btn-subtract-product">-</button>
+        <span id="spam-quantity" class="spam-quantity">1</span>
+        <button id="btn-add-more-product" class="btn-add-more-product"  data-stock="{{this.stock}}">+</button>
+        <button class="btnCard"  data-product-id="{{this._id}}" >Add to cart</button>
     </div>
     {{/each}}
 </div>

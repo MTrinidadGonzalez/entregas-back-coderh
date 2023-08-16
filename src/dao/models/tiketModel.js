@@ -4,13 +4,13 @@ const collection= 'Tikets'
 
 const schema= new mongoose.Schema({
 
-    buyerEmailTiket: String,
+    purchase: { type: Date, default: Date.now },
     productsWithStock: [],
     productsWithoutStock:[],
     totalQuantity: Number,
-    totalAmount:Number,
-    generatedAt: { type: Date, default: Date.now }
-
+    amount:Number,
+    code:String,
+    purchaser: String
 
 }, {timestamps:{createdAt: 'created_at', updatedAt: 'updated_at'}})
 

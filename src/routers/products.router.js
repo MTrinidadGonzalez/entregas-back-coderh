@@ -6,7 +6,7 @@ import productsControllers from '../controllers/products.controllers.js'
 export default class ProductRouter extends RouterPadre{
     init(){
 
-        this.get('/',["USER"],productsControllers.getProducts)
+        this.get('/',["USER", "PREMIUM","ADMIN"],productsControllers.getProducts)
 
         //addproduct al carrito
         this.post('/addProductTocart', ["USER","PREMIUM"], productsControllers.addProductCart)

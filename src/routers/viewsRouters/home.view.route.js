@@ -34,17 +34,17 @@ export default class HomeViewRouter extends RouterPadre{
             res.render('home',{
                 css:'home',
                 products,
-             page:currentPage, 
-             hasNextPage,
-             hasPrevPage,
-             prevPage,
-              nextPage,
-              totalQuantity:totalQuantity,
-              userId:userId,
-              role:role,
-              isPremium: isPremium,
-              isAdmin: isAdmin,
-              isUser:isUser
+                page:currentPage, 
+                hasNextPage,
+                hasPrevPage,
+                prevPage,
+                nextPage,
+                totalQuantity:totalQuantity,
+                userId:userId,
+                role:role,
+                isPremium: isPremium,
+                isAdmin: isAdmin,
+                isUser:isUser
             })
         })
 

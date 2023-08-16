@@ -9,18 +9,14 @@ import { generateTiketsData} from '../meddlewares/tiket.meddleware.js'
 export default class CartRoute extends RouterPadre{
     init(){
      
-        this.get('/',["USER"], cartControllers.getUserCart)
+        this.get('/',["USER","PREMIUM"], cartControllers.getUserCart)
 
         
         this.post('/deleteproductcart', ['USER',"PREMIUM"],productsCntrolles.deleteProductCart)
 
+        this.post('/:cid/purchase', ['USER',"PREMIUM"],  generateTiketsData, tiketControllers.operacionTiket)
 
-            //aqui voy a mandar el la confirmacion de compra, se supone que recibo los ids de los 
-            //products del cart product, luego los comparo a su quantity con el stock y me devuelve el array de 
-            //products q si estaban y products q no hay stock la función se llamará stockConfimCompra en el tiketcontroller
-        this.post('/:cid/purchase', ['USER'],  generateTiketsData, tiketControllers.operacionTiket)
-
-
+        this.post('/clearCart', ["USER","PREMIUM"],cartControllers.clearCart )
     }//cierre del init
 
     

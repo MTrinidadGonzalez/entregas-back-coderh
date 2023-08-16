@@ -25,6 +25,8 @@ const getProduct= async(req,res)=>{
     }
 }
 
+
+
 const addProductCart=async (req,res)=>{
     try{
  
@@ -66,6 +68,9 @@ const addProductCart=async (req,res)=>{
         console.log(error)
     }
 }
+
+
+
 
 const deleteProductCart= async(req,res)=>{
     try{

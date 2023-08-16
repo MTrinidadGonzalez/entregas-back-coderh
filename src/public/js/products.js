@@ -21,7 +21,7 @@ btnCards.forEach((button) => {
     })
       .then((response) => {
       //  console.log(response); // Agrega este console.log para ver la respuesta
-        return response.json();
+        console.log(response.json()) ;
       })
       .then(result => {
        if(result.message === "Producto perteneciente al usuario"){
@@ -38,10 +38,10 @@ btnCards.forEach((button) => {
       quantity--;
       quantityElement.textContent = quantity;
     }
-  });
+  })
 
   button.parentElement.querySelector('.btn-add-more-product').addEventListener("click", () => {
     quantity++;
     quantityElement.textContent = quantity;
-  });
-});
+  })
+})

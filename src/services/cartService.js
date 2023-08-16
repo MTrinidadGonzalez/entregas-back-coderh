@@ -29,4 +29,8 @@ export default class CartsService{
     subtractProduct=(cid,pid)=>{
         return this.dao.subtractProduct(cid,pid)
     }
+
+    clearCart=(cid)=>{
+        return this.dao.clearCart(cid)
+    }
 }

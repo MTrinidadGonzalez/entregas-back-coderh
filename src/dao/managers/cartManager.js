@@ -82,7 +82,23 @@ addProductToCart = async (cid, product) => {
     return cart
   };
 
- 
+ //Limpiar el carrito
+ clearCart=async(cid)=>{
+try{
+  const updateCart = {
+    $set: {
+      products: [],
+      totalAmount: 0,
+      totalQuantity: 0
+    }
+  };
+
+  return await cartModel.updateOne({ _id: cid }, updateCart)
+}
+catch(error){
+  console.log(error)
+}
+ } 
 
 
 }

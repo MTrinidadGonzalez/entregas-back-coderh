@@ -1,8 +1,10 @@
 const btnCards = document.querySelectorAll('.btnCard');
 
 btnCards.forEach((button) => {
-  const quantityElement = button.parentElement.querySelector('.spam-quantity');
+  const quantityElement = button.parentElement.querySelector('.spam-quantity')
+  
   let quantity = 1;
+  
 
   button.addEventListener('click', () => {
     const productId = button.dataset.productId;
@@ -12,7 +14,7 @@ btnCards.forEach((button) => {
       spamQuantity: quantity
     };
 
-    fetch("/api/products", {
+    fetch("/api/products/addProductTocart", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -38,11 +40,33 @@ btnCards.forEach((button) => {
     }
   });
 
-  button.parentElement.querySelector('.btn-add-more-product').addEventListener("click", () => {
-    quantity++;
-    quantityElement.textContent = quantity;
+
+  const addMoreButton = button.parentElement.querySelector('.btn-add-more-product');
+  const stock = parseInt(addMoreButton.getAttribute('data-stock'), 10)
+  addMoreButton.addEventListener("click", () => {
+    if (quantity < stock) {
+      quantity++;
+      quantityElement.textContent = quantity;
+    } else {
+      alert('Límite de stock');
+    }
   });
 });
+
+
+
+  /*
+  button.parentElement.querySelector('.btn-add-more-product').addEventListener("click", () => {
+    const stock = parseInt(button.parentElement.querySelector('.btn-add-more-product').getAttribute('data-stock'), 10)
+    console.log('stock'. stock)
+      quantity++;
+      quantityElement.textContent = quantity;
+    
+   
+  });
+});
+*/
+
 
 
 const btnConvertToPremium= document.getElementById('btnConvertToPremium')
