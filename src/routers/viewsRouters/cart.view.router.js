@@ -6,7 +6,7 @@ import {generateTiketsData} from '../../meddlewares/tiket.meddleware.js'
 
 export default class CartView extends RouterPadre{
     init(){
-        this.get('/cart', ["USER"], async (req,res)=>{
+        this.get('/cart', ["USER", "PREMIUM"], async (req,res)=>{
            // console.log(`el dueño de este carrito es ${req.user.name}`)
             const user= req.user
             const cid= req.user.cart[0]._id

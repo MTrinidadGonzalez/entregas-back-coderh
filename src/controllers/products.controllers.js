@@ -69,12 +69,9 @@ const addProductCart=async (req,res)=>{
 
 const deleteProductCart= async(req,res)=>{
     try{
-        const user = req.user;
+    const user = req.user;
     const cid = user.cart[0]._id
-    console.log('cart id', cid)
     const pid= req.body.pid
-    console.log('pid', pid)
-
     const result= await cartsService.subtractProduct(cid,pid)
     res.send({status:'success',payload:result })
     }
@@ -120,6 +117,12 @@ const postProduct= async(req,res)=>{
     }
 }
 
+const deleteProduct=async(req,res)=>{
+    const {pid}= req.params
+    const deleteProduct= await productsService.deleteProduct(pid)
+    res.send({status:'success', message: 'Producto eliminado'})
+}
+
 const putProduct=async(req,res)=>{
     try{
         const {pid}=req.params
@@ -146,5 +149,6 @@ export default{
     addProductCart,
     postProduct,
     putProduct,
-    deleteProductCart
+    deleteProductCart,
+    deleteProduct
 }

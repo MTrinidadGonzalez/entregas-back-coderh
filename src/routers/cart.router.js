@@ -12,7 +12,7 @@ export default class CartRoute extends RouterPadre{
         this.get('/',["USER"], cartControllers.getUserCart)
 
         
-        this.post('/deleteproductcart', ['USER'],productsCntrolles.deleteProductCart)
+        this.post('/deleteproductcart', ['USER',"PREMIUM"],productsCntrolles.deleteProductCart)
 
 
             //aqui voy a mandar el la confirmacion de compra, se supone que recibo los ids de los 

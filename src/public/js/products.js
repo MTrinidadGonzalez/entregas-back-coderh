@@ -20,7 +20,7 @@ btnCards.forEach((button) => {
       body: JSON.stringify(data)
     })
       .then((response) => {
-        console.log(response); // Agrega este console.log para ver la respuesta
+      //  console.log(response); // Agrega este console.log para ver la respuesta
         return response.json();
       })
       .then(result => {

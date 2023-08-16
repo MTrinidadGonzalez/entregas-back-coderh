@@ -11,7 +11,7 @@ export default class ProductRouter extends RouterPadre{
         //addproduct al carrito
         this.post('/addProductTocart', ["USER","PREMIUM"], productsControllers.addProductCart)
 
-        this.post('/deleteProduct', productsControllers.deleteProductCart)
+     //   this.post('/deleteProduct',["ADMIN", "PREMIUM","USER"], productsControllers.deleteProductCart)
        
         this.get('/:pid', ["PUBLIC"],productsControllers.getProduct )
 
@@ -20,11 +20,10 @@ export default class ProductRouter extends RouterPadre{
 
         this.put('/:pid',["ADMIN"],productsControllers.putProduct )
 
-        this.delete('/:pid',["ADMIN"],async (req,res)=>{
-        const {pid}= req.params
-        const deleteProduct= await productsService.deleteProduct(pid)
-        res.send({status:'success', message: 'Producto eliminado', payload: deleteProduct})
-    })
+        this.delete('/deleteProduct/:pid',["ADMIN","PREMIUM"],productsControllers.deleteProduct)
+
+
+
 
     //esto es para cargarlos todos de una para mi
         this.post('/cargomuchos', ["PUBLIC"], async (req,res)=>{

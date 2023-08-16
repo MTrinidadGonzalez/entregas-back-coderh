@@ -58,7 +58,7 @@ export default class ProductsView extends RouterPadre{
             const productsJSON = JSON.parse(JSON.stringify(products));
            
             res.render('premiumProducts',{
-                css:'userProducts',
+                css:'prmiumProducts',
                 products:productsJSON
 
             })

@@ -26,7 +26,7 @@ deleteCart=(cid)=>{
 subtractProduct= async (cid,pid)=>{
   const newproduct = await productsModel.findById(pid)
   const cart= await cartModel.findById(cid)
-  console.log('carrito sin modificar', cart)
+  //console.log('carrito sin modificar', cart)
   const productsList= cart.products
 
   const index= productsList.findIndex(p=> p._id.equals(new mongoose.Types.ObjectId(pid)))
@@ -42,7 +42,7 @@ subtractProduct= async (cid,pid)=>{
       productsList.splice(index,1)
     }
     await cart.save()
-    console.log('como queda el cart con el producto eliminado', cart)
+   // console.log('como queda el cart con el producto eliminado', cart)
     return cart
 
   }
