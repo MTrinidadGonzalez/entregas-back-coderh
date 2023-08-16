@@ -3,6 +3,9 @@ import {userServices} from '../services/services.js'
 import RestoreTokenDTO from '../dto/user/restoreRequesTokenDTO.js'
 import MailingService from '../mailService/mail.service.js'
 import Dtemplates from '../constants/Dtemplates.js'
+import jwt from 'jsonwebtoken'
+import {validatePassword, createHash} from '../utils.js'
+
 const registerUser=async (req,res)=>{
     try{   
         res.send({status:'success', payload:req.user})  
@@ -74,7 +77,23 @@ const restoreRequest=async(req,res)=>{
 
 
 const newPswRestore=async(req,res)=>{
- 
+
+ try{
+  const{password, token}=req.body
+  const userToken= jwt.verify(token,'jwtSecret')
+  
+  const user= await userServices.getUser("email",userToken.email)
+  const comparePassword= await validatePassword(password, user.password)
+  if(comparePassword){
+    res.send({status:'error', error: 'misma contraseña'})
+  }
+ /* const hashPassword= await createHash(password)
+  await userServices.updateUser(user._id, {password:hashPassword })*/
+  res.send({status:'success', message:'Contraseña modificada'})
+ }
+catch(error){
+  console.log(error)
+}
 }
 
 

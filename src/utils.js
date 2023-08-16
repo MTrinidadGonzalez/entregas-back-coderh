@@ -9,20 +9,19 @@ export default __dirname
 
 /////////////////encripto contraseña
 import bcrypt from 'bcrypt';
-//creo la password
+
 export const createHash = async(password) => {
-    
     const salts = await bcrypt.genSalt(10)
     return bcrypt.hash(password,salts);
 }
-// funcion para comparar la password q ingresa con la encriptada
+
 export const validatePassword = (password, hashedPassword) => bcrypt.compare(password,hashedPassword);
 
 
 //////////////jwt
 import jwt from 'jsonwebtoken'
-export const generateToken= (user)=>{
-    const token= jwt.sign(user,'jwtSecret', {expiresIn: '24h'})
+export const generateToken= (user, expiresIn='24h')=>{
+    const token= jwt.sign(user,'jwtSecret', {expiresIn})
     return token
 }
 

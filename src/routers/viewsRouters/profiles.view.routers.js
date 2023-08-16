@@ -1,4 +1,5 @@
 import RouterPadre from '../router.js'
+import jwt from 'jsonwebtoken'
 
 export default class ProfilesViewRouter extends RouterPadre{
     init(){
@@ -23,7 +24,14 @@ export default class ProfilesViewRouter extends RouterPadre{
         })
 
        this.get('/newPswRestore', ["PUBLIC"], async(req,res)=>{
-        res.render('newPswRestore')
+        try{
+            const {token}=req.query
+            const validateToken= jwt.verify(token,'jwtSecret')
+            res.render('newPswRestore')
+        }
+        catch(error){
+           res.render('tokenInvalido')
+        }
        })
 
     }//cierre del init

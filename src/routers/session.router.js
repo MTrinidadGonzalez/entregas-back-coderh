@@ -25,7 +25,7 @@ export default class SessionRouter extends RouterPadre{
 
         this.post('/restoreRequest', ["PUBLIC"], sessionControllers.restoreRequest)
 
-        this.get('/newPswRestore',["NO_AUTH"], sessionControllers.newPswRestore )
+        this.post('/newPswRestore',["PUBLIC"], sessionControllers.newPswRestore )
 
     }//cierre del init
 }//cierre de clase
