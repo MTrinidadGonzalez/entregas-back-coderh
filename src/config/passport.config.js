@@ -65,7 +65,7 @@ const passportStrategies=()=>{
               const user = {
                 id: 0,
                 name: `Admin`,
-                role: 'admin',
+                role: 'ADMIN',
                 email: '...',
                 
               };

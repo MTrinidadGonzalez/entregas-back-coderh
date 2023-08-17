@@ -22,12 +22,16 @@ btnCards.forEach((button) => {
       body: JSON.stringify(data)
     })
       .then((response) => {
-       // console.log(response)
         return response.json();
       })
       .then(data => {
         if(data.status === "success"){
           alert('Producto agregado')
+        }
+        if(data.status === "error"){
+          if(data.error === 'producto del usuario'){
+            alert('No puedes agregar tus propios productos al carrito')
+          }
         }
       })
       .catch(error => {

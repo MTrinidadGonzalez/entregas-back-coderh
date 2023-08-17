@@ -24,8 +24,8 @@ const loginUser=async (req,res)=>{
         const accessToken = generateToken(req.user);
         res.cookie('authToken',accessToken, {
             maxAge:1000*60*60*24,
-          //  httpOnly:true,
-           // sameSite:"none"
+           // httpOnly:true,
+          //  sameSite:"none"
         }).send({status:'success', userrole:role})
     }
     catch(error){
@@ -57,8 +57,11 @@ const convertToPremium=async(req,res)=>{
 
 
 const revertPremium= async(req,res)=>{
-  const result= await userServices.uptateUserRole(userId, "USER")
-  res.clearCookie('authToken').send({status:"success", message:'Rol de usuario cambiado'})
+  const userId= req.body.userId
+  console.log(userId)
+ /* const result= await userServices.uptateUserRole(userId, "USER")
+  res.clearCookie('authToken').send({status:"success"})*/
+  res.send({status:'success'})
 }
 
 const restoreRequest=async(req,res)=>{

@@ -18,12 +18,13 @@ form.addEventListener('submit',async (e)=>{
         const responseData= await response.json()
       
         if(responseData.status === 'success'){
-           //
-           if(responseData.userrole === "USER"){
-            window.location.replace('/home')
+          
+           if(responseData.userrole === "ADMIN"){
+           window.location.replace('/adminHome')
+       
            }
-           if(responseData.userrole === "USER"){
-            window.location.replace('/adminHome')
+           else{
+            window.location.replace('/home')
            }
         }
         if(responseData.status === 'error'){

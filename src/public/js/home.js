@@ -2,18 +2,14 @@ const btnCards = document.querySelectorAll('.btnCard');
 
 btnCards.forEach((button) => {
   const quantityElement = button.parentElement.querySelector('.spam-quantity')
-  
   let quantity = 1;
   
-
   button.addEventListener('click', () => {
     const productId = button.dataset.productId;
-
     const data = {
       productId: productId,
       spamQuantity: quantity
     };
-
     fetch("/api/products/addProductTocart", {
       method: "POST",
       headers: {
@@ -40,7 +36,6 @@ btnCards.forEach((button) => {
     }
   });
 
-
   const addMoreButton = button.parentElement.querySelector('.btn-add-more-product');
   const stock = parseInt(addMoreButton.getAttribute('data-stock'), 10)
   addMoreButton.addEventListener("click", () => {
@@ -53,40 +48,32 @@ btnCards.forEach((button) => {
   });
 });
 
-
-
-
-
-
-
-const btnConvertToPremium= document.getElementById('btnConvertToPremium')
-btnConvertToPremium.addEventListener('click', ()=>{
-const userId = btnConvertToPremium.getAttribute('data-user-id');
-
-fetch('/api/session/convertToPremium',
-{
-  method: 'POST',
-  headers: {
-      'Content-Type':'application/json'
-  },
-  body: JSON.stringify({ userId })
-})
-.then(response=> response.json())
-.then(data=> {
-  if(data.status === "success"){
-  window.location.href = '/login'
-  }
-})
-
-})
-
+const btnGetPremium= document.getElementById('btnGetPromium')
+if(btnGetPremium){
+  btnGetPremium.addEventListener('click', ()=>{
+    const userId = btnGetPremium.getAttribute('data-user-id');
+  fetch('/api/session/convertToPremium',
+  {
+    method: 'POST',
+    headers: {
+        'Content-Type':'application/json'
+    },
+    body: JSON.stringify({ userId })
+  })
+  .then(response=> response.json())
+  .then(data=> {
+    if(data.status === "success"){
+    window.location.href = '/login'
+    }
+  })
+  
+  })
+}
 
 const btnRevertPremium= document.getElementById('btnRevertPremium')
 
 btnRevertPremium.addEventListener('click',()=>{
-
   const userId = btnRevertPremium.getAttribute('data-user-id');
-
  fetch('/api/session/revertPremium',
  {
    method: 'POST',
@@ -101,9 +88,5 @@ btnRevertPremium.addEventListener('click',()=>{
    window.location.href = '/login'
    }
  })
-
-
-
-
 
 })

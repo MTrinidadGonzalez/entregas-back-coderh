@@ -43,7 +43,7 @@ const addProductCart=async (req,res)=>{
         const productOwner= productdB.owner
         const email= req.user.email
         if(productOwner === email){
-         res.send({status:'error', message: "Producto perteneciente al usuario"})
+         res.send({status:'error', error: 'producto del usuario'})
         }
         if (productdB.stock < 0){
             ErrorsService.createError({
@@ -54,13 +54,11 @@ const addProductCart=async (req,res)=>{
 
             }),
             req.logger.error(`producto agregado, sin stock ${productdB}`)
+            res.send({status:'error', error: 'Producto sin stock'})
         }
        
            const result= await cartsService.addProductToCart(cid,product)
-
-    res.send({status:"success", 
-              message:`se agrego el product ${pid} en el el carrito ${cid} de ${username}`,
-              })
+            res.send({status:"success" })
     }
     catch(error){
         console.log(error)

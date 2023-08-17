@@ -9,11 +9,7 @@ export default class SessionRouter extends RouterPadre{
 
         this.post('/register',["PUBLIC"],passportCall('register',{strategyType:'locals'}),sessionControllers.registerUser)
 
-    
-        this.post('/login',["NO_AUTH"],passportCall('login',{strategyType:'locals'}),sessionControllers.loginUser)
-
-        
-        this.post('/login',["NO_AUTH"],passportCall('login',{strategyType:'locals'}),sessionControllers.loginUser)
+        this.post('/login',["NO_AUTH", "ADMIN"],passportCall('login',{strategyType:'locals'}),sessionControllers.loginUser)
 
         this.get('/github',["NO_AUTH"],passportCall('github',{strategyType:'locals'}),(req,res)=>{});
      
