@@ -48,7 +48,7 @@ btnCards.forEach((button) => {
   });
 });
 
-const btnGetPremium= document.getElementById('btnGetPromium')
+const btnGetPremium= document.getElementById('btnGetPremium')
 if(btnGetPremium){
   btnGetPremium.addEventListener('click', ()=>{
     const userId = btnGetPremium.getAttribute('data-user-id');
@@ -63,30 +63,32 @@ if(btnGetPremium){
   .then(response=> response.json())
   .then(data=> {
     if(data.status === "success"){
-    window.location.href = '/login'
+      window.location.replace('/login')
     }
   })
-  
   })
 }
 
+
+
 const btnRevertPremium= document.getElementById('btnRevertPremium')
-
-btnRevertPremium.addEventListener('click',()=>{
-  const userId = btnRevertPremium.getAttribute('data-user-id');
- fetch('/api/session/revertPremium',
- {
-   method: 'POST',
-   headers: {
-       'Content-Type':'application/json'
-   },
-   body: JSON.stringify({ userId })
- })
- .then(response=> response.json())
- .then(data=> {
-   if(data.status === "success"){
-   window.location.href = '/login'
-   }
- })
-
-})
+if(btnRevertPremium){
+  btnRevertPremium.addEventListener('click',()=>{
+    const userId = btnRevertPremium.getAttribute('data-user-id');
+   fetch('/api/session/revertPremium',
+   {
+     method: 'POST',
+     headers: {
+         'Content-Type':'application/json'
+     },
+     body: JSON.stringify({ userId })
+   })
+   .then(response=> response.json())
+   .then(data=> {
+     if(data.status === "success"){
+      window.location.replace('/login')
+     }
+   })
+  
+  })
+}

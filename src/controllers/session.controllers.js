@@ -59,9 +59,9 @@ const convertToPremium=async(req,res)=>{
 const revertPremium= async(req,res)=>{
   const userId= req.body.userId
   console.log(userId)
- /* const result= await userServices.uptateUserRole(userId, "USER")
-  res.clearCookie('authToken').send({status:"success"})*/
-  res.send({status:'success'})
+  const result= await userServices.uptateUserRole(userId, "USER")
+  res.clearCookie('authToken').send({status:"success"})
+
 }
 
 const restoreRequest=async(req,res)=>{
@@ -71,7 +71,7 @@ const restoreRequest=async(req,res)=>{
    const restoreToken= generateToken(RestoreTokenDTO.getFrom(user),'1h')
    const mailingService= new MailingService()
     const result= await mailingService.sendMail(user.email, Dtemplates.RESTORE_PASSW,{restoreToken})
-   res.send({status:"success"})
+   res.clearCookie('authToken').send({status:"success"})
   }
   if(!user){
    res.send({status:"error", error: "Correo no encontrado"})
@@ -83,6 +83,7 @@ const newPswRestore=async(req,res)=>{
 
  try{
   const{password, token}=req.body
+ 
   const userToken= jwt.verify(token,'jwtSecret')
   
   const user= await userServices.getUser("email",userToken.email)
@@ -90,8 +91,8 @@ const newPswRestore=async(req,res)=>{
   if(comparePassword){
     res.send({status:'error', error: 'misma contraseña'})
   }
- /* const hashPassword= await createHash(password)
-  await userServices.updateUser(user._id, {password:hashPassword })*/
+const hashPassword= await createHash(password)
+  await userServices.updateUser(user._id, {password:hashPassword })
   res.send({status:'success', message:'Contraseña modificada'})
  }
 catch(error){
