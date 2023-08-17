@@ -1,0 +1,15 @@
+<h1>Admin home</h1>
+<div class="productsContainer">
+    {{#each products}}
+    <div class="productCard">
+        <p>Title: {{this.title}} </p>
+        <img src={{this.img}} alt={{this.description}}>
+        <p>Description: {{this.description}} </p>
+        <p>Price: $ {{this.price}} </p>
+        <button class="btnDeleteProduct"  data-product-id="{{this._id}}" >Eliminar producto</button>
+    </div>
+    {{/each}}
+</div>
+
+
+<script src="/js/adminhome.js"></script>

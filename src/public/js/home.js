@@ -55,17 +55,7 @@ btnCards.forEach((button) => {
 
 
 
-  /*
-  button.parentElement.querySelector('.btn-add-more-product').addEventListener("click", () => {
-    const stock = parseInt(button.parentElement.querySelector('.btn-add-more-product').getAttribute('data-stock'), 10)
-    console.log('stock'. stock)
-      quantity++;
-      quantityElement.textContent = quantity;
-    
-   
-  });
-});
-*/
+
 
 
 

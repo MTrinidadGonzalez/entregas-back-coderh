@@ -6,6 +6,8 @@ import GithubStrategy from 'passport-github2';
 import {userServices} from '../services/services.js'
 import config from  '../config.js'
 import {cartsService} from '../services/services.js'
+import  RegisterUserDTO from '../dto/user/registerUserDTO.js'
+
 
 const LocalStrategy= local.Strategy
 const admin1= config.admin.emailemail1
@@ -13,45 +15,45 @@ const admin2= config.admin.emailemail2
 const adminPassword= config.admin.adminPassword
 
 const passportStrategies=()=>{
-    passport.use(
-        'register',
-        new LocalStrategy(
-          { passReqToCallback: true, usernameField: 'email'},
-          async (req, email, password, done) => {
-            try {
-              const { first_name, last_name } = req.body;
-              if(!first_name && !last_name && !email && !password){
-                return done(null, false, { message:'Datos incompletos' });
-              }
-
-              const exists = await userServices.getUser("email", email);
-              
-              if (exists){  
-                return done(null, false, { message:'El usuario ya existe' });           
-              }
-              
-            else{
-              const hashedPassword = await createHash(password);
-              const cart= await cartsService.createCart()
-              
-              const user = {
-                first_name,
-                last_name,
-                email,
-                password: hashedPassword,
-                cart:  cart._id 
-              };
-              
-              const result = await userServices.createUser(user);
-              done(null, result);
-            }
-            
-            } catch (error) {
-              done(error);
-            }
+  passport.use(
+    'register',
+    new LocalStrategy(
+      { passReqToCallback: true, usernameField: 'email'},
+      async (req, email, password, done) => {
+        try {
+          const { first_name, last_name } = req.body;
+          if(!first_name && !last_name && !email && !password){
+            return done(null, false, { message:'Datos incompletos' });
           }
-        )
-      );
+
+          const exists = await userServices.getUser("email", email);
+          
+          if (exists){  
+            return done(null, false, { message:'El usuario ya existe' });           
+          }
+          
+        else{
+          const hashedPassword = await createHash(password);
+          const cart= await cartsService.createCart()
+          
+          const user = {
+            first_name,
+            last_name,
+            email,
+            password: hashedPassword,
+            cart:  cart._id 
+          };
+          const newUser= RegisterUserDTO.getFrom(user)
+          const result = await userServices.createUser(newUser);
+          done(null, result);
+        }
+        
+        } catch (error) {
+          done(error);
+        }
+      }
+    )
+  );
     
       //para login aca genero al user pero la sesion la inicio en el endpoint
       passport.use(

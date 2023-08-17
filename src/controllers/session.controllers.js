@@ -20,13 +20,13 @@ const registerUser=async (req,res)=>{
 
 const loginUser=async (req,res)=>{
     try{
-    
+      const role= req.user.role
         const accessToken = generateToken(req.user);
         res.cookie('authToken',accessToken, {
             maxAge:1000*60*60*24,
           //  httpOnly:true,
            // sameSite:"none"
-        }).send({status:'success', message: `llego a login router ${req.user.name}`})
+        }).send({status:'success', userrole:role})
     }
     catch(error){
        console.log('Error catch login:', error)

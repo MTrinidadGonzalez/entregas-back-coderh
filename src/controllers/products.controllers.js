@@ -45,8 +45,6 @@ const addProductCart=async (req,res)=>{
         if(productOwner === email){
          res.send({status:'error', message: "Producto perteneciente al usuario"})
         }
-
-
         if (productdB.stock < 0){
             ErrorsService.createError({
                 name:"Error al agregar producto producto",

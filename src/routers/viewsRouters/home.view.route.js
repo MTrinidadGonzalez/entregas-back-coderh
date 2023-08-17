@@ -11,7 +11,6 @@ export default class HomeViewRouter extends RouterPadre{
             const defaultLimit = 3
             const limit = queryLimit ? parseInt(queryLimit) ?? defaultLimit : defaultLimit
             
-
             const {docs, totalPages, page: currentPage}=
             await productsModel.paginate({}, {page, limit, lean:true})
             const products= docs
@@ -47,6 +46,21 @@ export default class HomeViewRouter extends RouterPadre{
                 isUser:isUser
             })
         })
+
+
+
+        this.get('/adminHome', ["ADMIN"], async (req,res)=>{
+            const products= await productsService.getProducts()
+        
+            res.render('adminhome',{
+                css:'home',
+                products,
+               
+            })
+         
+        })
+
+
 
     }//cierre del init
 }
