@@ -2,7 +2,8 @@ import express  from "express";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import handlebars from 'express-handlebars'
-
+import swaggerJSDoc from 'swagger-jsdoc'
+import swaggerUiExpress from "swagger-ui-express";
 
 import config from  './config.js'
 import passportStrategies from './config/passport.config.js'
@@ -37,16 +38,31 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.static(`${__dirname}/public`))
 
 
-
-
-
-
 //handlebars
 app.engine('handlebars',handlebars.engine());
 app.set('views',`${__dirname}/views`);
 app.set('view engine','handlebars')
 
 passportStrategies()
+
+
+
+//Estrategia para documentación con swagger:
+const swaggerOptions={
+    definition:{
+        openapi: '3.0.1',
+        info:{
+            title: 'Tienda nube',
+            description: 'Documentación de api ecommerce, proyecto para CorderHouse'
+        }
+    },
+    apis: [ `${__dirname}/./docs/**/*.yaml`]
+}
+
+const specifications= swaggerJSDoc(swaggerOptions)
+app.use('/docs' , swaggerUiExpress.serve, swaggerUiExpress.setup(specifications))
+
+
 
 //rutas
 app.use('/', loggerRouter)

@@ -17,7 +17,7 @@ try{
   const cid= req.body.cid
   const result=await cartsService.clearCart(cid)
   
-  res.send({status:'success'})
+  res.status('200').send({status:'success'})
 }
 catch(error){
   console.log(error)

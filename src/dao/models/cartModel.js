@@ -28,8 +28,6 @@ const schema= new mongoose.Schema({
           default: 0
         }
       
-
-
 },{timestamps:{createdAt: 'created_at', updatedAt: 'updated_at'}})
 
 const cartModel= mongoose.model(collection,schema)
