@@ -7,7 +7,6 @@ export default class ProductRouter extends RouterPadre{
     init(){
 
         this.get('/',["USER", "PREMIUM","ADMIN"],productsControllers.getProducts)
-
         //addproduct al carrito
         this.post('/addProductTocart', ["USER","PREMIUM"], productsControllers.addProductCart)
 
@@ -18,7 +17,7 @@ export default class ProductRouter extends RouterPadre{
         this.post('/newproduct',["USER","PREMIUM"],productsControllers.postProduct)
 
 
-        this.put('/:pid',["ADMIN"],productsControllers.putProduct )
+        this.put('/:pid',["ADMIN", "PREMIUM"],productsControllers.putProduct )
 
         this.delete('/deleteProduct/:pid',["ADMIN","PREMIUM"],productsControllers.deleteProduct)
 
