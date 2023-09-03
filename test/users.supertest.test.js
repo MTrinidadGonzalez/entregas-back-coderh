@@ -7,7 +7,7 @@ const expect= chai.expect
 const requester= supertest('http://localhost:8080')
 
 
-describe('Supertes de ecommerce CoderHose', async function(){
+describe('Supertes de sesiones y usuarios CoderHose', async function(){
 
    describe('Test integral majeno de session', async function(){
       
