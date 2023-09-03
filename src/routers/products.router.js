@@ -6,22 +6,13 @@ import productsControllers from '../controllers/products.controllers.js'
 export default class ProductRouter extends RouterPadre{
     init(){
 
-        this.get('/',["USER", "PREMIUM","ADMIN"],productsControllers.getProducts)
-        //addproduct al carrito
-        this.post('/addProductTocart', ["USER","PREMIUM"], productsControllers.addProductCart)
-
-     //   this.post('/deleteProduct',["ADMIN", "PREMIUM","USER"], productsControllers.deleteProductCart)
-       
+        this.get('/',["PUBLIC","USER", "PREMIUM","ADMIN"],productsControllers.getProducts)    
+     //   this.post('/deleteProduct',["ADMIN", "PREMIUM","USER"], productsControllers.deleteProductCart)   
         this.get('/:pid', ["PUBLIC"],productsControllers.getProduct )
-
         this.post('/newproduct',["USER","PREMIUM"],productsControllers.postProduct)
-
-
         this.put('/:pid',["ADMIN", "PREMIUM"],productsControllers.putProduct )
-
         this.delete('/deleteProduct/:pid',["ADMIN","PREMIUM"],productsControllers.deleteProduct)
-
-
+        this.post('/addProductTocart', ["USER","PREMIUM"], productsControllers.addProductCart)
 
 
     //esto es para cargarlos todos de una para mi

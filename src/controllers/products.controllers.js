@@ -29,16 +29,14 @@ const getProduct= async(req,res)=>{
 
 const addProductCart=async (req,res)=>{
     try{
- 
         const cid= req.user.cart[0]._id
         const username= req.user.name
-        const pid= req.body.productId
+        const pid= req.body.productId       
         const productQuantity= req.body.spamQuantity
         const product= {
             pid:pid,
             productQuantity:productQuantity
-        }
-         
+        }         
         const productdB= await productsService.getProductById(pid)
         const productOwner= productdB.owner
         const email= req.user.email
@@ -51,12 +49,10 @@ const addProductCart=async (req,res)=>{
                 cause: productsWithoutStock(productdB),
                 code: DictionaryEErrorProducts.SIN_STOCK_INIXISTENTE,
                 status:400
-
             }),
             req.logger.error(`producto agregado, sin stock ${productdB}`)
             res.send({status:'error', error: 'Producto sin stock'})
-        }
-       
+        }      
            const result= await cartsService.addProductToCart(cid,product)
             res.send({status:"success" })
     }
@@ -75,6 +71,7 @@ const deleteProductCart= async(req,res)=>{
     const pid= req.body.pid
     const result= await cartsService.subtractProduct(cid,pid)
     res.send({status:'success',payload:result })
+   
     }
     catch(error){
         console.log('Error catch delete product:', error)
@@ -86,7 +83,7 @@ const deleteProductCart= async(req,res)=>{
 
 const postProduct= async(req,res)=>{
     const useremail= req.user.email
-    
+    console.log(useremail)
     try{
        const {title, description,price,category,code,img}=req.body
         const product={
@@ -98,20 +95,17 @@ const postProduct= async(req,res)=>{
             img,
             owner:useremail
         }
-        
+        console.log(product)
         if(!title || !description || !price || !category || !code || !img){
             ErrorsService.createError({
                 name:"Error al crear producto",
                 cause: productsErrorIncompleteValues({title,description,price,code,img}),
                 code: DictionaryEErrorProducts.INCOMPLETE_VALUES,
                 status:400
-
             })
-        }
-        
+        }       
         const addProduct= await productsService.createProduct(product)
-        res.send({status:'success'}) 
-        
+        res.send({status:'success'})        
     }
     catch(error){
        console.log('Error catch createProduct:', error)

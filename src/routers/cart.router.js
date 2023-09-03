@@ -11,8 +11,9 @@ export default class CartRoute extends RouterPadre{
      
         this.get('/',["USER","PREMIUM"], cartControllers.getUserCart)
         this.post('/deleteproductcart', ['USER',"PREMIUM"],productsCntrolles.deleteProductCart)
-        this.post('/:cid/purchase', ['USER',"PREMIUM"],  generateTiketsData, tiketControllers.operacionTiket)
         this.post('/clearCart', ["USER","PREMIUM"],cartControllers.clearCart )
+        this.post('/:cid/purchase', ['USER',"PREMIUM"],  generateTiketsData, tiketControllers.operacionTiket)
+     
     }//cierre del init
 
 }
