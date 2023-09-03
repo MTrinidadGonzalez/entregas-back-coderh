@@ -18,7 +18,8 @@ export default {
 
     },
     mongo : {
-    URL: process.env.MONGO_URL 
+    URL: process.env.MONGO_URL ,
+    URL_TEST: process.env.MONGO_URL_TEST
     },
     
     mode:{

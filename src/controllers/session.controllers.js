@@ -61,7 +61,6 @@ const revertPremium= async(req,res)=>{
   console.log(userId)
   const result= await userServices.uptateUserRole(userId, "USER")
   res.clearCookie('authToken').send({status:"success"})
-
 }
 
 const restoreRequest=async(req,res)=>{
@@ -72,6 +71,7 @@ const restoreRequest=async(req,res)=>{
    const mailingService= new MailingService()
     const result= await mailingService.sendMail(user.email, Dtemplates.RESTORE_PASSW,{restoreToken})
    res.clearCookie('authToken').send({status:"success"})
+  
   }
   if(!user){
    res.send({status:"error", error: "Correo no encontrado"})

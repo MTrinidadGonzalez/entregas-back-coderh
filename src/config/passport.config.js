@@ -21,7 +21,7 @@ const passportStrategies=()=>{
       { passReqToCallback: true, usernameField: 'email'},
       async (req, email, password, done) => {
         try {
-          const { first_name, last_name } = req.body;
+          const { first_name, last_name, role } = req.body;
           if(!first_name && !last_name && !email && !password){
             return done(null, false, { message:'Datos incompletos' });
           }
@@ -41,6 +41,7 @@ const passportStrategies=()=>{
             last_name,
             email,
             password: hashedPassword,
+            role,
             cart:  cart._id 
           };
           const newUser= RegisterUserDTO.getFrom(user)

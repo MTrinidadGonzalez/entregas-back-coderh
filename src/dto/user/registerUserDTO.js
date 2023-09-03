@@ -7,6 +7,7 @@ export default class RegisterUserDTO {
             email:user.email,
             role:user.role,
             password:user.password,
+            role:user.role,
             cart:user.cart
         }
     }

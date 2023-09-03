@@ -6,13 +6,9 @@ export default class UserRouter extends RouterPadre{
     init(){
 
         this.get('/', ["PUBLIC"],usersControllers.getAllUsers)
-
-      
-
-        this.put('/', ["USER"], usersControllers.putUser)
-
-        this.delete('/',["USER"],usersControllers.deleteUser )
-
+        this.put('/', ["USER","PREMIUM","ADMIN"], usersControllers.putUser)
+        this.delete('/',["USER","PREMIUM","ADMIN"],usersControllers.deleteUser )
+        this.post('/user', ["PUBLIC"], usersControllers.getUser)
 
         
         

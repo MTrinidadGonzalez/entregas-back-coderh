@@ -24,6 +24,10 @@ export default class UserServices{
             return this.dao.updateUser(uid,user)
         }
 
+        updateUserBy(params, user, newData){
+            return this.dao.updateUserBy(params, user, newData)
+        }
+
         deleteUser(uid){
             return this.dao.deleteUser(uid)
         }
