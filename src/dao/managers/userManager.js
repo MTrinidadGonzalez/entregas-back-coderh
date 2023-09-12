@@ -13,7 +13,7 @@ export default class UserManager{
     updateUserBy = (params, user, newData) => {
         return userModel.findOneAndUpdate({ [params]: user }, newData, { new: true });
     }
-
+  
 
     uptateUserRole=(userId, newRole)=>{
         return userModel.findByIdAndUpdate(userId, { role: newRole }, { new: true })

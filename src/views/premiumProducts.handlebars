@@ -5,7 +5,7 @@
          {{#each products}}
     <div class="productCard">
         <p>Title: {{this.title}} </p>
-        <img src={{this.img.[0]}} alt={{this.description}}>
+        <img src={{this.img}} alt={{this.description}}>
         <p>Description: {{this.description}} </p>
         <p>Price: $ {{this.price}} </p>        
     <button class="btnDeleteUserProduct"   data-product-id="{{this._id}}" >Delete Product</button>

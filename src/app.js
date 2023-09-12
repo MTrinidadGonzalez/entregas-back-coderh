@@ -14,8 +14,9 @@ import CartRoute from './routers/cart.router.js'
 import moksRouter from '../src/moks/routermoks/moks.products.router.js'
 import loggerRouter from './routers/loggerRouter/logger.router.js'
 import EmailRouter from './routers/email.router.js'
+import DocumentsRouter from './routers/documents.router.js'
 import {profilesViewRouter} from './services/viewsServices/viewsServices.js'
-
+import UserViewRouter from './routers/viewsRouters/user.view.router.js'
 import errorHandler from '../src/meddlewares/errorMedlewares.js'
 import __dirname from './utils.js'
 import {loginAndRegisterview} from './services/viewsServices/viewsServices.js'
@@ -65,6 +66,8 @@ app.use('/docs' , swaggerUiExpress.serve, swaggerUiExpress.setup(specifications)
 
 
 //rutas
+const documentsRouter= new DocumentsRouter()
+app.use('/api/documents', documentsRouter.getRouter())
 app.use('/', loggerRouter)
 const userRouter= new UserRouter()
 app.use('/api/users', userRouter.getRouter())
@@ -83,6 +86,8 @@ app.use('/products',productsView.getRouter())
 app.use('/',cartView.getRouter())
 app.use('/', homeViewRouter.getRouter())
 app.use('/', profilesViewRouter.getRouter())
+const useViewRouter= new UserViewRouter()
+app.use('/users', useViewRouter.getRouter())
 
 app.use('/smokingsproducts', moksRouter)
 

@@ -82,30 +82,33 @@ const deleteProductCart= async(req,res)=>{
 
 
 const postProduct= async(req,res)=>{
-    const useremail= req.user.email
-    console.log(useremail)
     try{
-       const {title, description,price,category,code,img}=req.body
-        const product={
-            title,
-            description,
-            price,
-            category,
-            code,
-            img,
-            owner:useremail
-        }
-        console.log(product)
-        if(!title || !description || !price || !category || !code || !img){
+        const useremail= req.user.email 
+        const{title,description,price,category,code,stock}=req.body
+         if(!title || !description || !price || !category ){
             ErrorsService.createError({
                 name:"Error al crear producto",
                 cause: productsErrorIncompleteValues({title,description,price,code,img}),
                 code: DictionaryEErrorProducts.INCOMPLETE_VALUES,
                 status:400
             })
-        }       
+        } 
+        const imgFileName=req.file.filename  
+    
+        const product= {
+            title,
+            description,
+            price,
+            category,
+            code,
+            stock,
+            img: `http://localhost:8080/api/documents/${imgFileName}?folder=products`,
+            owner:useremail
+        }
+ 
         const addProduct= await productsService.createProduct(product)
-        res.send({status:'success'})        
+        res.send({status:'success', payload: addProduct})        
+      
     }
     catch(error){
        console.log('Error catch createProduct:', error)
@@ -138,6 +141,8 @@ const putProduct=async(req,res)=>{
     }
 }
 
+
+
 export default{
     getProducts,
     getProduct,
@@ -145,5 +150,6 @@ export default{
     postProduct,
     putProduct,
     deleteProductCart,
-    deleteProduct
+    deleteProduct,
+   
 }

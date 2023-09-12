@@ -1,6 +1,6 @@
 import RouterPadre from '../../routers/router.js'
 import productsModel from '../../dao/models/productsModel.js'
-import {productsService} from '../../services/services.js'
+import {productsService, userServices} from '../../services/services.js'
 
 
 export default class HomeViewRouter extends RouterPadre{
@@ -30,6 +30,9 @@ export default class HomeViewRouter extends RouterPadre{
             const isPremium = role === 'PREMIUM';
             const isAdmin= role === 'ADMIN'
           
+            const userDb= await userServices.getUser('email', req.user.email)
+            const imgProfile= userDb.imgProfile
+
             res.render('home',{
                 css:'home',
                 products,
@@ -43,7 +46,8 @@ export default class HomeViewRouter extends RouterPadre{
                 role:role,
                 isPremium: isPremium,
                 isAdmin: isAdmin,
-                isUser:isUser
+                isUser:isUser,
+                imgProfile:imgProfile
             })
         })
 

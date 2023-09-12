@@ -5,18 +5,12 @@ formNewProduct.addEventListener('submit', (e)=>{
     e.preventDefault()
     const formData = new FormData(formNewProduct)
     
-    const productData = {};
-    formData.forEach((value, key) => {
-        productData[key] = value;
-    })
-
-    fetch('/api/products/newProduct',
+    console.log(formData)
+    fetch('/api/products/newproduct',
     {
         method: 'POST',
-        headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(productData)
+        body:formData
+          
     }
     )
     .then(response => response.json())
@@ -29,3 +23,4 @@ formNewProduct.addEventListener('submit', (e)=>{
         }
     })
 })
+

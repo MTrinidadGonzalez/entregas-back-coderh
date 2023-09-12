@@ -79,3 +79,41 @@ a{
     color: black;
 
 }
+
+.forms{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    margin: auto;
+    border: 1px solid rgb(63, 193, 245);
+    border-radius: 6px;
+}
+.forms button, input{
+    width: 60%;
+    margin: 7px;
+    padding: 7px;
+}
+
+.carteles{
+    background-color: aliceblue;
+    color: red;
+    font-size: larger;
+    text-align: center;
+    padding: 20px;
+    margin: 20px;
+    border: 1px solid red;
+    border-radius: 6px;
+}
+
+.imgProfile{
+    width: 180px;
+    border-radius: 50%
+}
+
+.imgProfileSpam{
+    width: 25px;
+    border-radius: 50%;
+  
+}

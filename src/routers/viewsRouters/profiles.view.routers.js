@@ -35,13 +35,24 @@ export default class ProfilesViewRouter extends RouterPadre{
        })
 
        this.get('/userData', ["USER", "PREMIUM"], async (req,res)=>{
+        const userDb= await userServices.getUser('email', req.user.email)
+        const imgProfile= userDb.imgProfile
         const user={
             name:req.user.name,
             email:req.user.email,
-            role:req.user.role
+            role:req.user.role,
+            imgProfile: imgProfile
         }
         res.render('userData',{
             user:user
+        })
+    })
+
+    this.get('/bntconvertpremium', ["USER", "PREMIUM","ADMIN"], async(req,res)=>{
+        const userId= req.user.id
+        console.log(userId)
+        res.render('btnConverTopremium',{
+            userId:userId
         })
     })
 

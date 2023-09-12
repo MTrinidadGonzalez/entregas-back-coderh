@@ -1,7 +1,27 @@
-<h1>aqui debe ir la user data da ambos roles</h1>
 
-<div>
+
+
+<div class="forms">
+    <div class="productCard">
+        <img src={{user.imgProfile}} alt="Imagen de perfil del usuario" class="imgProfile">
+        <button id="btnUpdateImg">
+            <span class="material-symbols-outlined">
+            upload_file
+            </span>
+            Cambiar imagen de perfil
+        </button>
+    </div>
+    <div id="alerOploadImgprofile">
+        <form id="formImgProfile" enctype="multipart/form-data" >
+        <input type="file" name="imgProfile" required>
+        <input type="submit" value="Remplazar imagen">
+        </form>
+    </div>
+
     <h1>{{user.name}}  </h1>
     <p>{{user.email}} </p>
     <p>{{user.role}}</p>
 </div>
+
+
+<script src="/js/imgProfile.js"></script>
