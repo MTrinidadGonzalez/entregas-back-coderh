@@ -1,13 +1,14 @@
 import {userServices} from '../services/services.js'
 import usersControllers from '../controllers/users.controllers.js'
 import RouterPadre from './router.js'
-import {documentsUploader} from '../meddlewares/multer.meddleware.js'
-import {imgProfileUploader} from '../meddlewares/multer.meddleware.js'
+import {documentsUploader} from '../middlewares/multer.middleware.js'
+import {imgProfileUploader} from '../middlewares/multer.middleware.js'
 
 export default class UserRouter extends RouterPadre{
     init(){
 
-        this.get('/', ["PUBLIC"],usersControllers.getAllUsers)
+        this.get('/', ["PUBLIC", "USER", "ADMIN","PREMIUM"],usersControllers.getAllUsers)
+
         this.put('/', ["USER","PREMIUM","ADMIN"], usersControllers.putUser)
         this.delete('/',["USER","PREMIUM","ADMIN"],usersControllers.deleteUser )
         this.post('/user', ["PUBLIC"], usersControllers.getUser)

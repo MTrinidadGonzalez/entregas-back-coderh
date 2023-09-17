@@ -1,8 +1,7 @@
-<div id="containerNewProduct" class="containerNewProduct">
-    <h1>Nuevo producto</h1>
+<h1>Modificar producto:</h1>
 
-<form id="formNewProduct" class="formNewProduct" enctype="multipart/form-data" >
-    <input type="text" placeholder="Title" name="title" required>
+<form class="forms" enctype="multipart/form-data" >
+    <input type="text" placeholder="{{product.title}}" name="title" required>
     <input type="text" placeholder="Description" name="description" required>
     <input type="number" placeholder="Price: $" name="price" min="1" required>
     <select id="category" name="category" required>

@@ -4,7 +4,7 @@ import RouterPadre from './router.js'
 import cartControllers from '../controllers/cart.controllers.js'
 import productsCntrolles from '../controllers/products.controllers.js'
 import tiketControllers from '../controllers/tiket.controllers.js'
-import { generateTiketsData} from '../meddlewares/tiket.meddleware.js'
+import { generateTiketsData} from '../middlewares/tiket.middleware.js'
 
 export default class CartRoute extends RouterPadre{
     init(){

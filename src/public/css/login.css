@@ -12,7 +12,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 60px;   
-    background-image: url('https://i.pinimg.com/564x/28/a6/d9/28a6d987e23d9228f984a48746dd4a70.jpg');
+    margin: 30px;
+    background-image: url("https://i.pinimg.com/564x/a3/01/97/a30197d3ada481ecd1776103250ddebb.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -25,6 +26,7 @@
     text-align: center;
     background-color:  rgba(252, 241, 241, 0.403);
     padding: 20px;
+ 
 }
 .form-clsss input{
     padding: 5px;

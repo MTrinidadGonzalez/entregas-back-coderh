@@ -17,14 +17,14 @@ import EmailRouter from './routers/email.router.js'
 import DocumentsRouter from './routers/documents.router.js'
 import {profilesViewRouter} from './services/viewsServices/viewsServices.js'
 import UserViewRouter from './routers/viewsRouters/user.view.router.js'
-import errorHandler from '../src/meddlewares/errorMedlewares.js'
+import errorHandler from './middlewares/errorMiddlewares.js'
 import __dirname from './utils.js'
 import {loginAndRegisterview} from './services/viewsServices/viewsServices.js'
 import {productsView} from './services/viewsServices/viewsServices.js'
 import {cartView} from './services/viewsServices/viewsServices.js'
 import {homeViewRouter} from './services/viewsServices/viewsServices.js'
 import { Server } from 'socket.io'
-import attachLogger from './meddlewares/logger.medleware.js'
+import attachLogger from './middlewares/logger.middleware.js'
 
 
 const app= express()

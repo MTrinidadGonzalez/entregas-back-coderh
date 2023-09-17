@@ -2,7 +2,7 @@ import RouterPadre from '../routers/router.js'
 import {cartsService, productsService} from '../services/services.js'
 import productsControllers from '../controllers/products.controllers.js'
 import uploader from '../services/multerServices/uploader.js'
-import {productsUploader} from  '../meddlewares/multer.meddleware.js'
+import {productsUploader} from  '../middlewares/multer.middleware.js'
 
 export default class ProductRouter extends RouterPadre{
     init(){
@@ -14,7 +14,7 @@ export default class ProductRouter extends RouterPadre{
         this.put('/:pid',["ADMIN", "PREMIUM"],productsControllers.putProduct )
         this.delete('/deleteProduct/:pid',["ADMIN","PREMIUM"],productsControllers.deleteProduct)
         this.post('/addProductTocart', ["USER","PREMIUM"], productsControllers.addProductCart)
-
+        this.put('/updateProductImg', ["ADMIN", "PREMIUM"],productsControllers.updateProductImg)
 
     //esto es para cargarlos todos de una para mi
         this.post('/cargomuchos', ["PUBLIC"], async (req,res)=>{

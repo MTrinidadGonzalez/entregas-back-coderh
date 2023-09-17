@@ -84,7 +84,7 @@ const deleteProductCart= async(req,res)=>{
 const postProduct= async(req,res)=>{
     try{
         const useremail= req.user.email 
-        const{title,description,price,category,code,stock}=req.body
+        const{title,description,price,category,code,stock,talle,color}=req.body
          if(!title || !description || !price || !category ){
             ErrorsService.createError({
                 name:"Error al crear producto",
@@ -103,10 +103,12 @@ const postProduct= async(req,res)=>{
             code,
             stock,
             img: `http://localhost:8080/api/documents/${imgFileName}?folder=products`,
+            talle,
+            color,
             owner:useremail
         }
  
-        const addProduct= await productsService.createProduct(product)
+       const addProduct= await productsService.createProduct(product)
         res.send({status:'success', payload: addProduct})        
       
     }
@@ -141,7 +143,9 @@ const putProduct=async(req,res)=>{
     }
 }
 
-
+const updateProductImg=async (req,res)=>{
+    req.send({status:'success'})
+}
 
 export default{
     getProducts,
@@ -151,5 +155,6 @@ export default{
     putProduct,
     deleteProductCart,
     deleteProduct,
+    updateProductImg
    
 }

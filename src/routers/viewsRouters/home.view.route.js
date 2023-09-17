@@ -64,6 +64,10 @@ export default class HomeViewRouter extends RouterPadre{
          
         })
 
+        this.get('/', ["PUBLIC"], async (req,res)=>{
+            res.render('inicio')
+        })
+
 
 
     }//cierre del init

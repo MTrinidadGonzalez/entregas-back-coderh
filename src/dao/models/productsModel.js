@@ -27,7 +27,19 @@ const schema= new mongoose.Schema({
     owner: {
         type: String,
         default: 'ADMIN'
+    },
+    talle:{
+        type:String,
+        default:"m",
+        enum:["xs","s", "m","l","xl"]
+
+    },
+    color:{
+        type:String,
+        default:'blanco',
+        enum:["blanco","negro", "marron","rojo","azul","amarillo", "verde","rosa","celeste","violeta","naranja","gris","crema","jean","estampado","ninguno"]
     }
+
 }, {timestamps:{createdAt: 'created_at', updatedAt: 'updated_at'}}
 )
 schema.plugin(mongoosePaginate)

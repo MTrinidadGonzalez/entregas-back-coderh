@@ -1,0 +1,19 @@
+<h1>Usuarios</h1>
+
+<div>
+    
+    <div class="productsContainer">
+         {{#each users}}
+    <div class="productCard">
+        <img src={{this.imgProfile}} alt="Imagen persil de isuario" class="imgsCard">
+        <p>Nombre:{{this.first_name}} </p>
+        <p>Apellido: {{this.last_name}} </p>
+        <p>Alias: {{this.alias}} </p>
+        <p>Correo: {{this.email}} </p>      
+        <a href="/products/useproducts/{{this.alias}}"> Ver productos de este usuario</a>
+        
+    </div>
+    {{/each}}
+
+    </div>
+</div>
