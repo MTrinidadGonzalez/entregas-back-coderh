@@ -1,49 +1,39 @@
 <div>
     <h1>Mis productos</h1>
-    
-<!-- aqui robe lo de cambiar la img de profile, debo hacer q vaya a product
-<div class="forms">
-    <div class="productCard">
-        <img src={{user.imgProfile}} alt="Imagen de producto" class="imgProfile">
-        <button id="btnUpdateImg">
-            <span class="material-symbols-outlined">
-            upload_file
-            </span>
-            Cambiar imagen de perfil
-        </button>
-    </div>
-    <div id="alerOploadImgprofile">
-        <form id="formImgProfile" enctype="multipart/form-data" >
-        <input type="file" name="imgProfile" required>
-        <input type="submit" value="Remplazar imagen">
-        </form>
-    </div>
-
-
-
-
-
-
-
+ 
     <div class="div-premium-products">
-         {{#each products}}
+    {{#each products}}
     <div class="productCard">
         <p>Categoría: {{this.category}} </p>
-        <img src={{this.img}} alt={{this.description}}>
+        <div>
+            <img src={{this.img}} alt={{this.description}}>
+             <button id="btnUpdateImg">
+                <span class="material-symbols-outlined">
+                upload_file
+                </span>
+                Cambiar imagen del producto
+                </button>
+                </div>
+                <div id="alerOploadImgproduct">
+                <form id="formImgProduct" enctype="multipart/form-data" >
+                 <input type="hidden" name="productId" id="productId" value="{{this._id}}">
+                <input type="file" name="img" required>
+                <input type="submit" value="Remplazar imagen">
+                </form>
+        </div>
+
         <p>Description: {{this.description}} </p>
          <p>Color:{{this.color}} </p>
         <p>Talle: {{this.talle}}</p>
              <p>Duaeño:{{this.owner}} </p>
         <p>Price: $ {{this.price}} </p> 
         <p>Dueño:{{../alias}} </p>       
-        
         <a href="/products/updateProduct/{{this._id}}" class="btnUpdateAndDelete">
         <span class="material-symbols-outlined">
         edit
         </span>
-        Modificar
+        Modificar datos
         </a>
-
         <button class="btnDeleteUserProduct btnUpdateAndDelete"   data-product-id="{{this._id}}" >
         <span class="material-symbols-outlined">
         delete_sweep
@@ -51,6 +41,8 @@
         Eliminar
         </button>
     </div>
+
+     </div>
     {{/each}}
 
     </div>
@@ -58,3 +50,29 @@
 
 </div>
 <script src="/js/premiumProducts.js" ></script>
+
+<script src="/js/updateImgProduct.js" ></script>
+
+   
+
+
+
+
+   
+<!-- aqui robe lo de cambiar la img de profile, debo hacer q vaya a product
+<div class="forms" id="formUpdateImgProduct">
+    <div class="productCard">
+        <img src={{this.img}} alt="Imagen de producto" class="imgProfile">
+    <button id="btnUpdateImg">
+        <span class="material-symbols-outlined">
+        upload_file
+        </span>
+        Cambiar imagen de perfil
+    </button>
+    </div>
+    <div id="alerOploadImgproduct">
+        <form id="formImgProduct" enctype="multipart/form-data" >
+        <input type="file" name="imgProfile" required>
+        <input type="submit" value="Remplazar imagen">
+        </form>
+    </div>

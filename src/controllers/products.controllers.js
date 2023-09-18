@@ -125,18 +125,23 @@ const deleteProduct=async(req,res)=>{
 
 const putProduct=async(req,res)=>{
     try{
-        const {pid}=req.params
-        const {title, description,price,category,code,thumbnail}=req.body
-        const product={
-            title,
-            description,
-            price,
-            category,
-            code,
-            thumbnail
-        }
-        const updateProduct= await productsService.updateProduct(pid,product)
-        res.send({status:'success', message:`Se modificó ${product.description}`, payload:updateProduct})
+      const pid= req.body.productId
+      const productDb=await productsService.getProductById(pid)
+      const updatedProduct = {
+        title: req.body.title || productDb.title,
+        description: req.body.description || productDb.description,
+        price: req.body.price || productDb.price,
+        category: req.body.category || productDb.category,
+        code: req.body.code || productDb.code,
+        talle: req.body.talle || productDb.talle,
+        color: req.body.color || productDb.color,
+        stock: req.body.stock || productDb.stock,
+        img:productDb.img
+    }
+ 
+      const updateProduct= await productsService.updateProduct(pid,updatedProduct)
+   
+      res.send({status:'success', message:'Producto modificado', payload:updateProduct})
     }
     catch(error) {
         req.logger.error('Error catch updateProduct:', error)
@@ -144,7 +149,17 @@ const putProduct=async(req,res)=>{
 }
 
 const updateProductImg=async (req,res)=>{
-    req.send({status:'success'})
+  try{
+   
+    const {productId}=req.body
+    const img= req.file.filename
+    const newImgPath= `http://localhost:8080/api/documents/${img}?folder=products`
+    const update= await productsService.updateProductImage(productId,newImgPath)
+    res.send({status:'success'})
+  }
+  catch(error){
+    console.log(error)
+  }
 }
 
 export default{

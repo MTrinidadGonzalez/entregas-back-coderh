@@ -40,4 +40,8 @@ export default class ProductsServices{
     deleteProduct=(pid)=>{
         return this.dao.deleteProduct(pid)
     }
+
+    updateProductImage = (productId, newImgPath) => {
+        return this.dao.updateProductImage(productId,newImgPath)
+      }
 }

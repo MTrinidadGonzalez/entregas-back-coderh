@@ -11,11 +11,12 @@ export default class ProductRouter extends RouterPadre{
      //   this.post('/deleteProduct',["ADMIN", "PREMIUM","USER"], productsControllers.deleteProductCart)   
         this.get('/:pid', ["PUBLIC"],productsControllers.getProduct )
         this.post('/newproduct',["ADMIN","PREMIUM"],productsUploader,productsControllers.postProduct)
-        this.put('/:pid',["ADMIN", "PREMIUM"],productsControllers.putProduct )
+        this.put('/',["ADMIN", "PREMIUM"],productsControllers.putProduct )
         this.delete('/deleteProduct/:pid',["ADMIN","PREMIUM"],productsControllers.deleteProduct)
         this.post('/addProductTocart', ["USER","PREMIUM"], productsControllers.addProductCart)
-        this.put('/updateProductImg', ["ADMIN", "PREMIUM"],productsControllers.updateProductImg)
+        this.post('/updateProductImg', ["ADMIN", "PREMIUM"],productsUploader,productsControllers.updateProductImg)
 
+        this.put('/updateProduct',["ADMIN","PREMIUM"], productsControllers.putProduct)
     //esto es para cargarlos todos de una para mi
         this.post('/cargomuchos', ["PUBLIC"], async (req,res)=>{
         try{

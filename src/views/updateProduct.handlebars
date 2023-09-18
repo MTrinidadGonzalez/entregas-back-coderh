@@ -1,20 +1,25 @@
 <h1>Modificar producto:</h1>
 
-<form class="forms" enctype="multipart/form-data" >
-    <input type="text" placeholder="{{product.title}}" name="title" required>
-    <input type="text" placeholder="Description" name="description" required>
-    <input type="number" placeholder="Price: $" name="price" min="1" required>
-    <select id="category" name="category" required>
+<div class="forms"> 
+
+
+
+
+<form class="forms" id="formUpdateProduct" >
+    <img src={{product.img}} alt="imagen del producto">
+       <input type="hidden" name="productId" id="productId" value="{{product.id}}">
+    <input type="text" placeholder="{{product.title}}" name="title">
+    <input type="text" placeholder="{{product.description}}" name="description" >
+    <input type="number" placeholder="Price: $ {{product.price}}" name="price" min="1" >
+    <select id="category" name="category" >
         <option value="remeras">Remeras</option>
         <option value="pantalones">Pantalones</option>
         <option value="abrigos">Abrigos</option>
         <option value="accesorios">Accesorios</option>
     </select>
-    <input type="text" placeholder="Code" name="code" required>
-    <p>Imagen del producto:</p>
-    <input type="file"  name="img">
+    <input type="text" placeholder="Code {{product.code}}" name="code" >
     <label for="talle">Talle:</label>
-        <select id="talle" name="talle" required>
+        <select id="talle" name="talle" >
             <option value="xs">XS</option>
             <option value="s">S</option>
             <option value="m" selected>M</option>
@@ -22,7 +27,7 @@
             <option value="xl">XL</option>
         </select>
       <label for="color">Color:</label>
-        <select id="color" name="color" required>
+        <select id="color" name="color" >
             <option value="blanco">Blanco</option>
             <option value="negro">Negro</option>
             <option value="marron">Marrón</option>
@@ -40,9 +45,16 @@
             <option value="estampado">Estampado</option>
             <option value="ninguno">Ninguno</option>
         </select>  
-    <input type="number" placeholder="Stock" name="stock" min="1" required>
-    <input type="submit" value="Cargar" class="btnNewProduct" required>
+    <input type="number" placeholder="Stock" name="stock" min="1" >
+    <input type="submit" value="Cargar" class="btnNewProduct" >
 </form>
 
 </div>
-<script src="/js/newProduct.js" ></script>
+
+
+
+
+
+</div>
+
+<script src="/js/updateProduct.js" ></script>

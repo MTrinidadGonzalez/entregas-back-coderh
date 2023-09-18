@@ -25,6 +25,13 @@ export default class ProductsManager{
     updateProduct=(pid, product)=>{
         return productsModel.findByIdAndUpdate(pid, {$set: product})
     }
+     updateProductImage = (productId, newImgPath) => {
+      return productsModel.findByIdAndUpdate(
+        productId,
+        { $set: { img: newImgPath } },
+        { new: true } 
+      )
+    }
 
     getProductsByOwnerEmail(email) {          
         return productsModel.find({ owner: email });   

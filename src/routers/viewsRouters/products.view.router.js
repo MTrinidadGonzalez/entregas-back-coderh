@@ -63,7 +63,9 @@ export default class ProductsView extends RouterPadre{
                 category: productDb.category,
                 stock: productDb.stock,
                 talle:productDb.talle,
-                color:productDb.color
+                color:productDb.color,
+                img:productDb.img,
+                id: productDb._id
 
             }
        
