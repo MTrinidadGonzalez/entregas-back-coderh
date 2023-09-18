@@ -10,7 +10,7 @@ export default class UserRouter extends RouterPadre{
         this.get('/', ["PUBLIC", "USER", "ADMIN","PREMIUM"],usersControllers.getAllUsers)
 
         this.put('/', ["USER","PREMIUM","ADMIN"], usersControllers.putUser)
-        this.delete('/',["USER","PREMIUM","ADMIN"],usersControllers.deleteUser )
+        this.delete('/:uid',["USER","PREMIUM","ADMIN"],usersControllers.deleteUser )
         this.post('/user', ["PUBLIC"], usersControllers.getUser)
         
         this.post('/postPremiumDocuments', ["USER","ADMIN","PREMIUM"],documentsUploader,usersControllers.postPremiumDocuments)

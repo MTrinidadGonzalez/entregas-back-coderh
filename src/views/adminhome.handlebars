@@ -1,4 +1,9 @@
 <h1>Admin home</h1>
+<div class="navInicio">
+    <h2><a href="/products" class="navInicioItem">Productos</a></h2>
+    <h2><a href="/users/users" class="navInicioItem">Usuarios</a></h2>
+</div>
+
 <div class="productsContainer">
     {{#each products}}
     <div class="productCard">
@@ -6,6 +11,7 @@
         <img src={{this.img}} alt={{this.description}}>
         <p>Description: {{this.description}} </p>
         <p>Price: $ {{this.price}} </p>
+        <p>Dueño:{{this.owner}} <a href=""></a> </p>
         <button class="btnDeleteProduct"  data-product-id="{{this._id}}" >Eliminar producto</button>
     </div>
     {{/each}}

@@ -69,7 +69,8 @@ const passportStrategies=()=>{
                 id: 0,
                 name: `Admin`,
                 role: 'ADMIN',
-                email: '...',
+                email: 'admin2@correo',
+                alias: "admin"
                 
               };
               return done(null, user);

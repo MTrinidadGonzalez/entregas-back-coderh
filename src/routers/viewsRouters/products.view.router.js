@@ -10,17 +10,26 @@ export default class ProductsView extends RouterPadre{
     
             const defaultLimit = 6
             const limit = queryLimit ? parseInt(queryLimit) ?? defaultLimit : defaultLimit
-            
+            const role= req.user.role
+            const isAdmin = role === "ADMIN"
+            const isUserOrPremium = role === "USER" || role === "PREMIUM"
+            const isPremium=  role === "PREMIUM"
+            const isUser= role === "USER"
+           
         
             if(category){
                 const productsfilter= await productsService.getProductsTo("category",category)
-                console.log('ownerproductsfilter', productsfilter.owner)
+               // console.log('ownerproductsfilter', productsfilter.owner)
               
                 res.render('products',{
                     productsfilter,
                     hasPrevPage: false,
                     hasNextPage: false,
                     productsfilter:productsfilter,
+                    isAdmin:isAdmin,
+                    isUserOrPremium:isUserOrPremium,
+                    isPremium:isPremium,
+                    isUser:isUser,
                     css:'products'
                     //cid:cid
                 })
@@ -34,7 +43,7 @@ export default class ProductsView extends RouterPadre{
             const hasPrevPage = currentPage > 1;
             const prevPage = hasPrevPage ? currentPage - 1 : null;
             const nextPage = hasNextPage ? currentPage + 1 : null;
-            console('products owner', products.owner)
+          //console.log('products owner', products.owner)
         res.render('products', 
         {products,
          page:currentPage, 
@@ -42,6 +51,10 @@ export default class ProductsView extends RouterPadre{
          hasPrevPage,
          prevPage,
          nextPage,
+         isAdmin:isAdmin,
+         isUserOrPremium:isUserOrPremium,
+         isPremium:isPremium,
+         isUser:isUser,
          css:'products'
          //cid: cid
          })
@@ -92,10 +105,11 @@ export default class ProductsView extends RouterPadre{
         this.get('/useproducts/:userAlias',["ADMIN", "USER","PREMIUM"], async (req,res)=>{
             const {userAlias}=req.params
             const userDb= await userServices.getUser('alias',userAlias)
+         
             const products= await productsService.getProductsByOwnerEmail(userDb.email)
+      
             const productsJSON = JSON.parse(JSON.stringify(products));
             const role= req.user.role
-
             const isAdmin = role === "ADMIN"
             const isUserOrPremium = role === "USER" || role === "PREMIUM"
             const isPremium=  role === "PREMIUM"

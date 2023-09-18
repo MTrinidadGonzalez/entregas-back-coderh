@@ -23,10 +23,8 @@ const putUser = async (req, res) => {
 
 const deleteUser=async(req,res)=>{
     try{
-        const uid= req.user.id
-        console.log('eliminaría a:',uid)
+        const {uid}= req.params
        // const result= await userServices.deleteUser(uid)
-       // res.send({status:"success", message: `Se eliminó ${result.first_name}`})
         res.send({status:'success'})
         }
         catch(error){

@@ -10,10 +10,16 @@
         <p>Apellido: {{this.last_name}} </p>
         <p>Alias: {{this.alias}} </p>
         <p>Correo: {{this.email}} </p>      
-        <a href="/products/useproducts/{{this.alias}}"> Ver productos de este usuario</a>
-        
+        <a href="/products/useproducts/{{this.alias}}" class="links"> Ver productos de este usuario</a>
+        <button id="btnDeleteUser" data-user-id="{{this._id}}" class="btnUpdateAndDelete">
+        <span class="material-symbols-outlined">
+        delete_sweep
+        </span>
+        Eliminar cuenta</button>
     </div>
     {{/each}}
 
     </div>
 </div>
+
+<script src="/js/users.js"></script>
