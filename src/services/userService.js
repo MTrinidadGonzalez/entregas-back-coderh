@@ -8,6 +8,10 @@ export default class UserServices{
             return this.dao.getUsers()
         }
 
+        getUserById=(uid)=>{
+            return this.dao.getUserById(uid)
+        }
+
         getUser(params,user){
             return this.dao.getUser(params,user)
         }

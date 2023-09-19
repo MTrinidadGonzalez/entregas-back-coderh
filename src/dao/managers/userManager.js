@@ -9,6 +9,10 @@ export default class UserManager{
     getUser=(params,user)=>{
         return userModel.findOne({[params]: user}).lean().populate('cart')
     }
+
+    getUserById=(uid)=>{
+        return userModel.findById(uid)
+    }
     
     updateUserBy = (params, user, newData) => {
         return userModel.findOneAndUpdate({ [params]: user }, newData, { new: true });

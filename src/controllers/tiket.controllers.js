@@ -63,8 +63,13 @@ import { tiketService ,cartsService} from "../services/services.js";
   const operacionTiket=async(req,res)=>{
     const cid= req.body.cid
     const cart= await cartsService.getCartById(cid)
-     const purchaser= req.user.email
-    
+    const purchaser= req.user.email
+    const confirmProductsInCart= cart.products
+   
+    if(confirmProductsInCart.length < 1){
+     res.send({status:'error',error:'carrito vacio'})
+    }
+   else{ 
     const tiket= {
       totalQuantity:cart.totalQuantity,
       amount:cart.totalAmount,
@@ -72,8 +77,10 @@ import { tiketService ,cartsService} from "../services/services.js";
       purchaser: purchaser
     }
     const result = await  tiketService.createTiket(tiket)
- //   await cartsService.clearCart(cid)   
+ //  await cartsService.clearCart(cid)   
     res.send({status:"success"})
+ }
+   
 
   }
 

@@ -1,4 +1,6 @@
 import {userServices} from '../services/services.js'
+import MailingService from '../mailService/mail.service.js'
+import Dtemplates from '../constants/Dtemplates.js'
 
 const getAllUsers= async (req,res)=>{
     try{
@@ -24,7 +26,12 @@ const putUser = async (req, res) => {
 const deleteUser=async(req,res)=>{
     try{
         const {uid}= req.params
-       // const result= await userServices.deleteUser(uid)
+       const user= await userServices.getUserById(uid)
+       const username= `${user.first_name} ${user.last_name}`
+       const userEmail= user.email
+        const mailingService= new MailingService()
+        const sendEmail= await mailingService.sendMail(userEmail, Dtemplates.DELETE_USER,username)
+        const result= await userServices.deleteUser(uid)
         res.send({status:'success'})
         }
         catch(error){

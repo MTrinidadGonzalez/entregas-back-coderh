@@ -8,6 +8,11 @@ import {validatePassword, createHash} from '../utils.js'
 
 const registerUser=async (req,res)=>{
     try{   
+      const userEmail= req.user.email
+      const username= req.user.first_name
+      //const trinigmail= 'mtgprimaria@gmail.com'
+      const mailingService= new MailingService()
+      const result= await mailingService.sendMail(userEmail, Dtemplates.WELCOME_REGISTERED,username)
         res.send({status:'success', payload:req.user})  
        
        }

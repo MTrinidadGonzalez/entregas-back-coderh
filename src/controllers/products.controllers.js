@@ -2,6 +2,9 @@ import {cartsService, productsService} from '../services/services.js'
 import ErrorsService from '../services/ErrorServices/error.services.js'
 import {productsErrorIncompleteValues, productsExistYet} from '../constants/productsErrors.js'
 import {DictionaryEErrorProducts} from '../constants/EErors.js'
+import MailingService from '../mailService/mail.service.js'
+import Dtemplates from '../constants/Dtemplates.js'
+
 
 const getProducts=async(req,res)=>{
     try{
@@ -119,6 +122,12 @@ const postProduct= async(req,res)=>{
 
 const deleteProduct=async(req,res)=>{
     const {pid}= req.params
+    const product= await productsService.getProductById(pid)
+    const email= product.owner
+    const description = product.description
+    const mailingService= new MailingService()
+    const result= await mailingService.sendMail(email, Dtemplates.DELETE_PRODUCT,productDescription)
+
     const deleteProduct= await productsService.deleteProduct(pid)
     res.send({status:'success', message: 'Producto eliminado'})
 }

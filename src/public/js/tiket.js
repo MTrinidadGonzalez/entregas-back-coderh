@@ -1,11 +1,7 @@
 
-console.log('conectado al segundo js')
-
 const btnGenerarTiket= document.getElementById('btnGenerarTiket')
 
-
 btnGenerarTiket.addEventListener('click', ()=>{
-
   try{
           
     const cartId = btnGenerarTiket.getAttribute('data-cart-id')
@@ -20,11 +16,13 @@ btnGenerarTiket.addEventListener('click', ()=>{
    .then(response=> response.json()) 
    .then(data=>{
     if(data.status=== "success"){
-      console.log('success')
+
       window.location.replace(`/${cartId}/purchase`)
     }
     if(data.status ==="error"){
-      console.log(data.error)
+      if(data.error === 'carrito vacio'){
+        alert('El carrito debe tener productos para realizar una compra')
+      }
     }
    })  
    
