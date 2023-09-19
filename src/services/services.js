@@ -19,3 +19,7 @@ import TiketServices from '../services/tikets.service.js'
 import TiketManager from '../dao/managers/tiketManager.js'
 
 export const tiketService= new TiketServices(new TiketManager)
+
+import VentasService from './ventasService.js'
+import VentasManager from '../dao/managers/ventasManager.js'
+export const ventasService= new VentasService(new VentasManager)

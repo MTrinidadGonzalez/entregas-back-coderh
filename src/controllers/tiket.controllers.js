@@ -1,5 +1,59 @@
 import productsModel from "../dao/models/productsModel.js"
-import { tiketService ,cartsService} from "../services/services.js";
+import { tiketService ,cartsService, ventasService} from "../services/services.js";
+import MailingService from '../mailService/mail.service.js'
+import Dtemplates from '../constants/Dtemplates.js'
+
+ 
+const operacionTiket=async(req,res)=>{
+  const cid= req.body.cid
+  const cart= await cartsService.getCartById(cid)
+  const purchaser= req.user.email
+  const username= req.user.name
+  const confirmProductsInCart= cart.products
+
+  const totalAmount= cart.totalAmount
+  const triniemail= 'mtgprimaria@gmail.com'
+
+  if(confirmProductsInCart.length < 1){
+   res.send({status:'error',error:'carrito vacio'})
+  }
+ else{
+  const comprados= req.userTiketInfo.productsComprados
+  
+ //const mailingService= new MailingService()
+  //const sendEmail= await mailingService.sendMail(triniemail, Dtemplates.TIKET_COMPRA,{username,comprados,totalAmount})
+ /* const tiket= {
+    totalQuantity:cart.totalQuantity,
+    amount:cart.totalAmount,
+    code: Math.random().toString(),
+    purchaser: purchaser
+  }
+  const result = await  tiketService.createTiket(tiket)
+  const newSale = {
+    comprador: purchaser,
+    products:comprados, 
+    totalAmount: totalAmount,
+  }
+  const venta= await ventasService.createVenta(newSale)
+ // await cartsService.clearCart(cid) 
+  const tid= await tiketService.getTiket('purchaser', purchaser)
+console.log(tid)
+  //const clearTiket= await tiketService.deleteTiket(tid._id)  
+*/
+  res.send({status:"success"})
+}
+
+}
+
+export default{
+operacionTiket
+}
+
+
+
+
+
+
 /*
   const operacionTiket=async(req,res)=>{
   try{
@@ -59,35 +113,4 @@ import { tiketService ,cartsService} from "../services/services.js";
   }
   */
   
-  
-  const operacionTiket=async(req,res)=>{
-    const cid= req.body.cid
-    const cart= await cartsService.getCartById(cid)
-    const purchaser= req.user.email
-    const confirmProductsInCart= cart.products
-   
-    if(confirmProductsInCart.length < 1){
-     res.send({status:'error',error:'carrito vacio'})
-    }
-   else{ 
-    const tiket= {
-      totalQuantity:cart.totalQuantity,
-      amount:cart.totalAmount,
-      code: Math.random().toString(),
-      purchaser: purchaser
-    }
-    const result = await  tiketService.createTiket(tiket)
- //  await cartsService.clearCart(cid)   
-    res.send({status:"success"})
- }
-   
-
-  }
-
-
-
-
-
-export default{
-  operacionTiket
-}
+ 

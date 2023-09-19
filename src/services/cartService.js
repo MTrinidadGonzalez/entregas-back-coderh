@@ -33,4 +33,9 @@ export default class CartsService{
     clearCart=(cid)=>{
         return this.dao.clearCart(cid)
     }
+    getDetailsOfProductsInCart =(cartProducts)=>{
+        return this.dao.getDetailsOfProductsInCart(cartProducts)
+    }
+
+
 }

@@ -105,4 +105,29 @@ catch(error){
  } 
 
 
+ getDetailsOfProductsInCart = async (cartProducts) => {
+  try {
+    const productDetails = [];
+
+    for (const cartProduct of cartProducts) {
+      const product = await productsModel.findById(cartProduct.productId)
+      if (product) {
+        productDetails.push({
+          productId: product._id,
+          description: product.description,
+          color: product.color,
+          talle: product.talle,
+          price: product.price,
+          quantity: cartProduct.quantity, 
+        });
+      }
+    }
+
+    return productDetails;
+  } catch (error) {
+    console.log(error)
+  }
+};
+
+
 }

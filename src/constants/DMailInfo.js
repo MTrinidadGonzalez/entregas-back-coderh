@@ -2,15 +2,19 @@ import __dirname from  '../utils.js'
 
 export default {
     restorePasw:{
-        subject: "Restaurar contraseña"
+        subject: "Restaurar contraseña E-commerceCoderBack Trini"
     },
     registerTemplate:{
-        subject: "Bienvenido nuevo usuario registrado"
+        subject: "Bienvenido nuevo usuario registrado E-commerceCoderBack Trini"
     },
     deleteUserTemplate:{
-        subject: "Eliminación de cuenta"
+        subject: "Eliminación de cuenta  E-commerceCoderBack Trini"
     },
     deleteproductTemplate:{
-        subject: "Eliminación de cuenta"
+        subject: "Eliminación de producto  E-commerceCoderBack Trini"
+    },
+    tiketDecompraTemplate:{
+        subject: "Orden de compra E-commerceCoderBack Trini"
     }
+
 }
