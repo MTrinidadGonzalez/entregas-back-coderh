@@ -1,0 +1,14 @@
+<div>
+    <h1>Modificar datos de usuario</h1>
+    <form id="updateDataUser">
+         <input type="text" name="first_name" placeholder="Nombre:{{user.first_name}}" >
+        <input type="text" name="last_name" placeholder="Apellido: {{user.last_name}}" > 
+        <p>El alias por el cual quieres que otros usuarios te encuentren:</p>
+        <input type="text" name="alias" placeholder="Alias:{{user.alias}}"  >
+        <input type="text" name="email" placeholder="Correo: {{user.email}}" required>
+        <input type="hidden" name="userId" id="userId" value="{{user.id}}">
+        <input type="submit" value="Modificar">
+    </form>
+</div>
+
+<script src="/js/updateDatauser.js"></script>

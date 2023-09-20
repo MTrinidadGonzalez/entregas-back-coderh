@@ -13,11 +13,18 @@ const getAllUsers= async (req,res)=>{
 }
 const putUser = async (req, res) => {
     try {
-       const {id} = req.user
-        const newuser = req.body
-        console.log('me llega el new user peticion', newuser)
-        const user = await userServices.updateUser(id,newuser)
-        res.send({ status: "success", payload: user })
+        const uid= req.body.userId
+        const userDb= await userServices.getUserById(uid)
+        console.log(req.body)
+        const newDataUser = {
+            first_name: req.body.first_name || userDb.first_name,
+            last_name: req.body.last_name || userDb.last_name,
+            alias: req.body.alias || userDb.alias,
+            email: req.body.email || userDb.email,
+           
+        }
+        const user = await userServices.updateUser(uid,newDataUser)
+        res.send({ status: "success" })
     } catch (error) {
         console.log(error)
     }

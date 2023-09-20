@@ -1,4 +1,4 @@
-import {userServices} from '../services/services.js'
+import {tiketService, userServices} from '../services/services.js'
 import usersControllers from '../controllers/users.controllers.js'
 import RouterPadre from './router.js'
 import {documentsUploader} from '../middlewares/multer.middleware.js'

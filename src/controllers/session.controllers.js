@@ -44,7 +44,7 @@ const loginUser=async (req,res)=>{
         res.cookie('authToken',accessToken, {
         maxAge:1000*60*60*24,
       //  httpOnly:true,
-       // sameSite:"none"
+        sameSite:"none"
         })
         res.redirect('/home')
     }
@@ -105,7 +105,16 @@ catch(error){
 }
 }
 
+const cerrarsession=async(req,res)=>{
+ try{
+  //console.log(req.user)
+  res.clearCookie('authToken').send({status:"success"})
 
+ }
+ catch(error){
+  console.log(error)
+ }
+}
 
 export default{
     registerUser,
@@ -114,5 +123,6 @@ export default{
     convertToPremium,
     revertPremium,
     restoreRequest,
-    newPswRestore
+    newPswRestore,
+    cerrarsession
 }

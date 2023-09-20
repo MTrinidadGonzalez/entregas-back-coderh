@@ -39,7 +39,19 @@
         <button class="btnCard"  data-product-id="{{this._id}}" >Add to cart</button>
         {{/if}}
         {{#if ../isAdmin}}
-        <button class="btnDeleteProduct"  data-product-id="{{this._id}}" >Eliminar producto</button>
+         <a href="/products/updateProduct/{{this._id}}" class="btnUpdateAndDelete">
+        <span class="material-symbols-outlined">
+        edit
+        </span>
+        Modificar datos
+        </a>
+
+
+        <button class="btnDeleteProduct btnUpdateAndDelete"  data-product-id="{{this._id}}" >
+         <span class="material-symbols-outlined">
+        delete_sweep
+        </span>
+        Eliminar producto</button>
         {{/if}}
     </div>
     {{/each}}
@@ -81,7 +93,18 @@
         <button class="btnCard"  data-product-id="{{this._id}}" >Add to cart</button>
         {{/if}}
         {{#if ../isAdmin}}
-        <button class="btnDeleteProduct"  data-product-id="{{this._id}}" >Eliminar producto</button>
+       <a href="/products/updateProduct/{{this._id}}" class="btnUpdateAndDelete">
+        <span class="material-symbols-outlined">
+        edit
+        </span>
+        Modificar datos
+        </a>
+
+        <button class="btnDeleteProduc btnUpdateAndDelete"  data-product-id="{{this._id}}" >
+        <span class="material-symbols-outlined">
+        delete_sweep
+        </span>
+        Eliminar producto</button>
         {{/if}}
     </div>
 {{/each}}

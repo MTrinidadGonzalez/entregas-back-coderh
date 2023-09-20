@@ -1,16 +1,13 @@
-console.log('todo ok')
+const updateDataUser= document.getElementById('updateDataUser')
 
-
-const formUpdateProduct= document.getElementById('formUpdateProduct')
-
-formUpdateProduct.addEventListener('submit', (e)=>{
+updateDataUser.addEventListener('submit', (e)=>{
     e.preventDefault()
    
-    const data= new FormData(formUpdateProduct)
+    const data= new FormData(updateDataUser)
     const obj= {}
     data.forEach((value, key)=>obj[key]=value)
 
-    fetch('/api/products/updateProduct',
+    fetch('/api/users',
     {   method: 'PUT',
         body: JSON.stringify(obj),
         headers:{
@@ -22,10 +19,10 @@ formUpdateProduct.addEventListener('submit', (e)=>{
     .then(response => response.json())
     .then(result => {
         if (result.status === "success") {
-            alert("Producto modificado")
-            formNewProduct.reset()
+            alert("Datos modificados")
+            updateDataUser.reset()
         } else {
-            console.log("Error al crear el producto");
+            alert("Error del sevidor, vuelve a intntarlo más tarde");
         }
     })
 })

@@ -41,7 +41,8 @@ export default class ProfilesViewRouter extends RouterPadre{
             name:req.user.name,
             email:req.user.email,
             role:req.user.role,
-            imgProfile: imgProfile
+            imgProfile: imgProfile,
+            id: userDb._id
         }
         res.render('userData',{
             user:user

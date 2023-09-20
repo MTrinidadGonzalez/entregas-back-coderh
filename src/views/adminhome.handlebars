@@ -1,7 +1,8 @@
-<h1>Admin home</h1>
+<h1>Admin Home</h1>
 <div class="navInicio">
     <h2><a href="/products" class="navInicioItem">Productos</a></h2>
     <h2><a href="/users/users" class="navInicioItem">Usuarios</a></h2>
+    <h2 id="btnCerrarSession" class="navInicioItem">Cerrar sesion</h2>
 </div>
 
 <div class="productsContainer">
@@ -12,7 +13,17 @@
         <p>Description: {{this.description}} </p>
         <p>Price: $ {{this.price}} </p>
         <p>Dueño:{{this.owner}} <a href=""></a> </p>
-        <button class="btnDeleteProduct"  data-product-id="{{this._id}}" >Eliminar producto</button>
+        <a href="/products/updateProduct/{{this._id}}" class="btnUpdateAndDelete">
+        <span class="material-symbols-outlined">
+        edit
+        </span>
+        Modificar datos
+        </a>
+        <button class="btnDeleteProduct btnUpdateAndDelete"  data-product-id="{{this._id}}" >
+         <span class="material-symbols-outlined">
+        delete_sweep
+        </span>
+        Eliminar producto</button>
     </div>
     {{/each}}
 </div>

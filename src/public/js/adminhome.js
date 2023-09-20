@@ -26,9 +26,27 @@
               })
               .catch(error => {
                 console.error('Error:', error);
-              });
+              })
           }
         }
-      });
-    });
-  });
+      })
+    })
+  })
+
+  const btnCerrarSession= document.getElementById('btnCerrarSession')
+  btnCerrarSession.addEventListener('click', ()=>{
+    try{
+      fetch('/api/session/cerrarsession', {
+        method: 'GET',
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === "success") {
+            window.location.replace('/')
+          }
+        })
+    }
+    catch(error){
+      console.log(error)
+    }
+  })

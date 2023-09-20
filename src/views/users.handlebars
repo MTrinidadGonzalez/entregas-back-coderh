@@ -11,12 +11,24 @@
         <p>Alias: {{this.alias}} </p>
         <p>Correo: {{this.email}} </p>      
         <a href="/products/useproducts/{{this.alias}}" class="links"> Ver productos de este usuario</a>
+       
+        {{#if ../isAdmin}}
+       <a href="/users/updateuser/{{this._id}}" class="btnUpdateAndDelete">
+        <span class="material-symbols-outlined">
+        edit
+        </span>
+        Modificar datos
+        </a>
+
         <button id="btnDeleteUser" data-user-id="{{this._id}}" class="btnUpdateAndDelete">
         <span class="material-symbols-outlined">
         delete_sweep
         </span>
         Eliminar cuenta</button>
+         {{/if}}
     </div>
+       
+     
     {{/each}}
 
     </div>

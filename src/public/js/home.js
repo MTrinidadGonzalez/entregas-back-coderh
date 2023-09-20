@@ -51,24 +51,52 @@ btnCards.forEach((button) => {
 
 
 const btnRevertPremium= document.getElementById('btnRevertPremium')
-btnRevertPremium.addEventListener('click',()=>{
-  const userId = btnRevertPremium.getAttribute('data-user-id');
- fetch('/api/session/revertPremium',
- {
-   method: 'POST',
-   headers: {
-       'Content-Type':'application/json'
-   },
-   body: JSON.stringify({ userId })
- })
- .then(response=> response.json())
- .then(data=> {
-   if(data.status === "success"){
-    window.location.replace('/login')
-   }
- })
+if(btnRevertPremium){
+  btnRevertPremium.addEventListener('click',()=>{
+    const userId = btnRevertPremium.getAttribute('data-user-id');
+   fetch('/api/session/revertPremium',
+   {
+     method: 'POST',
+     headers: {
+         'Content-Type':'application/json'
+     },
+     body: JSON.stringify({ userId })
+   })
+   .then(response=> response.json())
+   .then(data=> {
+     if(data.status === "success"){
+      window.location.replace('/login')
+     }
+   })
+  })
+}
 
+
+
+
+const btnCerrarSession= document.getElementById('btnCerrarSession')
+btnCerrarSession.addEventListener('click', ()=>{
+  try{
+    fetch('/api/session/cerrarsession', {
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === "success") {
+          window.location.replace('/')
+        }
+      })
+  }
+  catch(error){
+    console.log(error)
+  }
 })
+
+
+
+
+
+
 /*
 const btnGetPremium= document.getElementById('btnGetPremium')
 if(btnGetPremium){

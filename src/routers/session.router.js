@@ -23,5 +23,7 @@ export default class SessionRouter extends RouterPadre{
 
         this.post('/newPswRestore',["PUBLIC"], sessionControllers.newPswRestore )
 
+        this.get('/cerrarsession', ["ADMIN", "USER","PREMIUM"],sessionControllers.cerrarsession)
+
     }//cierre del init
 }//cierre de clase
