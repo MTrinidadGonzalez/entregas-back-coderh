@@ -17,5 +17,8 @@ export default class TiketServices{
         return this.dao.deleteTiket(tid)
     }
 
+    uptateTiketStatus=(tid, newStatus)=>{
+        return this.dao.uptateTiketStatus(tid,newStatus)
+    }
 
 }

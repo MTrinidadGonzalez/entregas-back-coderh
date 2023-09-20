@@ -20,7 +20,9 @@ export const generateTiketsData= async(req,res,next)=>{
                   combinedProduct.price = productsColection[i].price;
                   combinedProduct.img = productsColection[i].img
                   combinedProduct.category= productsColection[i].category
-                  
+                  combinedProduct.owner= productsColection[i].owner
+                  combinedProduct.talle= productsColection[i].talle
+                  combinedProduct.color= productsColection[i].color
                 }
                 listFinalDeProducts.push(combinedProduct);
               }  

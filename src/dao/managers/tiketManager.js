@@ -12,5 +12,7 @@ export default class TiketManager{
     deleteTiket=(tid)=>{
         return tiketModel.findByIdAndDelete(tid)
     }
-
+    uptateTiketStatus=(tid, newStatus)=>{
+        return tiketModel.findByIdAndUpdate(tid, { status: newStatus }, { new: true })
+    }
 }

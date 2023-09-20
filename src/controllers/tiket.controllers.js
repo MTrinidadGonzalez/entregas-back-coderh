@@ -19,10 +19,9 @@ const operacionTiket=async(req,res)=>{
   }
  else{
   const comprados= req.userTiketInfo.productsComprados
-  
- //const mailingService= new MailingService()
-  //const sendEmail= await mailingService.sendMail(triniemail, Dtemplates.TIKET_COMPRA,{username,comprados,totalAmount})
- /* const tiket= {
+  const mailingService= new MailingService()
+  const sendEmail= await mailingService.sendMail([triniemail,purchaser], Dtemplates.TIKET_COMPRA,{username,comprados,totalAmount})
+   const tiket= {
     totalQuantity:cart.totalQuantity,
     amount:cart.totalAmount,
     code: Math.random().toString(),
@@ -33,25 +32,34 @@ const operacionTiket=async(req,res)=>{
     comprador: purchaser,
     products:comprados, 
     totalAmount: totalAmount,
+    
   }
-  const venta= await ventasService.createVenta(newSale)
- // await cartsService.clearCart(cid) 
-  const tid= await tiketService.getTiket('purchaser', purchaser)
-console.log(tid)
-  //const clearTiket= await tiketService.deleteTiket(tid._id)  
-*/
+  const venta= await ventasService.createVenta(newSale) 
+  const tiketDb= await tiketService.getTiket('purchaser', purchaser)
+  const tid= tiketDb._id
+  const payload={
+    totalQuantity:tiketDb.totalQuantity,
+    amount:tiket.amount
+  }
+  res.send({status:"success", tid:tid, cid:cid, payload:payload})
+}
+
+}
+
+const clearTiketAndCart= async(req,res)=>{
+  const {cid, tid}= req.params
+  console.log('cid',cid)
+  console.log('tid', tid)
+  await cartsService.clearCart(cid) 
+  //await tiketService.uptateTiketStatus(tid,"false")
+  await tiketService.deleteTiket(tid)
   res.send({status:"success"})
 }
 
-}
-
 export default{
-operacionTiket
+operacionTiket,
+clearTiketAndCart
 }
-
-
-
-
 
 
 /*

@@ -15,15 +15,39 @@ btnGenerarTiket.addEventListener('click', ()=>{
    })
    .then(response=> response.json()) 
    .then(data=>{
-    if(data.status=== "success"){
-
-      window.location.replace(`/${cartId}/purchase`)
-    }
     if(data.status ==="error"){
       if(data.error === 'carrito vacio'){
         alert('El carrito debe tener productos para realizar una compra')
       }
     }
+    if(data.status=== "success"){
+      //window.location.replace(`/${cartId}/purchase`)
+      const payload= data.payload
+      const userConfirmed = window.confirm(
+        `Compra realizada. 
+        -Cantidad total de productos: ${payload.totalQuantity}
+        -Monto total:$ ${payload.amount}.
+        Te enviarémos un correo con los detalles de la compra!
+        Muchas gracias por confiar en nosotros.`
+       )
+      const cid= data.cid
+      const tid= data.tid
+      if(userConfirmed){
+        fetch(`/api/cart/clearTiketAndCart/${cid}/${tid}`,{
+          method: 'GET',
+      })
+      .then(response=> response.json())
+      .then(data=>{
+        if(data.status === 'success'){
+          alert('Orden de compra realizada')
+          window.location.replace('/home')
+        }
+      })
+
+      }
+     
+    }
+   
    })  
    
   }

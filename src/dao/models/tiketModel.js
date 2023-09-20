@@ -8,8 +8,12 @@ const schema= new mongoose.Schema({
     totalQuantity: Number,
     amount:Number,
     code:String,
-    purchaser: String
-
+    purchaser: String,
+    status:{
+        type:String,
+        enum:["false", "true"],
+        default:"true"
+    }
 }, {timestamps:{createdAt: 'created_at', updatedAt: 'updated_at'}})
 
 const tiketModel= mongoose.model(collection,schema)
