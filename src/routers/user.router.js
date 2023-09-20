@@ -15,6 +15,6 @@ export default class UserRouter extends RouterPadre{
         
         this.post('/postPremiumDocuments', ["USER","ADMIN","PREMIUM"],documentsUploader,usersControllers.postPremiumDocuments)
         this.post('/postImgProfile', ["USER","ADMIN","PREMIUM"],imgProfileUploader,usersControllers.postImgProfile)
-        
+        this.post('/deleteInactiveUser', ["PUBLIC"], usersControllers.deleteInactiveUser)
     }//cierre del init
 }//cierre de la clase

@@ -15,6 +15,9 @@ export default {
     },
     tiketDecompraTemplate:{
         subject: "Orden de compra E-commerceCoderBack Trini"
+    },
+    cierreDeCuentaPorInactividad:{
+        subject: "Cierre de cuenta por inactividad E-commerceCoderBack Trini"
     }
 
 }

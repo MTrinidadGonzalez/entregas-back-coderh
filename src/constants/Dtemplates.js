@@ -3,5 +3,6 @@ export default {
     WELCOME_REGISTERED: 'registerTemplate',
     DELETE_USER: 'deleteUserTemplate',
     DELETE_PRODUCT: 'deleteproductTemplate',
-    TIKET_COMPRA: 'tiketDecompraTemplate'
+    TIKET_COMPRA: 'tiketDecompraTemplate',
+    CIERRE_CUENTA_INACTIVA: 'cierreDeCuentaPorInactividad'
 }

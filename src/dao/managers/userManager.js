@@ -22,7 +22,13 @@ export default class UserManager{
     uptateUserRole=(userId, newRole)=>{
         return userModel.findByIdAndUpdate(userId, { role: newRole }, { new: true })
     }
+    updateUserLastConection=(userId, newConection)=>{
+        return userModel.findByIdAndUpdate(userId, { last_conection: newConection }, { new: true })
+    }
 
+    updateUserExpiration=(userId, newExpiration)=>{
+        return userModel.findByIdAndUpdate(userId, { expiration: newExpiration }, { new: true })
+    }
     createUser=(user)=>{
         return userModel.create(user)
     }

@@ -45,6 +45,32 @@ const deleteUser=async(req,res)=>{
             console.log(error)
         }
 }
+/*
+Para poner en mongo cuando tenga ngrok
+exports = async function() {
+ const today= new Date()
+ const collection= context.services.get('ClusterTrinidad').db('ecommerce').collection('users')
+ const result = await collection.find({expiration:{'$lte': today} }).toArray()
+ //console.log(JSON.stringify(result))
+const reponse = context.http.post({
+    url: url de ngrok o la del hosteo /api/users/deleteInactiveUser,
+    body: JSON.stringify(result),
+    headers:{
+        'Content-Type': ['application/json']
+    }
+})
+ return response
+};
+
+ */
+const deleteInactiveUser= async(req,res)=>{
+    const user= req.body
+    console.log(user)
+    const mailingService= new MailingService()
+    const sendEmail= await mailingService.sendMail(user.email, Dtemplates.CIERRE_CUENTA_INACTIVA)
+    const result= await userServices.deleteUser(user._id)
+    res.send({status:'success', message:'Cuenta eliminada'})
+}
 
  const getUser= async(req,res)=>{
     try{
@@ -100,5 +126,6 @@ export default{
     deleteUser,
     getUser,
     postPremiumDocuments,
-    postImgProfile
+    postImgProfile,
+    deleteInactiveUser
 }

@@ -20,6 +20,13 @@ export default class UserServices{
             return this.dao.uptateUserRole(userId,newRole)
         }
 
+        updateUserLastConection=(userId, newConection)=>{
+            return this.dao.updateUserLastConection(userId,newConection)
+        }
+        updateUserExpiration=(userId, newExpiration)=>{
+            return this.dao.updateUserExpiration(userId,newExpiration)
+        }
+
         createUser(user){
             return this.dao.createUser(user)
         }

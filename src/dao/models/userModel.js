@@ -41,7 +41,8 @@ const schema= new mongoose.Schema({
             reference: String
         }
     ],
-    las_conection:String
+    last_conection:Date,
+    expiration: Date
 })
       
 const userModel= mongoose.model(collection, schema)
