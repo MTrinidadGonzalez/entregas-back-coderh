@@ -12,9 +12,12 @@ const schema= new mongoose.Schema({
             description:String,
             quantity: Number,
             price:Number,
-            owner:String
+            owner:String,
+            talle:String,
+            color:String
         }
     ],
+    totalQuantity:String,
     totalAmount:Number,
     fecha: Date
 
