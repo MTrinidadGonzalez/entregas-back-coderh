@@ -1,16 +1,16 @@
 import RouterPadre from '../router.js'
-import {cartsService, productsService,tiketService} from '../../services/services.js'
+import {cartsService, productsService,tiketService,userServices} from '../../services/services.js'
 import productsModel from '../../dao/models/productsModel.js'
 import {generateTiketsData} from '../../middlewares/tiket.middleware.js'
 
 
 export default class CartView extends RouterPadre{
     init(){
-        this.get('/cart', ["USER", "PREMIUM"], async (req,res)=>{
+      /*  this.get('/cart', ["USER", "PREMIUM"], async (req,res)=>{
            // console.log(`el dueño de este carrito es ${req.user.name}`)
             const user= req.user
             const cid= req.user.cart[0]._id
-         
+            const userDb= await userServices.getUserById(user.id)
             const cart= await cartsService.getCartById(cid)
             const products=cart.products
             
@@ -39,7 +39,44 @@ export default class CartView extends RouterPadre{
                 css:'cart',
                 listFinalDeProducts:listFinalDeProducts
             })
+        })*/
+
+        this.get('/cart', ["USER", "PREMIUM"], async (req,res)=>{
+          // console.log(`el dueño de este carrito es ${req.user.name}`)
+          const cart= req.user.cart 
+          const cid= cart[0]._id
+          //const clear= await cartsService.clearCart(cid)
+         const cartDb= await cartsService.getCartById(cid)
+        // console.log(cartDb.products)
+        let listFinalDeProducts=[]
+        const integro= cartDb.products.map(p=>{
+          const obj={
+            id: p.product._id,
+            description: p.product.description,
+            price: p.product.price,
+            img: p.product.img,
+            category: p.product.category,
+            talle: p.product.talle,
+            color:p.product.color,
+            amount: p.amount,
+            quantity: p.quantity
+          }
+         // console.log(p.quantity, p.product.description)
+         listFinalDeProducts.push(obj)
         })
+        //console.log('listafinalproducts', listFinalDeProducts)
+         
+          res.render('cart',{
+            cid:cid,
+            listFinalDeProducts:listFinalDeProducts,
+            cart:cart
+          })
+       })
+
+
+
+
+
 
         this.get('/:cid/purchase', ["ADMIN",'USER',"PREMIUM"], generateTiketsData, async (req, res) => {
             const email= req.user.email
@@ -57,6 +94,8 @@ export default class CartView extends RouterPadre{
               tiket:tiket
             })
               });
+
+             
 
     }//cierre del init
 }

@@ -26,7 +26,7 @@ const schema= new mongoose.Schema({
     },
     owner: {
         type: String,
-        default: 'ADMIN'
+        default: 'admin2@correo'
     },
     talle:{
         type:String,

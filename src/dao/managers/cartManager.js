@@ -7,16 +7,16 @@ const productsService= new ProductsManager()
 
 export default class CartsManager{
 
-createCart=()=>{
-    return cartModel.create({products:[]})
+createCart=(cart)=>{
+    return cartModel.create(cart)
 }
 
 getCarts=()=>{
-    return cartModel.find().lean().populate('products')
+    return cartModel.find().lean()
 }
 
 getCartById=(cid)=>{
-    return cartModel.findById(cid).lean().populate('products.product')
+    return cartModel.findById(cid).populate('products.product')
 }
 
 deleteCart=(cid)=>{
@@ -71,14 +71,16 @@ addProductToCart = async (cid, product) => {
   else{
     //console.log('el producto no estaba en el carrito')
     const productadd={
-      _id: new mongoose.Types.ObjectId(product.pid),
+     // product: product.id,
+      product: new mongoose.Types.ObjectId(product.pid),
+      //_id: new mongoose.Types.ObjectId(product.pid),
       amount: newproduct.price * product.productQuantity,
       quantity: product.productQuantity
     }
     productsList.push(productadd)
     cart.totalAmount = cart.totalAmount + productadd.amount
     cart.totalQuantity = cart.totalQuantity + productadd.quantity
-    console.log('el producto se agrego por primera vez me queda totalquantity', cart.totalQuantity, 'totalamount:', cart.totalAmount )
+  //  console.log('el producto se agrego por primera vez me queda totalquantity', cart.totalQuantity, 'totalamount:', cart.totalAmount )
   }
     
     await cart.save()

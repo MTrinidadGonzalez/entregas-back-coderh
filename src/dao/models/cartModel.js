@@ -26,9 +26,14 @@ const schema= new mongoose.Schema({
         totalQuantity:{
           type:Number,
           default: 0
-        }
+        },
+        owner:String
       
 },{timestamps:{createdAt: 'created_at', updatedAt: 'updated_at'}})
+/*
+schema.pre('find', function(){
+  this.this.populate('products.product')
+})*/
 
 const cartModel= mongoose.model(collection,schema)
 export default cartModel;

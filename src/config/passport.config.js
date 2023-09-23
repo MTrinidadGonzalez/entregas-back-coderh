@@ -35,8 +35,11 @@ const passportStrategies=()=>{
           
         else{
           const hashedPassword = await createHash(password);
-          const cart= await cartsService.createCart()
-          
+          const cart={
+            owner:email
+          }
+          const createdCart= await cartsService.createCart(cart)
+    
           const user = {
             first_name,
             last_name,
@@ -44,7 +47,7 @@ const passportStrategies=()=>{
             email,
             password: hashedPassword,
             role,
-            cart:  cart._id 
+            cart:  createdCart._id 
           };
           const newUser= RegisterUserDTO.getFrom(user)
           const result = await userServices.createUser(newUser);
@@ -65,8 +68,9 @@ const passportStrategies=()=>{
           { usernameField: 'email' },
           async (email, password, done) => {
             if ((email === admin2) && password === adminPassword) {
+              const userAdmin =await userServices.getUser("email", email)
               const user = {
-                id: 0,
+                id: userAdmin._id,
                 name: `Admin`,
                 role: 'ADMIN',
                 email: 'admin2@correo',

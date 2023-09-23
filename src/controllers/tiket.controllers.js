@@ -32,7 +32,7 @@ const operacionTiket=async(req,res)=>{
     comprador: purchaser,
     products:comprados, 
     totalAmount: totalAmount,
-    
+    fecha: new Date()
   }
   const venta= await ventasService.createVenta(newSale) 
   const tiketDb= await tiketService.getTiket('purchaser', purchaser)

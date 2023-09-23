@@ -1,0 +1,27 @@
+   <h2>Ventas</h2>
+<div class="ventascontainer">
+
+    {{#if ventas}}
+
+    {{#each ventas}}
+<div class="ventaDiv">
+   <div class="ventaSubDiv">
+     <p>Fecha: {{this.fecha}} </p>
+    <p>Comprador: {{this.comprador}}</p>
+    <p>Monto total de la compra: ${{this.totalAmount}} </p>
+ 
+   </div>
+      {{#each this.products}}
+          <div class="ventaSubDiv">
+            <p>-Detalle de producto:</p>
+            <p>Descripción: {{ this.description}}</p>
+            <p>Cantidad de unidades: {{this.quantity}} </p>
+            <p>Precio:$ {{this.price}} </p>
+            <p>Vendedor: {{this.owner}} </p>
+          </div>
+        {{/each}}
+    </div>
+    {{/each}}
+    {{/if}}
+
+</div>

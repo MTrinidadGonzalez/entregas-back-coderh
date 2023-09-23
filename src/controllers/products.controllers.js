@@ -34,13 +34,15 @@ const addProductCart=async (req,res)=>{
     try{
         const cid= req.user.cart[0]._id
         const username= req.user.name
-        const pid= req.body.productId       
+        const pid= req.body.productId  
+          
         const productQuantity= req.body.spamQuantity
         const product= {
             pid:pid,
             productQuantity:productQuantity
         }         
         const productdB= await productsService.getProductById(pid)
+     //   console.log('productDb productcontroler addproduc:',productdB)
         const productOwner= productdB.owner
         const email= req.user.email
         if(productOwner === email){

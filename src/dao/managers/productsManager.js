@@ -4,6 +4,9 @@ export default class ProductsManager{
     getProducts= ()=>{
         return productsModel.find().lean()
     }
+    getListProductsToId=(productsIds)=>{
+        return productsModel.find({ _id: { $in: productsIds } })
+    }
     getProductById=(pid)=>{
         return productsModel.findById(pid)
     }

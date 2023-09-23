@@ -25,22 +25,28 @@ const registerUser=async (req,res)=>{
 
 const loginUser=async (req,res)=>{
     try{
-      const role= req.user.role
-      const uid= req.user.id
-        const accessToken = generateToken(req.user);
-        const connectionDate= new Date()
-        const expirationDate = new Date(connectionDate)
-        expirationDate.setDate(connectionDate.getDate() +30 )
-      
-        const user= await userServices.updateUserLastConection(uid,connectionDate)
-        const exp= await userServices.updateUserExpiration(uid,expirationDate)
-
-        res.cookie('authToken',accessToken, {
-            maxAge:1000*60*60*24,
-           // httpOnly:true,
-            sameSite:"none"
-        }).send({status:'success', userrole:role})
-    }
+      if(req.error === 'Correo no encontrado' || req.error === 'Contraseña inválida'){
+        console.log(req.error)
+        res.send({status:'error', error: req.error})
+      }
+      else{
+        const role= req.user.role
+        const uid= req.user.id
+          const accessToken = generateToken(req.user);
+          const connectionDate= new Date()
+          const expirationDate = new Date(connectionDate)
+          expirationDate.setDate(connectionDate.getDate() +30 )
+        
+          const user= await userServices.updateUserLastConection(uid,connectionDate)
+          const exp= await userServices.updateUserExpiration(uid,expirationDate)
+  
+          res.cookie('authToken',accessToken, {
+              maxAge:1000*60*60*24,
+             // httpOnly:true,
+              sameSite:"none"
+          }).send({status:'success', userrole:role})
+      }
+      }
     catch(error){
        console.log('Error catch login:', error)
     }

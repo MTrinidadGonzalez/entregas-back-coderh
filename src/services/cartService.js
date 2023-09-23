@@ -4,8 +4,8 @@ export default class CartsService{
         this.dao= dao
     }
 
-    createCart=()=>{
-        return this.dao.createCart()
+    createCart=(cart)=>{
+        return this.dao.createCart(cart)
     }
      //OCION 2 PARA USAR EL POPULATE AL HACER FIND   
     getCarts=()=>{

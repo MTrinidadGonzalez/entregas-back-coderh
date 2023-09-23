@@ -45,4 +45,7 @@
 .spamUserNotFound{
     color: red;
     font-size: larger;
+    background-color:  rgba(239, 235, 235, 0.745);
+    padding: 3px;
+    margin: 3px;
 }

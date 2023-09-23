@@ -17,15 +17,16 @@ import EmailRouter from './routers/email.router.js'
 import DocumentsRouter from './routers/documents.router.js'
 import {profilesViewRouter} from './services/viewsServices/viewsServices.js'
 import UserViewRouter from './routers/viewsRouters/user.view.router.js'
-import errorHandler from './middlewares/errorMiddlewares.js'
-import __dirname from './utils.js'
+import VentasViewRouter from './routers/viewsRouters/ventas.view.router.js'
+
 import {loginAndRegisterview} from './services/viewsServices/viewsServices.js'
 import {productsView} from './services/viewsServices/viewsServices.js'
 import {cartView} from './services/viewsServices/viewsServices.js'
 import {homeViewRouter} from './services/viewsServices/viewsServices.js'
 import { Server } from 'socket.io'
 import attachLogger from './middlewares/logger.middleware.js'
-
+import errorHandler from './middlewares/errorMiddlewares.js'
+import __dirname from './utils.js'
 
 const app= express()
 
@@ -88,7 +89,8 @@ app.use('/', homeViewRouter.getRouter())
 app.use('/', profilesViewRouter.getRouter())
 const useViewRouter= new UserViewRouter()
 app.use('/users', useViewRouter.getRouter())
-
+const ventasViewRouter= new  VentasViewRouter()
+app.use('/ventas', ventasViewRouter.getRouter())
 app.use('/smokingsproducts', moksRouter)
 
 app.use(errorHandler)

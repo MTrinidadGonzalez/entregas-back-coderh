@@ -15,7 +15,8 @@ const schema= new mongoose.Schema({
             owner:String
         }
     ],
-    totalAmount:Number
+    totalAmount:Number,
+    fecha: Date
 
 }, {timestamps:{createdAt: 'created_at', updatedAt: 'updated_at'}})
 
