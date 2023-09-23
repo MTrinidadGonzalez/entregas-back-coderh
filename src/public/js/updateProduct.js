@@ -1,5 +1,3 @@
-console.log('todo ok')
-
 
 const formUpdateProduct= document.getElementById('formUpdateProduct')
 
@@ -23,7 +21,7 @@ formUpdateProduct.addEventListener('submit', (e)=>{
     .then(result => {
         if (result.status === "success") {
             alert("Producto modificado")
-            formNewProduct.reset()
+            formUpdateProduct.reset()
         } else {
             console.log("Error al crear el producto");
         }

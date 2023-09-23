@@ -80,11 +80,10 @@ addProductToCart = async (cid, product) => {
     productsList.push(productadd)
     cart.totalAmount = cart.totalAmount + productadd.amount
     cart.totalQuantity = cart.totalQuantity + productadd.quantity
-  //  console.log('el producto se agrego por primera vez me queda totalquantity', cart.totalQuantity, 'totalamount:', cart.totalAmount )
   }
-    
+ 
     await cart.save()
-    //console.log('como queda el cart luego de el prodcuto agregado', cart)
+  
     return cart
   };
 

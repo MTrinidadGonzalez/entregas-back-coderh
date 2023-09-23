@@ -66,7 +66,9 @@ export default class CartView extends RouterPadre{
             })
               });
 
-             
+             this.get('/soketCart', ["USER","PREMIUM"], async(req,res)=>{
+              res.render('pruebasoket')
+             })
 
     }//cierre del init
 }

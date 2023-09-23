@@ -3,51 +3,6 @@ import { tiketService ,cartsService, ventasService} from "../services/services.j
 import MailingService from '../mailService/mail.service.js'
 import Dtemplates from '../constants/Dtemplates.js'
 
- /*
-const operacionTiket=async(req,res)=>{
-  const cid= req.body.cid
-  const cart= await cartsService.getCartById(cid)
-  const purchaser= req.user.email
-  const username= req.user.name
-  const confirmProductsInCart= cart.products
-
-  const totalAmount= cart.totalAmount
-  const triniemail= 'mtgprimaria@gmail.com'
-
-  if(confirmProductsInCart.length < 1){
-   res.send({status:'error',error:'carrito vacio'})
-  }
- else{
-  const comprados= req.userTiketInfo.productsComprados
- // const mailingService= new MailingService()
- // const sendEmail= await mailingService.sendMail([triniemail,purchaser], Dtemplates.TIKET_COMPRA,{username,comprados,totalAmount})
-   const tiket= {
-    totalQuantity:cart.totalQuantity,
-    amount:cart.totalAmount,
-    code: Math.random().toString(),
-    purchaser: purchaser
-  }
-  
-  const result = await  tiketService.createTiket(tiket)
-  const newSale = {
-    comprador: purchaser,
-    products:comprados, 
-    totalAmount: totalAmount,
-    fecha: new Date()
-  }
-
-  const venta= await ventasService.createVenta(newSale) 
-  const tiketDb= await tiketService.getTiket('purchaser', purchaser)
-  const tid= tiketDb._id
-  const payload={
-    totalQuantity:tiketDb.totalQuantity,
-    amount:tiket.amount
-  }
-  res.send({status:"success", tid:tid, cid:cid, payload:payload})
-}
-
-}
-*/
 
 const operacionTiket=async(req,res)=>{
   const cid= req.body.cid
@@ -139,7 +94,7 @@ const venta= await ventasService.createVenta(newSale)
 
 const triniemail= 'mtgprimaria@gmail.com'
 const mailingService= new MailingService()
-const sendEmail= await mailingService.sendMail([triniemail], Dtemplates.TIKET_COMPRA,{username,listFinalDeProducts,totalAmount})
+const sendEmail= await mailingService.sendMail([triniemail,req.user.email], Dtemplates.TIKET_COMPRA,{username,listFinalDeProducts,totalAmount})
 
 
   await cartsService.clearCart(cid) 

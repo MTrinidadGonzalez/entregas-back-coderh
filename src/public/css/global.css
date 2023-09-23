@@ -195,6 +195,11 @@ a{
     background-image: url("https://i.pinimg.com/564x/a3/01/97/a30197d3ada481ecd1776103250ddebb.jpg");
 }
 
+.userProductsContainer{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
 .ventaDiv{
     display: flex;
     flex-direction: row;
@@ -203,6 +208,7 @@ a{
     padding: 12px;
     margin: 7px;
     border: 1px solid rgb(63, 193, 245);
+    border: 1px solid rgb(245, 63, 215);
     background-color:  rgba(36, 20, 20, 0.403);
    ;
 }

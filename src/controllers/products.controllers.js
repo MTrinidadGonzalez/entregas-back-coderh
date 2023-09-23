@@ -32,10 +32,12 @@ const getProduct= async(req,res)=>{
 
 const addProductCart=async (req,res)=>{
     try{
+        
+
         const cid= req.user.cart[0]._id
         const username= req.user.name
         const pid= req.body.productId  
-          
+       
         const productQuantity= req.body.spamQuantity
         const product= {
             pid:pid,
@@ -58,7 +60,12 @@ const addProductCart=async (req,res)=>{
             req.logger.error(`producto agregado, sin stock ${productdB}`)
             res.send({status:'error', error: 'Producto sin stock'})
         }      
+
+
            const result= await cartsService.addProductToCart(cid,product)
+           const cartDb= await cartsService.getCartById(cid)
+           const totalQuantity= cartDb.totalQuantity
+            req.io.emit('cartquantity',totalQuantity)
             res.send({status:"success" })
     }
     catch(error){
@@ -126,9 +133,9 @@ const deleteProduct=async(req,res)=>{
     const {pid}= req.params
     const product= await productsService.getProductById(pid)
     const email= product.owner
-    const description = product.description
+    const productDescription = product.description
     const mailingService= new MailingService()
-    const result= await mailingService.sendMail(email, Dtemplates.DELETE_PRODUCT,productDescription)
+    const result= await mailingService.sendMail([email,req.user.email,'mtgprimaria@gmail.com'], Dtemplates.DELETE_PRODUCT,productDescription)
 
     const deleteProduct= await productsService.deleteProduct(pid)
     res.send({status:'success', message: 'Producto eliminado'})
@@ -151,7 +158,6 @@ const putProduct=async(req,res)=>{
     }
  
       const updateProduct= await productsService.updateProduct(pid,updatedProduct)
-   
       res.send({status:'success', message:'Producto modificado', payload:updateProduct})
     }
     catch(error) {

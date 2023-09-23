@@ -1,26 +1,27 @@
-<div>
-    <h1>Mis productos</h1>
+<h1>Mis productos</h1>
+<div class="userProductsContainer">
+    
  
-    <div class="div-premium-products">
+    <div class="div-premium-products ">
     {{#each products}}
     <div class="productCard">
         <p>Categoría: {{this.category}} </p>
         <div>
             <img src={{this.img}} alt={{this.description}}>
-             <button id="btnUpdateImg">
+            <button class="btnUpdateImg">
                 <span class="material-symbols-outlined">
                 upload_file
                 </span>
                 Cambiar imagen del producto
-                </button>
-                </div>
-                <div id="alerOploadImgproduct">
-                <form id="formImgProduct" enctype="multipart/form-data" >
-                 <input type="hidden" name="productId" id="productId" value="{{this._id}}">
+            </button>
+        </div>
+        <div class="alerOploadImgproduct">
+            <form class="formImgProduct" enctype="multipart/form-data">
+                <input type="hidden" name="productId" value="{{this._id}}">
                 <input type="file" name="img" required>
                 <input type="submit" value="Remplazar imagen">
-                </form>
-        </div>
+            </form>
+    </div>
 
         <p>Description: {{this.description}} </p>
          <p>Color:{{this.color}} </p>

@@ -4,6 +4,7 @@ const getUserCart=async(req,res)=>{
     try{
     const cart= req.user.cart[0]
       //  req.logger.debug(req.user.cart)
+  
     res.send({status:"success", payload:cart })
     }
     catch(error){

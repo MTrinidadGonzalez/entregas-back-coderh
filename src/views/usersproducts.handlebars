@@ -36,10 +36,11 @@
 
 
 
-<div>
+
 {{#if productsJSON}}
- <h1>Productos de:{{userAlias}} </h1>
-  <div class="div-premium-products">  
+
+ <h1>Productos de: {{userAlias}} </h1>
+  <div class="div-premium-products userProductsContainer">  
     {{#each productsJSON}}
       <div class="productCard">
         <img src={{this.img}} alt={{this.description}}>
@@ -59,12 +60,15 @@
 
     {{/each}}
   </div>
+ 
 {{else}}
   <h1>No hay productos de este usuario por el momento</h1>
+ 
 {{/if}}
-</div>
+
 
 
 
 
  <script src="/js/products.js"></script> 
+ <script src="/js/usersproducts.js"></script>

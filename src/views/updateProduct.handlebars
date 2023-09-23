@@ -2,13 +2,10 @@
 
 <div class="forms"> 
 
-
-
-
 <form class="forms" id="formUpdateProduct" >
     <img src={{product.img}} alt="imagen del producto">
        <input type="hidden" name="productId" id="productId" value="{{product.id}}">
-    <input type="text" placeholder="{{product.title}}" name="title">
+    <input type="text" placeholder="Titulo:{{product.title}}" name="title">
     <input type="text" placeholder="{{product.description}}" name="description" >
     <input type="number" placeholder="Price: $ {{product.price}}" name="price" min="1" >
     <select id="category" name="category" >

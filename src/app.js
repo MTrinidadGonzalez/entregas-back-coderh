@@ -39,6 +39,18 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static(`${__dirname}/public`))
 
+const server= app.listen(port, ()=> console.log(`listening on ${port} - ${config.mode.mode}`))
+const io  = new Server(server)
+app.use((req,res,next)=>{
+    //La intención será REFERENCIAR NUESTRO io
+    req.io = io;
+    next();
+})
+io.on('connection', socket =>{
+    console.log("Nuevo cliente conectado");
+   
+})
+
 
 //handlebars
 app.engine('handlebars',handlebars.engine());
@@ -96,11 +108,9 @@ app.use('/smokingsproducts', moksRouter)
 app.use(errorHandler)
 
 
-const server= app.listen(port, ()=> console.log(`listening on ${port} - ${config.mode.mode}`))
 
-const io  = new Server(server)
 
-io.on('connection', socket =>{
-    console.log("Nuevo cliente conectado");
-   
-})
+
+
+
+

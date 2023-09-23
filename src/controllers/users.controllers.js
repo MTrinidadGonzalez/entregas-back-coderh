@@ -103,7 +103,7 @@ const deleteInactiveUser= async(req,res)=>{
         }
     ]
     const response= await userServices.updateUserBy('email',req.user.email,{'documents': [...documnments]})
-    console.log(documnments)
+  //  console.log(documnments)
     res.send({ status: 'success' });
   };
 

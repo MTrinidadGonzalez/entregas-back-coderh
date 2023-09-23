@@ -1,12 +1,12 @@
 import RouterPadre from '../../routers/router.js'
 import productsModel from '../../dao/models/productsModel.js'
-import {productsService, userServices} from '../../services/services.js'
+import {productsService, userServices,cartsService} from '../../services/services.js'
 
 
 export default class HomeViewRouter extends RouterPadre{
     init(){
         this.get('/home', ["USER","ADMIN","PREMIUM"], async (req,res)=>{
-
+           
             const { page=1, limit: queryLimit}= req.query 
             const defaultLimit = 3
             const limit = queryLimit ? parseInt(queryLimit) ?? defaultLimit : defaultLimit
@@ -20,9 +20,7 @@ export default class HomeViewRouter extends RouterPadre{
             const prevPage = hasPrevPage ? currentPage - 1 : null;
             const nextPage = hasNextPage ? currentPage + 1 : null;
             
-            const cart= req.user.cart
-            const totalQuantity = cart[0].totalQuantity
-            //console.log(totalQuantity)
+            
 
             const userId= req.user.id
             let role= req.user.role
@@ -33,7 +31,10 @@ export default class HomeViewRouter extends RouterPadre{
           
             const userDb= await userServices.getUser('email', req.user.email)
             const imgProfile= userDb.imgProfile
-
+            const cart= req.user.cart
+            const cartDb= await cartsService.getCartById(cart[0]._id)
+            const totalQuantity= cartDb.totalQuantity
+           
             res.render('home',{
                 css:'home',
                 products,

@@ -6,13 +6,13 @@
         <li><a href="/products/?category=pantalones" class="nav-item">Pantalones</a></li>
         <li><a href="/products/?category=abrigos" class="nav-item" >Abrigos</a></li>
         <li><a href="/products/?category=accesorios" class="nav-item" >Accesorios</a></li>
-    
+     
         <li>
          <a href="/cart" class="nav-item" >        
            <span class="material-symbols-outlined">
             shopping_cart
             </span>  
-            <samp>{{totalQuantity}}</samp>
+            <samp id="spamCart" style="color: antiquewhite;"></samp>
          </a>
         </li>
         {{#if isUser}}
@@ -70,4 +70,9 @@
     </div>
     {{/if}}
 
+
+
  <script src="/js/home.js"></script> 
+
+  <script src="/socket.io/socket.io.js"></script>
+<script src="/js/pruebasoketCart.js"></script>
