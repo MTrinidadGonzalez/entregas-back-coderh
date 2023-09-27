@@ -1,7 +1,10 @@
 import {userServices} from '../services/services.js'
 import MailingService from '../mailService/mail.service.js'
 import Dtemplates from '../constants/Dtemplates.js'
+import config from '../config.js'
 
+const port =config.app.PORT
+const urlDeploy= 'https://entragas-back-codeh.onrender.com'
 const getAllUsers= async (req,res)=>{
     try{
         const users= await userServices.getUsers()
@@ -91,15 +94,15 @@ const deleteInactiveUser= async(req,res)=>{
     const documnments=[
         {
             name: 'Identificación',
-            reference: `http://localhost:8080/api/documents/${indentificacion}?folder=documents`
+            reference: `${urlDeploy}/api/documents/${indentificacion}?folder=documents`
         },
         {
             name: 'Comprobante de domicilio',
-            reference: `http://localhost:8080/api/documents/${comprobanteDomicilio}?folder=documents`
+            reference: `${urlDeploy}/api/documents/${comprobanteDomicilio}?folder=documents`
         },
         {
             name: 'Comprobante de Estado de cuenta',
-            reference: `http://localhost:8080/api/documents/${comprobanteCuenta}?folder=documents`
+            reference: `${urlDeploy}/api/documents/${comprobanteCuenta}?folder=documents`
         }
     ]
     const response= await userServices.updateUserBy('email',req.user.email,{'documents': [...documnments]})
@@ -110,7 +113,8 @@ const deleteInactiveUser= async(req,res)=>{
   const postImgProfile = async (req, res) => {
     try{
        const filename= req.file.filename
-       const imgProfile= `http://localhost:8080/api/documents/${req.file.filename}?folder=profile`
+
+       const imgProfile= `${urlDeploy}/api/documents/${req.file.filename}?folder=profile`
        const response= await userServices.updateUserBy('email',req.user.email,{'imgProfile':imgProfile})
         res.send({ status: 'success' })
     }

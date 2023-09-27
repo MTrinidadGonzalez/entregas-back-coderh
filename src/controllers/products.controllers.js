@@ -4,7 +4,10 @@ import {productsErrorIncompleteValues, productsExistYet} from '../constants/prod
 import {DictionaryEErrorProducts} from '../constants/EErors.js'
 import MailingService from '../mailService/mail.service.js'
 import Dtemplates from '../constants/Dtemplates.js'
+import config from '../config.js'
 
+const port =config.app.PORT
+const urlDeploy= 'https://entragas-back-codeh.onrender.com'
 
 const getProducts=async(req,res)=>{
     try{
@@ -114,7 +117,8 @@ const postProduct= async(req,res)=>{
             category,
             code,
             stock,
-            img: `http://localhost:8080/api/documents/${imgFileName}?folder=products`,
+            img: `${urlDeploy}/api/documents/${imgFileName}?folder=products`,
+           // img: `${port}}/api/documents/${imgFileName}?folder=products`,
             talle,
             color,
             owner:useremail
@@ -170,7 +174,8 @@ const updateProductImg=async (req,res)=>{
    
     const {productId}=req.body
     const img= req.file.filename
-    const newImgPath= `http://localhost:8080/api/documents/${img}?folder=products`
+    const newImgPath= `${port}/api/documents/${img}?folder=products`
+  //  const newImgPath= `http://localhost:8080/api/documents/${img}?folder=products`
     const update= await productsService.updateProductImage(productId,newImgPath)
     res.send({status:'success'})
   }
